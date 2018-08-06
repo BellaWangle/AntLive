@@ -1,0 +1,430 @@
+/* 
+  info.strings
+  yunbaolive
+
+  Created by Boom on 2018/3/1.
+  Copyright © 2018年 cat. All rights reserved.
+*/
+//多页面共用字段
+"确认" = "Confirm";
+"取消" = "Cancel";
+"无网络" = "No internet";
+"发送" = "Send";
+"保存" = "Save";
+
+//登录注册页面
+"使用以下方式登录" = "Use the following methods to login";
+"手机号登录/注册" = "Phone number login/sign up";
+"登录即代表你同意《服务和隐私协议》" = "Login means you agree with <service and private agreement>";
+"登录" = "Login";
+"注册" = "Sign up";
+"请填写手机号" = "Please enter phone number";
+"请填写密码" = "Please enter password";
+"密码" = "Password";
+"立即登录" = "Login now";
+"立即注册" = "Sign up now";
+"忘记密码" = "forget password";
+//注册
+"注册" = "Sign up";
+"账号" = "Account";
+"请填写手机号" = "Please enter phone number";
+"验证码" = "Verification code";
+"请输入验证码" = "Please enter verification code";
+"获取验证码" = "Send";
+"确认密码" = "Confirm password";
+"请确认密码" = "Please confirm password";
+//忘记密码
+"立即找回" = "Recover now";
+//登录奖励
+"欢迎回来!" = "Welcome back";
+"第一天" = "Day one";//英文建议写成:"NO.x"
+"第二天" = "Day two";//英文建议写成:"NO.x"
+"第三天" = "Day three";//英文建议写成:"NO.x"
+"第四天" = "Day four";//英文建议写成:"NO.x"
+"第五天" = "Day five";//英文建议写成:"NO.x"
+"第六天" = "Day six";//英文建议写成:"NO.x"
+"第七天" = "Day seven";//英文建议写成:"NO.x"
+
+"领取" = "Claim";
+//首页
+"关注" = "Follows";
+"关注2" = "Follows";
+"热门" = "Hot";
+"视频" = "Video";
+"最新" = "Latest";
+"在看" = "Viewing";
+//推荐
+"为你推荐" = "Recommend for you";
+"点击进入" = "Click to enter";
+"跳过" = "Skip";
+//搜索
+"请输入您要搜索的昵称或ID" = "Please enter the nickname or ID you want to reach for";
+//私信
+"已关注" = "Followed";
+"未关注" = "Not followed";
+"忽略未读" = "Ignore unread";
+//进入直播间
+"直播Live" = "Live";
+"房间:" = "Room:";
+"映票:" = "Note";//(服务端获取)
+"周榜" = "Weekly list";
+"总榜" = "Total list";
+"贡献" = "Donate";
+"收入" = "Receive";
+"粉丝" = "Fan";
+"送出" = "Sent";
+"主页" = "Home";
+"我点亮了" = "I have lighted";
+"送了一个" = "Send one";
+"充值" = "Top up";
+"赠送" = "Gift";
+"私信" = "Chat";
+"举报" = "Report";
+//开启直播
+"给直播写个标题吧" = "Write a caption for the live";
+"普通房间" = "Normal room";
+"密码房间" = "Password room";
+"门票房间" = "Ticket room";
+"计时房间" = "Timing room";
+"直播分享到" = "Share the live to";
+"开始直播" = "Start live";
+"功能" = "Function";
+"和大家说些什么" = "Chat with everyone";
+"开启大喇叭" = "per Bullet screen";//("1/钻石"为服务端获取字段)
+"条" = "unit";
+//游戏
+"智勇三张" = "";
+"海盗船长" = "";
+"幸运转盘" = "Lucky draw";
+"开心牛仔" = "";
+"二八贝" = "";
+"即将开始，请稍后" = "Coming soon, please wait";
+"开始支持" = "Start to support";
+"揭晓结果" = "Show the results";
+"结束" = "End";
+"罗伯茨" = "";
+"平局" = "Draw";
+"基德" = "";
+"请等待游戏结束" = "Please wait until the end of game";
+"大桥" = "Bridge";
+"小乔" = "";
+"貂蝉" = "";
+"星星" = "";
+"球球" = "";
+"仔仔" = "";
+"庄家" = "Banker";
+"本家" = "Player";
+"赢了哦" = "Win";
+"竞拍剩余时间" = "Auction remaining time";
+"时" = "Hour(s)";
+"分" = "Minute(s)";
+"秒" = "Second(s)";
+
+
+
+//直播结束
+"确定退出直播吗?" = "Do you want to quit the live?";
+"直播结束" = "Live ended";
+"收获" = "Earn";
+"直播时长" = "Live duration";
+"观看人数" = "Number of view(s)";
+//附近
+"附近" = "Nearby";
+//排行榜
+"收益榜" = "Revenue list";
+"贡献榜" = "Donation list";
+"日榜" = "Daily list";
+"周榜" = "Weekly list";
+"月榜" = "Monthly list";
+"总榜" = "Total list";
+//个人中心-自己
+"个人中心" = "My Profile";
+"直播" = "Live";
+"无标题" = "No caption";
+"直播记录" = "Live recording";
+//编辑资料
+"修改个人资料" = "Edit personal information";
+"头像" = "Profile picture";
+"昵称" = "Nickname";
+"签名" = "Signature";
+"生日" = "Date of birth";
+"性别" = "Gender";
+"拍照" = "Take a photo";
+"从手机相册获取" = "Import from album";
+"昵称最多8个字" = "Nickname maximum length is 8 characters";
+"修改昵称" = "Edit nickname";
+"修改签名" = "Edit signature";
+"最多输入20个字" = "The maximum length is 20 characters";
+//我的收益
+"我的收益" = "My benefit";
+"映票" = "";//(服务端获取)??
+"可提现金额(元)" = "Withdrawable amount($)";
+"今日可提现金额(元)" = "Today withdrawable amount($)";
+"提现" = "Withdraw";
+"常见问题" = "FAQ";
+//我的钻石
+"我的" = "My ";
+"账户余额" = "Balance";
+"选择支付方式" = "Select a payment method";
+"苹果支付" = "Apple Pay";
+//我的等级
+"我的等级" = "My grade";
+"我的明细" = "My details";
+//在线商城
+"在线商城" = "Online store";
+"会员" = "Member";
+"靓号" = "Good number";
+"坐骑" = "Saddle horse";
+"装备中心" = "Equipment center";
+"家族中心" = "Family Center";
+"家族驻地" = "Clan territory";
+"三级分销" = "Grade 3 retail store";
+"我的竞拍" = "My auction";
+"我的认证" = "My authentication";
+"关于我们" = "About us";
+//个性设置
+"个性设置" = "Privacy setting";
+"修改密码" = "Change password";
+"重置密码" = "Reset password";
+"旧密码" = "Old password";
+"请输入旧密码" = "Please enter old password";
+"新密码" = "New password";
+"请填写新密码" = "Please enter new password";
+"确认新密码" = "Confirm new password";
+"立即修改" = "Change now";
+"检查更新" = "Check for update";
+"(当前已是最新版本)" = "(This is the latest update)";
+"退出登录" = "Logout";
+//砸金蛋
+"恭喜" = "Congratulation";
+"玩砸金蛋获得一个" = "Play ZaJinDan to get one";
+"获得" = "Get";
+"一个" = "One";
+"锤" = "Hammer";
+"头奖" = "First Price";
+//视频编辑
+"极慢" = "VerySlow";
+"慢" = "Slow";
+"标准" = "Standard";
+"快" = "Fast";
+"极快" = "VeryFast";
+"音乐" = "Music";
+"屏比" = "Screen size";
+"伴奏" = "Accompany";
+"人声" = "Voice";
+"音乐" = "Music";
+"美颜" = "Beauty";
+"美白" = "Whitening";
+"红润" = "Rosy";
+"风格" = "Style";
+"滤镜" = "Filter";
+"光滑" = "Smooth";
+"自然" = "Natural";
+"P图" = "P Image";
+"清除" = "Clear";
+"浪漫" = "Romantic";
+"清新" = "Fresh";
+"唯美" = "Beautiful";
+"粉嫩" = "Pink";
+"怀旧" = "Nostalgia";
+"蓝调" = "Blue";
+"清亮" = "Bright";
+"日系" = "Lightroom";
+"编辑视频" = "Edit video";
+"保存" = "Save";
+"请拖拽两侧滑块选择裁剪区域" = "Drag the slider on both sides to select the crop area";
+"无" = "None";
+"倒放" = "Reverse";
+"反复" = "Repeat";
+"慢动作" = "Slo-mo";
+"添加音乐" = "Add music";
+"本地音频" = "Local audio";
+"添加普通字幕/气泡字幕" = "Add normal subtitles/bubble subtitles";
+"文字效果" = "Text effect";
+"发布" = "Release";
+"说点什么。。" = "Say something…";
+"点击修改文字" = "Click to edit text";
+"编辑普通字幕/气泡字幕" = "Edit normal subtitles/bubble subtitles";
+"上传失败" = "Upload failed";
+"网络连接断开，视频上传失败" = "Video cannot be uploaded. Internet connect is lost.";
+"发布中" = "Releasing";
+"发布成功啦！" = "Released";
+"发布失败啦!" = "Release failed";
+"小视频" = "Small video";
+"完成" = "Completed";
+"发布成功" = "Released";
+"发布中，请稍后" = "Releasing, please wait";
+"正在上传请稍等" = "Uploading, please wait";
+"启动录制失败" = "Failed to start recording";
+"录制被打断" = "Recording was interrupted";
+"至少要录够5秒" = "Record at least for 5 seconds";
+"视频录制失败" = "Video recording failed";
+"视频转码中" = "Video transcoding";
+"转码失败" = "Transcoding failed";
+"原图" = "Original image";
+"歌曲名" = "Song title";
+"截取所需音频片段" = "Trim out the desired audio part";
+"音量控制" = "Volume control";
+"点击添加文字" = "Click to add text";
+"返回" = "Back";
+
+//短视频观看
+"拉黑" = "Blacklist";
+"举报" = "Report";
+"复制链接" = "Copy link";
+"保存" = "Save";
+"删除" = "Delete";
+"全部评论" = "All comments";
+"赞" = "Like";
+"正在加载更多的数据..." = "Loading more data…";
+"已经全部加载完毕" = "Done loading";
+"回复" = "Reply";
+"请添加内容后再尝试" = "Please retry after adding content";
+"评论" = "Comment";
+"全部回复" = "Reply all";
+"不用给自己回复" = "No need to reply to yourself";
+"查看回复" = "View reply";
+"不能给自己的评论点赞" = "Cannot like your own comment";
+"查看全部" = "View all";
+"不能给自己的回复点赞" = "Cannot like your own reply";
+"点击或上拉加载更多" = "Click or pull up to load more";
+"拉黑成功" = "Blacklisted";
+"涉嫌违规" = "Suspect to be illegal";
+"感谢您的举报,我们会尽快作出处理" = "Thanks for your report! We will work on it as soon as possible";
+"删除成功" = "Deleted";
+"视频保存成功" = "Video saved";
+"视频保存失败" = "Failed to save";
+"正在下载视频" = "Downloading video";
+//遗漏
+"现在还没有主播" = "No live";
+"快快开启你的直播吧" = "Start your live";
+"密码重置成功" = "Password is reset";
+"发送成功" = "Sent";
+"手机号输入错误" = "Incorrect phone number";
+"请输入手机号" = "Please enter phone number";
+"切换语言" = "Switch language";
+"靓" = "Beautiful";
+"复制成功" = "Copied";
+"提交成功" = "Submit successful";
+"申请进度" = "Application progress";
+"我的家族" = "My family";
+"字数超出限制" = "Exceeded the maximum length";
+"已拉黑" = "Blacklisted";
+"暂无更多" = "No more";
+"正在加载更多..." = "Loading more…";
+"现在还没有直播记录" = "No live record";
+"已解除拉黑" = "Unblacklist";
+"密码错误" = "Incorrect password";
+"请先退出直播在观看" = "Please quit live to view";
+"个性签名" = "Signature";
+"不能关注自己" = "Cannot follow yourself";
+" 进入了直播间" = "Entered live";
+"直播间消息" = "Live information";
+"主播回来了" = "The broadcaster is back";
+"主播离开一下，精彩不中断，不要走开哦" = "Broadcaster is way for a while. The excitement is not. Do not go away. ";
+"被取消管理员" = "Remove administrator";
+"取消管理员成功" = "Administrator is successfully removed";
+"被设为管理员" = "Is promoted to administrator";
+"设置管理员成功" = "Administrator is successfully promoted";
+"字数最多50字" = "The maximum length is 50 characters";
+"当前账号已在其他设备登录" = "The account is being logged into other device";
+"你已被踢出房间" = "You were kicked out of the room";
+"付费" = "Fee";
+"您当前余额不足无法观看" = "Cannot view. Your balance is insufficient.";
+"对不起，您的钻石余额不足。\n立即去充值？" = "Sorry, your diamond is insufficient. \nDo you want to top up now?";
+"立即充值" = "Top up now";
+"密码不能为空" = "Password cannot be blank";
+"请输入正确的金额" = "Please enter the correct amount";
+"设置您的密码房间" = "Set up your password room";
+"输入您的收费金额" = "Please enter your fee";
+"收益以直播结束显示为准" = "The fee is based on the end of the live";
+"权限受阻" = "Permission blocked";
+"请在设置中开启相机权限" = "Please turn on camera permission in setting.";
+"请在设置中开启麦克风权限" = "Please turn on microphone permission in setting";
+"分享成功" = "Shared";
+"分享失败" = "Failed to share";
+"选择上传方式" = "Select a upload method";
+"相册" = "Album";
+"上庄" = "Become the banker";
+"下庄" = "Become the player";
+"吕布" = "吕布";
+"上庄押金" = "Banker deposit";
+"请输入押金,最低" = "Please enter deposit amount, the minimum";
+"申请上庄" = "Request to be the banker";
+"庄家流水" = "Banker flow";
+"牌型" = "Type of card";
+"结算" = "Settle";
+"顺序" = "Order";
+"玩家" = "Player";
+"游戏币" = "Game coin";
+"庄" = "Banker";
+"您的余额不足" = "Your balance is insufficient";
+"将被下庄" = "will be returned to the player";
+"庄家无法下注" = "Banker cannot bet";
+"历史记录" = "History";
+"即将开始" = "Start soon";
+"香蕉" = "Bananas";
+"萝卜" = "Radish";
+"豌豆" = "Pea";
+"柿子" = "Persimmon ";
+"涉嫌传播淫秽色情信息" = "Suspected to spread pornography content";
+"举报成功" = "Reported";
+"提示" = "Prompt";
+"确定举报？" = "Confirm report?";
+"好像在火星" = "Seem to be on Mars";
+"踢人" = "Kick";
+"禁言" = "Ban";
+"设为管理" = "Promote to administrator";
+"管理员列表" = "Administrator list";
+"取消管理" = "Remove administrator";
+"关闭直播" = "Quit live";
+"禁用直播" = "Ban live";
+"返回首页" = "Back to Home";
+"连发" = "Combo";//Repeatedly send
+"对方暂时拒绝接收您的消息" = "The other side temporarily rejects your message";
+"已经忽略未读消息" = "Ignored unread message";
+"暂无未读消息" = "No unread message";
+"忽略" = "Ignore";
+"最终出价" = "Final bid";
+"商品详情" = "Details";
+"竞拍投注成功" = "Auction is successfully bid";
+"剩余" = "Remain";
+"自动关闭" = "Automatically close";
+"付款时间已过，付款失败" = "Payment failed. Payment time is expired.";
+"付款" = "Payment";
+"恭喜你付款成功" = "Your payment is succeeded. Congratulations!";
+"原始美白" = "Original whitening";
+"不使用美颜" = "Do not use beauty effect";
+"白皙" = "White";
+"收费金额" = "Charge amount";
+"进入房间" = "Enter room";
+"选择游戏" = "Select a game";
+"选择" = "Select";
+"下载" = "↓";
+"输入邀请码" = "Enter invitation code";
+"邀请码不能为空" = "Invitation code cannot be blank";
+//邮箱
+"邮箱" = "Email";
+"请填写邮箱账号" = "Please enter Email account";
+"手机号" = "Phone number";
+"请输入正确的邮箱" = "Please enter the correct Email";
+"邮箱登录/注册" = "Email login/Sign up";
+
+"视频生成中" = "Video generation";
+"邮箱登录" = "E-mail Login";
+"手机登录" = "Login with phone";
+
+"你已被禁言" = "You have been banned";
+"涉嫌违规" = "Suspect to be illegal";
+"踢人成功" = "Kicking success";
+"被踢出房间" = "Was kicked out of the room";
+"被禁言" = "Banned";
+"我点亮了" = "I have lighted";
+"关注了主播" = "Followed the anchor";
+"看过" = "Seen";
+"(当前版本可更新)" = "(Renewable)";
+"使用旧版" = "Use the old edition";
+"前往更新" = "Go to update";
+"禁言成功" = "Gag success";
+"背包" = "Backpack";
+"礼物" = "Gift";
