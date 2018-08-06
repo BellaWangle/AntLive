@@ -1,0 +1,140 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - Bugly (2.4.7)
+  - CWStatusBarNotification (2.3.5)
+  - GPUImage (0.1.7)
+  - HappyDNS (0.3.12)
+  - JCore (1.1.6)
+  - JMessage (3.4.0):
+    - JCore (~> 1.1.1)
+  - JPush (3.0.6):
+    - JCore (~> 1.1.1)
+  - libksygpulive/base (2.9.2)
+  - libksygpulive/libksygpulive (2.9.2):
+    - GPUImage
+    - libksygpulive/streamerbase
+  - libksygpulive/mediacodec (2.9.2)
+  - libksygpulive/mediacore_enc_base (2.9.2)
+  - libksygpulive/mediacore_enc_lite (2.9.2)
+  - libksygpulive/streamerbase (2.9.2):
+    - libksygpulive/base
+    - libksygpulive/mediacodec
+    - libksygpulive/mediacore_enc_base
+    - libksygpulive/mediacore_enc_lite
+    - libksygpulive/yuv
+  - libksygpulive/yuv (2.9.2)
+  - Masonry (1.0.2)
+  - MBProgressHUD (1.0.0)
+  - MJRefresh (3.1.12)
+  - mob_sharesdk (4.1.1):
+    - mob_sharesdk/ShareSDK (= 4.1.1)
+    - MOBFoundation
+  - mob_sharesdk/ShareSDK (4.1.1):
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.1.1):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - MOBFoundation (3.1.5)
+  - OpenSSL-for-iOS (1.0.2.d.1)
+  - QBImagePickerController (3.4.0)
+  - Qiniu (7.2.3):
+    - HappyDNS (~> 0.3)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - Socket.IO-Client-Swift (8.3.3)
+  - TXLiteAVSDK_UGC (4.4.3774)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - BlocksKit (~> 2.2.5)
+  - Bugly (~> 2.4.6)
+  - CWStatusBarNotification (~> 2.3.5)
+  - JMessage
+  - JPush
+  - libksygpulive/libksygpulive (from `./`)
+  - Masonry (~> 1.0.1)
+  - MBProgressHUD
+  - MJRefresh
+  - mob_sharesdk
+  - mob_sharesdk/ShareSDKPlatforms/Facebook
+  - mob_sharesdk/ShareSDKPlatforms/QQ
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
+  - mob_sharesdk/ShareSDKPlatforms/Twitter
+  - OpenSSL-for-iOS (~> 1.0.2.d.1)
+  - QBImagePickerController
+  - Qiniu (~> 7.0)
+  - SDWebImage (~> 3.8)
+  - Socket.IO-Client-Swift
+  - TXLiteAVSDK_UGC (from `http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_UGC.podspec`)
+
+EXTERNAL SOURCES:
+  libksygpulive:
+    :path: ./
+  TXLiteAVSDK_UGC:
+    :podspec: http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_UGC.podspec
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  Bugly: 2c256069145f550171907c5cb1c0f84ad291f6c1
+  CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  HappyDNS: 691a3041128055d09866f86e6e9ca90f24da1f18
+  JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
+  JMessage: 5c0a684b497cdfdc59e2a7871518c643a5814e19
+  JPush: c41be50eb1a574a66aeb68d237f00a4ec6ec3a82
+  libksygpulive: 7454036295a3a0c0dd214508838d060748547c82
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  mob_sharesdk: 6cb2159a5205d79c0f3e2d5a10ae63362c8e09d3
+  MOBFoundation: d961251ce6de54917f678dc711962d1385ae7ee1
+  OpenSSL-for-iOS: d7a30add88a1969b052135adbe48452af231ed32
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  Qiniu: ae0fea1cc379fae1560d8748ac537e0fbeb8626e
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  Socket.IO-Client-Swift: a2faffdbde89c63aebc5d631041530c1068b02b8
+  TXLiteAVSDK_UGC: cca9336245d9ffed4d7d45dc582073eba88f39a0
+
+PODFILE CHECKSUM: 830c43352920078a0670cb279ee77652e36852b8
+
+COCOAPODS: 1.3.1
