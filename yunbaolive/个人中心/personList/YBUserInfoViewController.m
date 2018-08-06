@@ -17,11 +17,11 @@
 #import "MyVideoListVC.h"
 @interface YBUserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,personInfoCellDelegate,UIAlertViewDelegate>
 {
-    NSArray *listArr;
-    NSDictionary *selectDic;
+    NSArray *_listArr;
+    NSDictionary *_selectDic;
 }
 @property (nonatomic, assign, getter=isOpenPay) BOOL openPay;
-@property(nonatomic,strong)NSDictionary *infoArray;//个人信息
+@property (nonatomic,strong)NSDictionary *infoArray;//个人信息
 @property (nonatomic, strong) YBPersonTableViewModel *model;
 @property (nonatomic, strong) UITableView *tableView;
 @end
@@ -63,35 +63,44 @@
                 [Config saveVipandliang:subdic];
                 _model = [YBPersonTableViewModel modelWithDic:info];
                 NSArray *list = [info valueForKey:@"list"];
-                listArr = list;
-                [common savepersoncontroller:listArr];//保存在本地，防止没网的时候不显示
-                [self.tableView reloadData];
+                _listArr = list;
+                [self restListArr];
+                [common savepersoncontroller:_listArr];//保存在本地，防止没网的时候不显示
             }
             if ([code isEqual:@"700"]) {
                 [self quitLogin];
             }
             else{
-                listArr = [NSArray arrayWithArray:[common getpersonc]];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                });
+                _listArr = [NSArray arrayWithArray:[common getpersonc]];
+                [self restListArr];
             }
         }
         else{
-            listArr = [NSArray arrayWithArray:[common getpersonc]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+            _listArr = [NSArray arrayWithArray:[common getpersonc]];
+            [self restListArr];
         }
     }
          failure:^(NSURLSessionDataTask *task, NSError *error)
      {
-         listArr = [NSArray arrayWithArray:[common getpersonc]];
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [self.tableView reloadData];
-         });
+         _listArr = [NSArray arrayWithArray:[common getpersonc]];
+         [self restListArr];
      }];
 }
+
+-(void)restListArr{
+    NSMutableArray * list = [[NSMutableArray alloc]init];
+    for (NSDictionary * dic in _listArr) {
+        int selectedid = [dic[@"id"] intValue];//选项ID
+        if (selectedid == 1 || selectedid == 2 || selectedid == 15 || selectedid == 13) {
+            [list addObject:dic];
+        }
+    }
+    _listArr = list;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self getPersonInfo];
@@ -103,8 +112,8 @@
     self.navigationController.navigationBarHidden = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     [self creatNavi];
-    listArr = [NSArray arrayWithArray:[common getpersonc]];
-    [self.tableView reloadData];
+    _listArr = [NSArray arrayWithArray:[common getpersonc]];
+    [self restListArr];
     [self setUI];
 }
 //MARK:-设置tableView
@@ -146,7 +155,7 @@
     }
     else  {
         YBUserInfoListTableViewCell *cell = [YBUserInfoListTableViewCell cellWithTabelView:tableView];
-        NSDictionary *subdic = listArr[indexPath.row];
+        NSDictionary *subdic = _listArr[indexPath.row];
         cell.nameL.text = minstr([subdic valueForKey:@"name"]);
         [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:minstr([subdic valueForKey:@"thumb"])]];
         return cell;
@@ -164,7 +173,7 @@
     }
     else if (section == 1)
     {
-        return listArr.count;
+        return _listArr.count;
     }
     return 1;
 }
@@ -200,13 +209,13 @@
 //我的收益
 -(void)Myearnings{
     ProfitViewC *VC = [[ProfitViewC alloc]init];
-    VC.titleStr = minstr([selectDic valueForKey:@"name"]);
+    VC.titleStr = minstr([_selectDic valueForKey:@"name"]);
     [[MXBADelegate sharedAppDelegate] pushViewController:VC animated:YES];
 }
 //我的钻石
 -(void)MyDiamonds{
     CoinVeiw *VC = [[CoinVeiw alloc]init];
-    VC.titleStr = minstr([selectDic valueForKey:@"name"]);
+    VC.titleStr = minstr([_selectDic valueForKey:@"name"]);
     [[MXBADelegate sharedAppDelegate] pushViewController:VC animated:YES];
 }
 //商城
@@ -222,7 +231,7 @@
 //设置
 -(void)SetUp{
     setView *VC = [[setView alloc]init];
-    VC.titleStr = minstr([selectDic valueForKey:@"name"]);
+    VC.titleStr = minstr([_selectDic valueForKey:@"name"]);
     [[MXBADelegate sharedAppDelegate] pushViewController:VC animated:YES];
 }
 //我的视频
@@ -234,46 +243,45 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     #warning 根据ID判断 进入 哪个页面（ID 不可随意更改（服务端，客户端））
-     if (indexPath.section == 1) {
-    selectDic = listArr[indexPath.row];
-    int selectedid = [selectDic[@"id"] intValue];//选项ID
-    NSString *url = [NSString stringWithFormat:@"%@",[selectDic valueForKey:@"href"]];
-    if (url.length >9) {
-        [self pushH5Webviewinfo:selectDic];
-    }
-    else{
-        /*
-         1我的收益  2 我的钻石  4 在线商城 5 装备中心 13 个性设置
-         其他页面 都是H5
-         */
-        switch (selectedid) {
-            //原生页面无法动态添加
-            case 1:
-                [self Myearnings];//我的收益
-                break;
-            case 2:
-                [self MyDiamonds];//我的钻石
-                break;
-            case 4:
-                [self ShoppingMall];//在线商城
-                break;
-            case 5:
-                [self Myequipment];//装备中心
-                break;
-            case 13:
-                [self SetUp];//设置
-                break;
-            case 15:
-                [self myVideo];//我的视频
-                break;
-            default:
-                break;
+    if (indexPath.section == 1) {
+        _selectDic = _listArr[indexPath.row];
+        int selectedid = [_selectDic[@"id"] intValue];//选项ID
+        NSString *url = [NSString stringWithFormat:@"%@",[_selectDic valueForKey:@"href"]];
+        if (url.length >9) {
+            [self pushH5Webviewinfo:_selectDic];
+        }else{
+            /*
+             1我的收益  2 我的钻石  4 在线商城 5 装备中心 13 个性设置
+             其他页面 都是H5
+             */
+            switch (selectedid) {
+                    //原生页面无法动态添加
+                case 1:
+                    [self Myearnings];//我的收益
+                    break;
+                case 2:
+                    [self MyDiamonds];//我的钻石
+                    break;
+                case 4:
+                    [self ShoppingMall];//在线商城
+                    break;
+                case 5:
+                    [self Myequipment];//装备中心
+                    break;
+                case 13:
+                    [self SetUp];//设置
+                    break;
+                case 15:
+                    [self myVideo];//我的视频
+                    break;
+                default:
+                    break;
+            }
         }
-    }
-
+        
     }
     else if (indexPath.section == 2){
-  
+        
     }
 }//MARK:-懒加载
 -(UITableView *)tableView{
