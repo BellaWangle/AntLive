@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2066D49421199B64007BC48F /* AntButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2066D49321199B64007BC48F /* AntButton.m */; };
+		2066D4972119A0BF007BC48F /* UILabel+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 2066D4962119A0BF007BC48F /* UILabel+Util.m */; };
+		2066D49A2119A309007BC48F /* UIView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 2066D4992119A309007BC48F /* UIView+Util.m */; };
 		2B8288731CA29AF8008CFE9F /* customTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B8288721CA29AF8008CFE9F /* customTextView.m */; };
 		2B844EA71CBC71C20091F3C9 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B844EA61CBC71C20091F3C9 /* libc++.tbd */; };
 		2B844EA91CBC71D80091F3C9 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B844EA81CBC71D80091F3C9 /* libresolv.tbd */; };
@@ -22,7 +25,6 @@
 		329F1F6E202318CF00C80777 /* YBNavi.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F1F6C202318CE00C80777 /* YBNavi.m */; };
 		329F1F712023F8BB00C80777 /* near_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 329F1F702023F8BB00C80777 /* near_location.png */; };
 		329F1F75202406C200C80777 /* UserLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F1F73202406C200C80777 /* UserLoginVC.m */; };
-		329F1F76202406C200C80777 /* UserLoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329F1F74202406C200C80777 /* UserLoginVC.xib */; };
 		329F1F7B20243D5800C80777 /* pub_black_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 329F1F7A20243D5800C80777 /* pub_black_back@2x.png */; };
 		329F1F7E2024512200C80777 /* rank_one_bgi.png in Resources */ = {isa = PBXBuildFile; fileRef = 329F1F7D2024512200C80777 /* rank_one_bgi.png */; };
 		329F1F88202451E600C80777 /* RankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 329F1F86202451E600C80777 /* RankCell.m */; };
@@ -89,7 +91,6 @@
 		4EE735CE1C8FA30900D1F682 /* UIImageView+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE735B71C8FA30900D1F682 /* UIImageView+Util.m */; };
 		A30D43DB1E52F20D00E70D61 /* UIButton+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A30D43D01E52F20D00E70D61 /* UIButton+Additions.m */; };
 		A30D43DD1E52F20D00E70D61 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A30D43D41E52F20D00E70D61 /* UIImage+Additions.m */; };
-		A30D43DE1E52F20D00E70D61 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A30D43D61E52F20D00E70D61 /* UIView+Additions.m */; };
 		A315BCDE1F428A9D002FD5FE /* live_分享.png in Resources */ = {isa = PBXBuildFile; fileRef = A315BCD81F428A9D002FD5FE /* live_分享.png */; };
 		A315BCDF1F428A9D002FD5FE /* live_关闭.png in Resources */ = {isa = PBXBuildFile; fileRef = A315BCD91F428A9D002FD5FE /* live_关闭.png */; };
 		A315BCE01F428A9D002FD5FE /* live_礼物.png in Resources */ = {isa = PBXBuildFile; fileRef = A315BCDA1F428A9D002FD5FE /* live_礼物.png */; };
@@ -1250,6 +1251,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2066D49221199B64007BC48F /* AntButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AntButton.h; sourceTree = "<group>"; };
+		2066D49321199B64007BC48F /* AntButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AntButton.m; sourceTree = "<group>"; };
+		2066D4952119A0BF007BC48F /* UILabel+Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Util.h"; sourceTree = "<group>"; };
+		2066D4962119A0BF007BC48F /* UILabel+Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Util.m"; sourceTree = "<group>"; };
+		2066D4982119A309007BC48F /* UIView+Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Util.h"; sourceTree = "<group>"; };
+		2066D4992119A309007BC48F /* UIView+Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Util.m"; sourceTree = "<group>"; };
 		2B8288711CA29AF8008CFE9F /* customTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customTextView.h; sourceTree = "<group>"; };
 		2B8288721CA29AF8008CFE9F /* customTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customTextView.m; sourceTree = "<group>"; };
 		2B844EA61CBC71C20091F3C9 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -1273,7 +1280,6 @@
 		329F1F702023F8BB00C80777 /* near_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = near_location.png; sourceTree = "<group>"; };
 		329F1F72202406C200C80777 /* UserLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginVC.h; sourceTree = "<group>"; };
 		329F1F73202406C200C80777 /* UserLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginVC.m; sourceTree = "<group>"; };
-		329F1F74202406C200C80777 /* UserLoginVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserLoginVC.xib; sourceTree = "<group>"; };
 		329F1F7A20243D5800C80777 /* pub_black_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pub_black_back@2x.png"; sourceTree = "<group>"; };
 		329F1F7D2024512200C80777 /* rank_one_bgi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_one_bgi.png; sourceTree = "<group>"; };
 		329F1F85202451E600C80777 /* RankCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankCell.h; sourceTree = "<group>"; };
@@ -1360,8 +1366,6 @@
 		A30D43D01E52F20D00E70D61 /* UIButton+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Additions.m"; sourceTree = "<group>"; };
 		A30D43D31E52F20D00E70D61 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
 		A30D43D41E52F20D00E70D61 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
-		A30D43D51E52F20D00E70D61 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
-		A30D43D61E52F20D00E70D61 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		A315BCD81F428A9D002FD5FE /* live_分享.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "live_分享.png"; sourceTree = "<group>"; };
 		A315BCD91F428A9D002FD5FE /* live_关闭.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "live_关闭.png"; sourceTree = "<group>"; };
 		A315BCDA1F428A9D002FD5FE /* live_礼物.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "live_礼物.png"; sourceTree = "<group>"; };
@@ -2823,6 +2827,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2066D49121199B45007BC48F /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				2066D49221199B64007BC48F /* AntButton.h */,
+				2066D49321199B64007BC48F /* AntButton.m */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
 		329F1F662023170E00C80777 /* 附近 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2953,6 +2966,7 @@
 		4E93450B1C8E64130088E428 /* yunbaolive */ = {
 			isa = PBXGroup;
 			children = (
+				2066D49121199B45007BC48F /* Widget */,
 				FE5EFCB72047D5EB0082918B /* 语言包 */,
 				FE5EFC1A204786B90082918B /* 砸金蛋 */,
 				FEC0CE0220468EF9009E4F97 /* 短视频录制 */,
@@ -3027,8 +3041,8 @@
 				A30D43D01E52F20D00E70D61 /* UIButton+Additions.m */,
 				A30D43D31E52F20D00E70D61 /* UIImage+Additions.h */,
 				A30D43D41E52F20D00E70D61 /* UIImage+Additions.m */,
-				A30D43D51E52F20D00E70D61 /* UIView+Additions.h */,
-				A30D43D61E52F20D00E70D61 /* UIView+Additions.m */,
+				2066D4982119A309007BC48F /* UIView+Util.h */,
+				2066D4992119A309007BC48F /* UIView+Util.m */,
 				2BBC259A1CB798A000F4CA93 /* NSString+StringSize.h */,
 				2BBC259B1CB798A000F4CA93 /* NSString+StringSize.m */,
 				2BBC259C1CB798A000F4CA93 /* UIImage+Resize.h */,
@@ -3044,6 +3058,8 @@
 				4EE735B51C8FA30900D1F682 /* UIImage+Util.m */,
 				4EE735B61C8FA30900D1F682 /* UIImageView+Util.h */,
 				4EE735B71C8FA30900D1F682 /* UIImageView+Util.m */,
+				2066D4952119A0BF007BC48F /* UILabel+Util.h */,
+				2066D4962119A0BF007BC48F /* UILabel+Util.m */,
 				2B8288711CA29AF8008CFE9F /* customTextView.h */,
 				2B8288721CA29AF8008CFE9F /* customTextView.m */,
 			);
@@ -3853,7 +3869,6 @@
 				FEAD9061204CDFAE0089AE46 /* CountryCode.json */,
 				329F1F72202406C200C80777 /* UserLoginVC.h */,
 				329F1F73202406C200C80777 /* UserLoginVC.m */,
-				329F1F74202406C200C80777 /* UserLoginVC.xib */,
 				A368E45F1F32C56F00FBACC6 /* PhoneLoginVC.h */,
 				A368E4601F32C56F00FBACC6 /* PhoneLoginVC.m */,
 				A368E4611F32C56F00FBACC6 /* PhoneLoginVC.xib */,
@@ -6219,7 +6234,6 @@
 				A368E7FB1F32CAE600FBACC6 /* 五小牛A.png in Resources */,
 				A368E7721F32CAE600FBACC6 /* 3-12.png in Resources */,
 				32C936392028513500F21CB1 /* 九星2.png in Resources */,
-				329F1F76202406C200C80777 /* UserLoginVC.xib in Resources */,
 				A368E7A61F32CAE600FBACC6 /* shell_0.png in Resources */,
 				FECFFA0A206E266800AEA617 /* docoasessssimage_en.jpg in Resources */,
 				FEC0CFB520468EFA009E4F97 /* text_add@2x.png in Resources */,
@@ -6726,6 +6740,7 @@
 				FEC0CF4320468EFA009E4F97 /* UIViewController+BackButtonHandler.m in Sources */,
 				A368E4CA1F32C6CF00FBACC6 /* CSActionSheet.m in Sources */,
 				A368E2D31F32BFEC00FBACC6 /* SlideCollectionViewCell.m in Sources */,
+				2066D49A2119A309007BC48F /* UIView+Util.m in Sources */,
 				FEC0CF6620468EFA009E4F97 /* VideoRecordViewController.m in Sources */,
 				FE5EFC50204786EC0082918B /* toutiaoAnimation.m in Sources */,
 				FEC0CF5620468EFA009E4F97 /* VideoPasterView.m in Sources */,
@@ -6779,6 +6794,7 @@
 				A368E4121F32C4D000FBACC6 /* ListCollection.m in Sources */,
 				FEC0CF4A20468EFA009E4F97 /* VideoTextViewController.m in Sources */,
 				2B8288731CA29AF8008CFE9F /* customTextView.m in Sources */,
+				2066D49421199B64007BC48F /* AntButton.m in Sources */,
 				A368E3431F32C4AF00FBACC6 /* startplay.m in Sources */,
 				FEC0CF6420468EFA009E4F97 /* VideoRecordMusicView.m in Sources */,
 				FE5EFCC42047DA930082918B /* SetCell.m in Sources */,
@@ -6933,7 +6949,6 @@
 				A30D43DD1E52F20D00E70D61 /* UIImage+Additions.m in Sources */,
 				A368E4CE1F32C6CF00FBACC6 /* AnimOperation.m in Sources */,
 				A368E2DE1F32BFEC00FBACC6 /* profit2.m in Sources */,
-				A30D43DE1E52F20D00E70D61 /* UIView+Additions.m in Sources */,
 				A3F26EFE200F00F40031B51A /* LWLCollectionViewHorizontalLayout.m in Sources */,
 				A368E4101F32C4D000FBACC6 /* listCell.m in Sources */,
 				FEC0CF5D20468EFA009E4F97 /* VideoJoinerCell.m in Sources */,
@@ -6952,6 +6967,7 @@
 				A368E4D31F32C6CF00FBACC6 /* ShakeLabel.m in Sources */,
 				A38F2D6B1FB3F3AA004F6D60 /* MainListRootViewController.m in Sources */,
 				A368E4051F32C4D000FBACC6 /* animationBtnV.m in Sources */,
+				2066D4972119A0BF007BC48F /* UILabel+Util.m in Sources */,
 				A368E42A1F32C4D000FBACC6 /* messageCellcell.m in Sources */,
 				FE5EFCC82047DAE70082918B /* RookieTools.m in Sources */,
 				A368E2DF1F32BFEC00FBACC6 /* ProfitViewC.m in Sources */,
