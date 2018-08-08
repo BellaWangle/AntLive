@@ -147,7 +147,7 @@
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
             </subviews>
-            <color key="backgroundColor" red="0.96862745100000003" green="0.95294117649999999" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="wqe-V7-cfl" firstAttribute="leading" secondItem="67L-Ge-4pY" secondAttribute="leading" constant="20" id="1ZC-2I-ozV"/>
                 <constraint firstItem="9nG-yV-Xfg" firstAttribute="top" secondItem="fAJ-YU-H03" secondAttribute="bottom" id="2ae-uh-Tk4"/>

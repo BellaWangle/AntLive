@@ -169,7 +169,7 @@
     bgImageView.image = [UIImage imageNamed:@"ic_login_bg"];
     [self.view addSubview:bgImageView];
     [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.bottom.mas_equalTo(0);
+        make.leading.trailing.top.mas_equalTo(0);
         make.height.mas_equalTo(bgImageView.mas_width).multipliedBy(2.174);
     }];
     

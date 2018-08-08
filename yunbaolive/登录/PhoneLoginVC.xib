@@ -12,9 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneLoginVC">
             <connections>
                 <outlet property="VIewH" destination="REL-KL-odP" id="CLA-Lv-8yB"/>
-                <outlet property="doLoginBtn" destination="DJU-ED-B4S" id="czN-rt-CEb"/>
+                <outlet property="doLoginBtn" destination="DJU-ED-B4S" id="UQ4-Sm-TPK"/>
                 <outlet property="forgotPwdBtn" destination="Q1W-C3-R7G" id="LBb-Yb-wpb"/>
-                <outlet property="logBtn" destination="DJU-ED-B4S" id="9Cz-q4-qdt"/>
                 <outlet property="logTitleLabel" destination="2fe-ze-k9D" id="qA5-v8-mfx"/>
                 <outlet property="passWordT" destination="6yD-Ml-H7u" id="fjh-Pb-3C3"/>
                 <outlet property="phoneT" destination="pvS-Jq-oJk" id="VOF-ZI-wGy"/>
@@ -104,7 +103,7 @@
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJU-ED-B4S">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJU-ED-B4S">
                     <rect key="frame" x="20" y="274" width="374" height="44"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -124,7 +123,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="mobileLogin:" destination="-1" eventType="touchUpInside" id="ELR-CA-kAJ"/>
+                        <action selector="mobileLogin:" destination="-1" eventType="touchUpInside" id="p8r-xg-Ydg"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7U-sM-6FH">

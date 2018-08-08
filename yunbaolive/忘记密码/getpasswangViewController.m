@@ -5,9 +5,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *VIewH;
 @property (weak, nonatomic) IBOutlet UILabel *titLAbel;
 
-@property (weak, nonatomic) IBOutlet UILabel *oldLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nnewLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nnewLabel2;
 @property (weak, nonatomic) IBOutlet UIButton *changeBtn;
 
 @end
@@ -28,9 +25,6 @@
         self.VIewH.constant+=statusbarHeight;
     }
     _titLAbel.text = YZMsg(@"重置密码");
-    _oldLabel.text = YZMsg(@"旧密码");
-    _nnewLabel.text = YZMsg(@"新密码");
-    _nnewLabel2.text = YZMsg(@"确认密码");
     [_changeBtn setTitle:YZMsg(@"立即修改") forState:0];
     _oldPassWord.placeholder = YZMsg(@"请输入旧密码");
     _futurePassWord.placeholder = YZMsg(@"请填写新密码");

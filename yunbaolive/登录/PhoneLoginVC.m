@@ -19,7 +19,6 @@
 
 - (IBAction)EULA:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *logTitleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *logBtn;
 @property (weak, nonatomic) IBOutlet UIButton *regBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *regBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *forgotPwdBtn;
@@ -47,7 +46,7 @@
     self.logTitleLabel.text = YZMsg(@"登录");
     [self.regBtn2 setTitle:YZMsg(@"立即注册") forState:0];
     [self.forgotPwdBtn setTitle:YZMsg(@"忘记密码") forState:0];
-    [self.logBtn setTitle:YZMsg(@"立即登录") forState:0];
+    [self.doLoginBtn setTitle:YZMsg(@"立即登录") forState:0];
     _phoneT.placeholder = YZMsg(@"请填写手机号");
     _passWordT.placeholder = YZMsg(@"请填写密码");
     if (_isEmail) {
