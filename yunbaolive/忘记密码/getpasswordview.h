@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *secretT;
 
-@property (weak, nonatomic) IBOutlet UILabel *secretT2;
 @property (weak, nonatomic) IBOutlet UITextField *secretTT2;
 @property (weak, nonatomic) IBOutlet UIButton *findNowBtn;
 - (IBAction)clickFindBtn:(id)sender;

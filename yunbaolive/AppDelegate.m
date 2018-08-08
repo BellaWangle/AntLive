@@ -119,7 +119,7 @@
         [self.window makeKeyAndVisible];
     }
     else{
-        UserLoginVC *login = [[UserLoginVC alloc]initWithNibName:@"UserLoginVC" bundle:nil];
+        UserLoginVC *login = [[UserLoginVC alloc]init];
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
         [self.window makeKeyAndVisible];
     }

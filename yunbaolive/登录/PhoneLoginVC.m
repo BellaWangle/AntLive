@@ -19,12 +19,10 @@
 
 - (IBAction)EULA:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *logTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pwdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *logBtn;
 @property (weak, nonatomic) IBOutlet UIButton *regBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *regBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *forgotPwdBtn;
-@property (weak, nonatomic) IBOutlet UILabel *codeLabel;
 
 @end
 @implementation PhoneLoginVC
@@ -45,33 +43,23 @@
     if (self.VIewH.constant<80) {
         self.VIewH.constant+=statusbarHeight;
     }
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(aaaaaa)];
-////    _codeLabel.userInteractionEnabled = YES;
-//    [_codeLabel addGestureRecognizer:tap];
     
     self.logTitleLabel.text = YZMsg(@"登录");
     [self.regBtn2 setTitle:YZMsg(@"立即注册") forState:0];
     [self.forgotPwdBtn setTitle:YZMsg(@"忘记密码") forState:0];
     [self.logBtn setTitle:YZMsg(@"立即登录") forState:0];
-    self.pwdLabel.text = YZMsg(@"密码");
     _phoneT.placeholder = YZMsg(@"请填写手机号");
     _passWordT.placeholder = YZMsg(@"请填写密码");
     if (_isEmail) {
         _phoneT.placeholder = YZMsg(@"请填写邮箱账号");
-        _codeLabel.text = YZMsg(@"邮箱");
         _phoneT.keyboardType = UIKeyboardTypeEmailAddress;
         [self.regBtn1 setTitle:YZMsg(@"手机登录") forState:0];
-
-//        _codeLabel.userInteractionEnabled = NO;
     }else{
         _phoneT.placeholder = YZMsg(@"请填写手机号");
-        _codeLabel.text = YZMsg(@"手机号");
         _phoneT.keyboardType = UIKeyboardTypeNumberPad;
         [self.regBtn1 setTitle:YZMsg(@"邮箱登录") forState:0];
-//        _codeLabel.userInteractionEnabled = YES;
     }
     self.navigationController.interactivePopGestureRecognizer.delegate = (id) self;
-    [self creatCountry];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ChangeBtnBackground) name:UITextFieldTextDidChangeNotification object:nil];
     testActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -82,8 +70,11 @@
     //隐私
     _privateBtn.titleLabel.textColor = RGB(111, 111, 111);
     NSMutableAttributedString *attStr=[[NSMutableAttributedString alloc]initWithString:YZMsg(@"登录即代表你同意《服务和隐私协议》")];
-    [attStr addAttribute:NSForegroundColorAttributeName value:RGB(248, 208, 119) range:NSMakeRange([[attStr string] rangeOfString:@"<"].location, ([[attStr string] rangeOfString:@">"].location+1-[[attStr string] rangeOfString:@"<"].location))];
+    [attStr addAttribute:NSForegroundColorAttributeName value:Main_Color range:NSMakeRange([[attStr string] rangeOfString:@"<"].location, ([[attStr string] rangeOfString:@">"].location+1-[[attStr string] rangeOfString:@"<"].location))];
     [_privateBtn setAttributedTitle:attStr forState:0];
+    
+    [_phoneT addBottomLineWithHeight:0.5 color:nil];
+    [_passWordT addBottomLineWithHeight:0.5 color:nil];
 }
 -(void)ChangeBtnBackground {
     if (_phoneT.text.length >0 && _passWordT.text.length >0)
@@ -179,6 +170,14 @@
     app2.window.rootViewController = nav;
     
 }
+
+- (BOOL)isEmailAddress:(NSString *)email{
+    NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    BOOL isValid = [predicate evaluateWithObject:email];
+    return isValid;
+}
+
 - (IBAction)regist:(id)sender {
     hahazhucedeview *regist = [[hahazhucedeview alloc]init];
     regist.isEmail = _isEmail;
@@ -206,119 +205,18 @@
 //    VC.titles = @"服务和隐私条款";
     [self.navigationController pushViewController:VC animated:YES];
 }
-#pragma mark ================ 国家编号 ===============
-- (void)aaaaaa {
-    if (!bottomView) {
-        bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, _window_height-200, _window_width, 200)];
-        bottomView.backgroundColor = [UIColor clearColor];
-        [self.view addSubview:bottomView];
-        
-        UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _window_width, 40)];
-        titleView.backgroundColor = [UIColor whiteColor];
-        [bottomView addSubview:titleView];
-        
-        UIButton *cancleBtn = [UIButton buttonWithType:0];
-        cancleBtn.frame = CGRectMake(20, 0, 80, 40);
-        cancleBtn.tag = 100;
-        [cancleBtn setTitle:YZMsg(@"取消") forState:0];
-        [cancleBtn setTitleColor:[UIColor grayColor] forState:0];
-        [cancleBtn addTarget:self action:@selector(cancleOrSure:) forControlEvents:UIControlEventTouchUpInside];
-        [titleView addSubview:cancleBtn];
-        UIButton *sureBtn = [UIButton buttonWithType:0];
-        sureBtn.frame = CGRectMake(_window_width-100, 0, 80, 40);
-        sureBtn.tag = 101;
-        [sureBtn setTitle:YZMsg(@"确认") forState:0];
-        [sureBtn setTitleColor:[UIColor orangeColor] forState:0];
-        [sureBtn addTarget:self action:@selector(cancleOrSure:) forControlEvents:UIControlEventTouchUpInside];
-        [titleView addSubview:sureBtn];
-        
-        UIPickerView *pick = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 40, _window_width, 160)];
-        pick.backgroundColor = [UIColor whiteColor];
-        pick.delegate = self;
-        pick.dataSource = self;
-        [bottomView addSubview:pick];
-        
-        
-    }else {
-        bottomView.hidden = NO;
-    }
-    
-}
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return countryArray.count;
-}
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
-}
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    // 由于该控件只包含一列，因此无须理会列序号参数component
-    // 该方法根据row参数返回teams中的元素，row参数代表列表项的编号，
-    // 因此该方法表示第几个列表项，就使用teams中的第几个元素
-    NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentLanguage];
-    if ([str isEqualToString:ZW]) {
-        return [[countryArray objectAtIndex:row] valueForKey:@"country_name_cn"];
-    }else if ([str isEqualToString:EN]) {
-        return [[countryArray objectAtIndex:row] valueForKey:@"country_name_en"];
-    }{
-        return [[countryArray objectAtIndex:row] valueForKey:@"country_name_ft"];
-    }
-    
-}
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:
-(NSInteger)row inComponent:(NSInteger)component {
-    selectIndex = row;
-    
-}
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
-    return 30.0;
-}
 
-- (void)creatCountry{
-    countryArray = [NSMutableArray array];
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"CountryCode" ofType:@".json"];
-    NSData *jsonData = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:nil];
-    NSMutableDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-    for (NSDictionary *dic in jsonDic) {
-        [countryArray addObject:dic];
-    }
-    for (int i = 0; i<countryArray.count; i++) {
-        if ([[countryArray[i] valueForKey:@"country_name_cn"] isEqualToString:@"柬埔寨"]) {
-            [countryArray exchangeObjectAtIndex:0 withObjectAtIndex:i];
-        }
-    }
-    NSLog(@"%@",countryArray);
-}
-- (void)cancleOrSure:(UIButton *)button{
-    if (button.tag == 100) {
-        //        return;
-    }else{
-        //        [_numBtn setTitle:[NSString stringWithFormat:@"+%@",[[countryArray objectAtIndex:selectIndex] valueForKey:@"country_code"]] forState:0];
-        _codeLabel.text = [NSString stringWithFormat:@"+%@",[[countryArray objectAtIndex:selectIndex] valueForKey:@"country_code"]];
-        
-    }
-    bottomView.hidden = YES;
-}
-- (BOOL)isEmailAddress:(NSString *)email{
-    NSString *emailRegex = @"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    BOOL isValid = [predicate evaluateWithObject:email];
-    return isValid;
-}
 - (IBAction)changeLoginType:(id)sender {
     _isEmail = !_isEmail;
     [_phoneT resignFirstResponder];
     [_passWordT resignFirstResponder];
     if (_isEmail) {
         _phoneT.placeholder = YZMsg(@"请填写邮箱账号");
-        _codeLabel.text = YZMsg(@"邮箱");
         _phoneT.keyboardType = UIKeyboardTypeEmailAddress;
         [self.regBtn1 setTitle:YZMsg(@"手机登录") forState:0];
         
     }else{
         _phoneT.placeholder = YZMsg(@"请填写手机号");
-        _codeLabel.text = YZMsg(@"手机号");
         _phoneT.keyboardType = UIKeyboardTypeNumberPad;
         [self.regBtn1 setTitle:YZMsg(@"邮箱登录") forState:0];
     }

@@ -24,6 +24,11 @@
 "立即登录" = "Login now";
 "立即注册" = "Sign up now";
 "忘记密码" = "forget password";
+"账号登录" = "Log in";
+"使用手机号登录" = "Use Phone Number Log in";
+"使用电子邮箱登录" = "Use Email Log in";
+"注册新账号" = "Register";
+"或" = "Or";
 //注册
 "注册" = "Sign up";
 "账号" = "Account";

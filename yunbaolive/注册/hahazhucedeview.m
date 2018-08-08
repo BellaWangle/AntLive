@@ -1,19 +1,17 @@
 #import "hahazhucedeview.h"
 @interface hahazhucedeview ()<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
-       NSTimer *messsageTimer;
-       int messageIssssss;//短信倒计时  60s
-        UIView *bottomView;
-        NSMutableArray *countryArray;//国家区号
-        NSInteger selectIndex;
+    NSTimer *messsageTimer;
+    int messageIssssss;//短信倒计时  60s
+    UIView *bottomView;
+    NSMutableArray *countryArray;//国家区号
+    NSInteger selectIndex;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *VIewH;
 @property (weak, nonatomic) IBOutlet UILabel *regTitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *yzmLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pwdLabel;
-@property (weak, nonatomic) IBOutlet UILabel *pwdLabel2;
 @property (weak, nonatomic) IBOutlet UIButton *regBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *selectPhoneStateImageView;
 
 @end
 @implementation hahazhucedeview
@@ -27,19 +25,18 @@
     }
     _regTitLabel.text = YZMsg(@"注册");
     _nameLabel.text = YZMsg(@"账号");
-    _yzmLabel.text = YZMsg(@"验证码");
-    _pwdLabel.text = YZMsg(@"密码");
-    _pwdLabel2.text = YZMsg(@"确认密码");
     [_yanzhengmaBtn setTitle:YZMsg(@"获取验证码") forState:0];
     _phoneT.placeholder = YZMsg(@"请填写手机号");
     _yanzhengmaT.placeholder = YZMsg(@"请输入验证码");
     _passWordT.placeholder = YZMsg(@"请填写密码");
     _password2.placeholder = YZMsg(@"请确认密码");
     [_regBtn setTitle:YZMsg(@"立即注册") forState:0];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(aaaaaa)];
-    //    _nameLabel.userInteractionEnabled = YES;
-    [_nameLabel addGestureRecognizer:tap];
+    
     if (_isEmail) {
+        _selectPhoneStateImageView.hidden = YES;
+        [_selectPhoneStateImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(0);
+        }];
         _nameLabel.text = YZMsg(@"邮箱");
         _phoneT.placeholder = YZMsg(@"请填写邮箱账号");
         _nameLabel.userInteractionEnabled = NO;
@@ -61,10 +58,8 @@
 -(void)ChangeBtnBackground
 {
     if (_phoneT.text.length > 0) {
-        [_yanzhengmaBtn setBackgroundColor:normalColors];
         _yanzhengmaBtn.enabled = YES;
     }else{
-        [_yanzhengmaBtn setBackgroundColor:[UIColor colorWithRed:207/255.0 green:207/255.0 blue:207/255.0 alpha:1.0]];
         _yanzhengmaBtn.enabled = NO;
     }
     if (_phoneT.text.length > 0 && _yanzhengmaT.text.length == 6 && _passWordT.text.length > 0 && _password2.text.length >0)
@@ -228,31 +223,44 @@
     
 
 }
+
 #pragma mark ================ 国家编号 ===============
-- (void)aaaaaa {
+- (IBAction)selectAreaCode:(id)sender {
+    if (_isEmail) {
+        return;
+    }
     [_phoneT resignFirstResponder];
     [_yanzhengmaT resignFirstResponder];
     [_passWordT resignFirstResponder];
     [_password2 resignFirstResponder];
+    _selectPhoneStateImageView.image = [UIImage imageNamed:@"ic_up"];
     
     if (!bottomView) {
-        bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, _window_height-200, _window_width, 200)];
-        bottomView.backgroundColor = [UIColor clearColor];
+        bottomView = [[UIView alloc]init];
+        bottomView.frame = self.view.bounds;
+        bottomView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.3];
         [self.view addSubview:bottomView];
         
+        
+        
+        UIView * pickerBgView = [[UIView alloc]initWithFrame:CGRectMake(0, _window_height-200, _window_width, 200)];
+        pickerBgView.backgroundColor = [UIColor whiteColor];
+        [bottomView addSubview:pickerBgView];
+        
         UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _window_width, 40)];
-        titleView.backgroundColor = [UIColor whiteColor];
-        [bottomView addSubview:titleView];
+        titleView.backgroundColor = HexColor(@"FAFAFA");
+        [pickerBgView addSubview:titleView];
         
         UIButton *cancleBtn = [UIButton buttonWithType:0];
-        cancleBtn.frame = CGRectMake(20, 0, 80, 40);
+        cancleBtn.frame = CGRectMake(20, 0, 40, 40);
         cancleBtn.tag = 100;
         [cancleBtn setTitle:YZMsg(@"取消") forState:0];
         [cancleBtn setTitleColor:[UIColor grayColor] forState:0];
         [cancleBtn addTarget:self action:@selector(cancleOrSure:) forControlEvents:UIControlEventTouchUpInside];
         [titleView addSubview:cancleBtn];
+        
         UIButton *sureBtn = [UIButton buttonWithType:0];
-        sureBtn.frame = CGRectMake(_window_width-100, 0, 80, 40);
+        sureBtn.frame = CGRectMake(_window_width-60, 0, 40, 40);
         sureBtn.tag = 101;
         [sureBtn setTitle:YZMsg(@"确认") forState:0];
         [sureBtn setTitleColor:[UIColor orangeColor] forState:0];
@@ -260,13 +268,13 @@
         [titleView addSubview:sureBtn];
         
         UIPickerView *pick = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 40, _window_width, 160)];
-        pick.backgroundColor = [UIColor whiteColor];
         pick.delegate = self;
         pick.dataSource = self;
-        [bottomView addSubview:pick];
+        [pickerBgView addSubview:pick];
         
         
     }else {
+       
         bottomView.hidden = NO;
     }
     
@@ -293,8 +301,7 @@
     }
     
 }
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:
-(NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     selectIndex = row;
     
 }
@@ -325,6 +332,7 @@
         _nameLabel.text = [NSString stringWithFormat:@"+%@",[[countryArray objectAtIndex:selectIndex] valueForKey:@"country_code"]];
         
     }
+    _selectPhoneStateImageView.image = [UIImage imageNamed:@"ic_down"];
     bottomView.hidden = YES;
 }
 - (BOOL)isEmailAddress:(NSString *)email{

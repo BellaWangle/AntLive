@@ -14,14 +14,16 @@
 #import "ZYTabBarController.h"
 #import "webH5.h"
 #import "PhoneLoginVC.h"
+#import "AntButton.h"
+#import "UIView+Util.h"
 
 @interface UserLoginVC ()
 {
     UIActivityIndicatorView *testActivityIndicator;//菊花
     NSArray *platformsarray;
 }
+
 @property(nonatomic,strong)NSString *isreg;
-@property (weak, nonatomic) IBOutlet UILabel *logTypeLabel;
 
 @end
 
@@ -32,8 +34,6 @@
     self.navigationController.navigationBarHidden = YES;
     [testActivityIndicator stopAnimating]; // 结束旋转
     [testActivityIndicator setHidesWhenStopped:YES]; //当旋转结束时隐藏
-//    [self getLoginThird];
-    [self setthirdview];
 }
 //获取三方登录方式
 -(void)getLoginThird{
@@ -52,7 +52,7 @@
                      NSDictionary *info = [[data valueForKey:@"info"] firstObject];
                      platformsarray = [info valueForKey:@"login_type"];
                      dispatch_async(dispatch_get_main_queue(), ^{
-                         [self setthirdview];
+                        
                      });
                  }
              }
@@ -65,44 +65,7 @@
          [testActivityIndicator setHidesWhenStopped:YES]; //当旋转结束时隐藏
      }];
 }
-//添加登陆方式
--(void)setthirdview{
-    //进入此方法钱，清除所有按钮，防止重复添加
-    platformsarray = @[@"facebook"];
 
-    for (UIButton *btn in _platformview.subviews) {
-        [btn removeFromSuperview];
-    }
-    //如果返回为空，登陆方式字样隐藏
-    if (platformsarray.count == 0) {
-        _otherviews.hidden = YES;
-    }
-    else{
-        _otherviews.hidden = NO;
-    }
-    //注意：此处涉及到精密计算，轻忽随意改动
-    CGFloat w = 50;
-    CGFloat x;
-    CGFloat centerX = _window_width/2;
-    if (platformsarray.count % 2 == 0) {
-        x =  centerX - platformsarray.count/2*w - (platformsarray.count - 1)*5;
-    }
-    else{
-        x =  centerX - (platformsarray.count - 1)/2*w - w/2 - (platformsarray.count - 1)*5;
-    }
-    
-    for (int i=0; i<platformsarray.count; i++) {
-        UIButton *btn = [UIButton buttonWithType:0];
-        btn.tag = 1000 + i;
-        [btn setImage:[UIImage imageNamed:platformsarray[i]] forState:UIControlStateNormal];
-        [btn setTitle:platformsarray[i] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(thirdlogin:) forControlEvents:UIControlEventTouchUpInside];
-        btn.frame = CGRectMake(x,0,w,w);
-        x+=w+10;
-        [_platformview addSubview:btn];
-    }
-}
 //若要添加登陆方式，在此处添加
 -(void)thirdlogin:(UIButton *)sender{
     /*
@@ -170,29 +133,15 @@
     [super viewDidLoad];
     
     self.navigationController.interactivePopGestureRecognizer.delegate = (id) self;
-//    platformsarray = @[@"facebook"];
-    self.logTypeLabel.text = YZMsg(@"使用以下方式登录");
+
     
     testActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     testActivityIndicator.center = CGPointMake(_window_width/2 - 10, _window_height/2 - 10);
     [self.view addSubview:testActivityIndicator];
     testActivityIndicator.color = [UIColor blackColor];
-    //手机登录、注册
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:YZMsg(@"手机号登录/注册")];
-    NSRange strRange = {0,[str length]};
-    [str addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:NSUnderlineStyleSingle],NSUnderlineStyleAttributeName,RGB(111, 111, 111), NSForegroundColorAttributeName,nil] range:strRange];
-    [_phoneLoginBtn setAttributedTitle:str forState:UIControlStateNormal];
+   
     
-    //邮箱登录、注册
-    NSMutableAttributedString *str2 = [[NSMutableAttributedString alloc] initWithString:YZMsg(@"邮箱登录/注册")];
-    NSRange strRange2 = {0,[str2 length]};
-    [str2 addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:NSUnderlineStyleSingle],NSUnderlineStyleAttributeName,RGB(111, 111, 111), NSForegroundColorAttributeName,nil] range:strRange2];
-    [_emailBtn setAttributedTitle:str2 forState:UIControlStateNormal];
-    //隐私
-    _privateBtn.titleLabel.textColor = RGB(111, 111, 111);
-    NSMutableAttributedString *attStr=[[NSMutableAttributedString alloc]initWithString:YZMsg(@"登录即代表你同意《服务和隐私协议》")];
-    [attStr addAttribute:NSForegroundColorAttributeName value:RGB(248, 208, 119) range:NSMakeRange([[attStr string] rangeOfString:@"<"].location, ([[attStr string] rangeOfString:@">"].location+1-[[attStr string] rangeOfString:@"<"].location))];
-    [_privateBtn setAttributedTitle:attStr forState:0];
+    
     
 //    [self setthirdview];
     
@@ -212,10 +161,111 @@
             NSLog(@"wifi-------");
         }
     }];
+    [self createSubviews];
+}
+
+-(void)createSubviews{
+    UIImageView * bgImageView = [[UIImageView alloc]init];
+    bgImageView.image = [UIImage imageNamed:@"ic_login_bg"];
+    [self.view addSubview:bgImageView];
+    [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(bgImageView.mas_width).multipliedBy(2.174);
+    }];
+    
+    AntButton * registerButton = [self buttonWithTitle:YZMsg(@"注册新账号")];
+    [registerButton addTarget:self action:@selector(registerButtonOnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:registerButton];
+    [registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(20);
+        make.trailing.mas_equalTo(-20);
+        make.height.mas_equalTo(44);
+        make.bottom.mas_equalTo(-50);
+    }];
+    
+    UILabel * segmentationLabel = [[UILabel alloc]initWithTextColor:[UIColor whiteColor] font:13 textAliahment:NSTextAlignmentCenter text:YZMsg(@"或")];
+    [self.view addSubview:segmentationLabel];
+    [segmentationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.width.mas_equalTo(70);
+        make.height.mas_equalTo(13);
+        make.bottom.mas_equalTo(registerButton.mas_top).offset(-35);
+    }];
+    
+    UIView * lineView1 = [[UIView alloc]init];
+    [self.view addSubview:lineView1];
+    [lineView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(20);
+        make.trailing.mas_equalTo(segmentationLabel.mas_leading);
+        make.height.mas_equalTo(0.5);
+        make.centerY.mas_equalTo(segmentationLabel);
+    }];
     
     
+    UIView * lineView2 = [[UIView alloc]init];
+    [self.view addSubview:lineView2];
+    [lineView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-20);
+        make.leading.mas_equalTo(segmentationLabel.mas_trailing);
+        make.height.mas_equalTo(lineView1);
+        make.centerY.mas_equalTo(segmentationLabel);
+    }];
+    
+    AntButton * emailLoginButton = [self buttonWithTitle:YZMsg(@"使用电子邮箱登录")];
+    [emailLoginButton addTarget:self action:@selector(emailBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:emailLoginButton];
+    [emailLoginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.height.mas_equalTo(registerButton);
+        make.bottom.mas_equalTo(segmentationLabel.mas_top).offset(-35);
+    }];
+    
+    AntButton * phoneLoginButton = [self buttonWithTitle:YZMsg(@"使用手机号登录")];
+    [phoneLoginButton addTarget:self action:@selector(clickPhoneLoginBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:phoneLoginButton];
+    [phoneLoginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.height.mas_equalTo(registerButton);
+        make.bottom.mas_equalTo(emailLoginButton.mas_top).offset(-15);
+    }];
+    
+    AntButton * faceBookButton = [[AntButton alloc]init];
+    faceBookButton.buttonTitleColor = [UIColor whiteColor];
+    faceBookButton.buttonTitleFontSize = 17;
+    faceBookButton.layer.cornerRadius = 3;
+    faceBookButton.backgroundColor = HexColor(@"3A579D");
+    faceBookButton.HorizontalWidth = 6;
+    faceBookButton.buttonImageWidth = 20;
+    NSString * string = [NSString stringWithFormat:@"facebook %@",YZMsg(@"账号登录")];
+    [faceBookButton setTitle:string imageName:@"ic_facebook"];
+    
+    [faceBookButton addTarget:self action:@selector(faceBookButtonOnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:faceBookButton];
+    [faceBookButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.height.mas_equalTo(registerButton);
+        make.bottom.mas_equalTo(phoneLoginButton.mas_top).offset(-15);
+    }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [lineView1 layoutIfNeeded];
+        [lineView1 gradientWithColors:@[[[UIColor whiteColor]colorWithAlphaComponent:0],[[UIColor whiteColor]colorWithAlphaComponent:1]] starPoint:CGPointMake(0, 1) endPoint:CGPointMake(1, 1)];
+        [lineView2 layoutIfNeeded];
+        [lineView2 gradientWithColors:@[[[UIColor whiteColor]colorWithAlphaComponent:1],[[UIColor whiteColor]colorWithAlphaComponent:0]] starPoint:CGPointMake(0, 1) endPoint:CGPointMake(1, 1)];
+    });
     
 }
+
+
+-(AntButton *)buttonWithTitle:(NSString *)title{
+    AntButton * button = [[AntButton alloc]init];
+    button.title = title;
+    button.backgroundColor = [UIColor clearColor];
+    button.buttonTitleColor = [UIColor whiteColor];
+    button.buttonTitleFontSize = 17;
+    button.layer.cornerRadius = 3;
+    button.layer.borderColor = [UIColor whiteColor].CGColor;
+    button.layer.borderWidth = 0.5;
+    return button;
+}
+
 -(void)RequestLogin:(SSDKUser *)user LoginType:(NSString *)LoginType
 {
     
@@ -337,6 +387,14 @@
     
 }
 
+#pragma mark - click -
+
+-(void)registerButtonOnClick{
+    hahazhucedeview *regist = [[hahazhucedeview alloc]init];
+    regist.isEmail = NO;
+    [self.navigationController pushViewController:regist animated:YES];
+}
+
 - (IBAction)clickPhoneLoginBtn:(UIButton *)sender {
     
     PhoneLoginVC *pVC = [[PhoneLoginVC alloc]initWithNibName:@"PhoneLoginVC" bundle:nil];
@@ -352,6 +410,11 @@
 //    VC.titles = @"服务和隐私条款";
     [self.navigationController pushViewController:VC animated:YES];
 }
+
+- (void)faceBookButtonOnClick{
+    [self login:@"facebook" platforms:SSDKPlatformTypeFacebook];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

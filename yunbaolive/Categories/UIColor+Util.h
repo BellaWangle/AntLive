@@ -10,8 +10,8 @@
 
 @interface UIColor (Util)
 
-//+ (UIColor *)colorWithHex:(int)hexValue alpha:(CGFloat)alpha;
-//+ (UIColor *)colorWithHex:(int)hexValue;
++ (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
++ (UIColor *)colorWithHexString:(NSString *)hexValue;
 
 //+ (UIColor *)themeColor;
 //+ (UIColor *)nameColor;
