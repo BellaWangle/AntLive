@@ -27,7 +27,8 @@
 }
 - (void)drawRect:(CGRect)rect {
     if (!self.plusBtn) {
-    self.plusBtn = [[MXtabbar alloc]initWithCenterImage:[UIImage imageNamed:@"个人中心—开始直播"]highlightedImage:[UIImage imageNamed:@"个人中心—开始直播"]];
+    self.plusBtn = [[MXtabbar alloc]initWithButtonFrame:CGRectMake(0, 0, 48, 48) centerImage:[UIImage imageNamed:@"个人中心—开始直播"]highlightedImage:[UIImage imageNamed:@"个人中心—开始直播"]];
+        
     self.plusBtn.delegate = self;
     [self setUpPathButton:self.plusBtn];
     //必须加到父视图上
