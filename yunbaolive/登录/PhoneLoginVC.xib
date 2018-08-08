@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -38,13 +39,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Uv-aM-eKT" userLabel="返回">
-                            <rect key="frame" x="0.0" y="20" width="44" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="44" id="dmE-LK-KPE"/>
-                                <constraint firstAttribute="width" constant="44" id="rpl-AL-dZ1"/>
+                                <constraint firstAttribute="width" secondItem="6Uv-aM-eKT" secondAttribute="height" multiplier="1:1" id="xtf-Bb-Tky"/>
                             </constraints>
                             <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                            <state key="normal" image="pub_black_back.png"/>
                             <connections>
                                 <action selector="clickBackBtn:" destination="-1" eventType="touchUpInside" id="ilY-oh-N1Z"/>
                             </connections>
@@ -69,20 +68,30 @@
                                 <action selector="changeLoginType:" destination="-1" eventType="touchUpInside" id="WZS-aC-yBI"/>
                             </connections>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_leftsssa" translatesAutoresizingMaskIntoConstraints="NO" id="lfB-aE-eTt">
+                            <rect key="frame" x="20" y="32.666666666666657" width="15" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="DYb-00-0wN"/>
+                                <constraint firstAttribute="width" constant="15" id="Mex-gM-3vd"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="lfB-aE-eTt" firstAttribute="centerY" secondItem="2fe-ze-k9D" secondAttribute="centerY" id="3dR-0Z-HMB"/>
                         <constraint firstItem="vWD-iJ-Bhl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2fe-ze-k9D" secondAttribute="trailing" id="Hgi-8S-PcG"/>
                         <constraint firstAttribute="trailing" secondItem="Y2n-Kt-VjM" secondAttribute="trailing" id="KxX-DJ-FDm"/>
                         <constraint firstItem="6Uv-aM-eKT" firstAttribute="leading" secondItem="iGc-kZ-bZc" secondAttribute="leading" id="Ote-qQ-n5J"/>
                         <constraint firstAttribute="height" constant="64" id="REL-KL-odP"/>
-                        <constraint firstItem="2fe-ze-k9D" firstAttribute="centerY" secondItem="iGc-kZ-bZc" secondAttribute="centerY" constant="10" id="WHW-2v-GGl"/>
                         <constraint firstAttribute="bottom" secondItem="6Uv-aM-eKT" secondAttribute="bottom" id="aWB-KP-NTN"/>
                         <constraint firstAttribute="trailing" secondItem="vWD-iJ-Bhl" secondAttribute="trailing" constant="20" id="dLs-1w-kNK"/>
                         <constraint firstAttribute="bottom" secondItem="Y2n-Kt-VjM" secondAttribute="bottom" id="lPK-uP-gfX"/>
                         <constraint firstItem="Y2n-Kt-VjM" firstAttribute="leading" secondItem="iGc-kZ-bZc" secondAttribute="leading" id="pq9-N1-iu1"/>
                         <constraint firstItem="vWD-iJ-Bhl" firstAttribute="centerY" secondItem="2fe-ze-k9D" secondAttribute="centerY" id="uS0-xR-kT3"/>
                         <constraint firstItem="2fe-ze-k9D" firstAttribute="centerX" secondItem="iGc-kZ-bZc" secondAttribute="centerX" id="wG3-rj-O5L"/>
+                        <constraint firstItem="lfB-aE-eTt" firstAttribute="leading" secondItem="iGc-kZ-bZc" secondAttribute="leading" constant="20" id="xMf-WJ-9fA"/>
+                        <constraint firstItem="Y2n-Kt-VjM" firstAttribute="top" secondItem="2fe-ze-k9D" secondAttribute="bottom" constant="11" id="xXg-Cj-PmY"/>
+                        <constraint firstItem="6Uv-aM-eKT" firstAttribute="top" secondItem="iGc-kZ-bZc" secondAttribute="top" id="xot-rg-8Nh"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写手机号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pvS-Jq-oJk">
@@ -188,6 +197,6 @@
         </view>
     </objects>
     <resources>
-        <image name="pub_black_back.png" width="32" height="32"/>
+        <image name="icon_arrow_leftsssa" width="24" height="32"/>
     </resources>
 </document>

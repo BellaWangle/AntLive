@@ -58,7 +58,7 @@
                             <state key="normal" image="icon_arrow_leftsssa"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pip-LZ-bEi">
-                            <rect key="frame" x="-2.5" y="12.5" width="60" height="60"/>
+                            <rect key="frame" x="0.0" y="4" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="4G4-30-thb"/>
                                 <constraint firstAttribute="width" constant="60" id="zTM-Kb-Fh1"/>
@@ -71,14 +71,14 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="3P9-s3-Jcl"/>
-                        <constraint firstItem="pip-LZ-bEi" firstAttribute="centerX" secondItem="4ee-tx-nen" secondAttribute="centerX" id="5fC-f9-eeU"/>
                         <constraint firstAttribute="bottom" secondItem="zD4-XK-sgi" secondAttribute="bottom" id="6jt-l3-I5B"/>
                         <constraint firstItem="0Zf-k8-dtz" firstAttribute="centerX" secondItem="oTN-5M-0Kf" secondAttribute="centerX" id="EHb-iJ-LAq"/>
                         <constraint firstItem="zD4-XK-sgi" firstAttribute="leading" secondItem="oTN-5M-0Kf" secondAttribute="leading" id="IS5-JR-Etx"/>
                         <constraint firstAttribute="trailing" secondItem="zD4-XK-sgi" secondAttribute="trailing" id="LlR-Mj-nMN"/>
-                        <constraint firstItem="pip-LZ-bEi" firstAttribute="centerY" secondItem="4ee-tx-nen" secondAttribute="centerY" id="Nks-Se-sju"/>
+                        <constraint firstItem="pip-LZ-bEi" firstAttribute="leading" secondItem="oTN-5M-0Kf" secondAttribute="leading" id="PIg-56-qJo"/>
+                        <constraint firstItem="zD4-XK-sgi" firstAttribute="top" secondItem="0Zf-k8-dtz" secondAttribute="bottom" constant="10" id="cEO-9p-Da8"/>
                         <constraint firstItem="4ee-tx-nen" firstAttribute="centerY" secondItem="0Zf-k8-dtz" secondAttribute="centerY" id="iuh-Gm-41M"/>
-                        <constraint firstItem="0Zf-k8-dtz" firstAttribute="centerY" secondItem="oTN-5M-0Kf" secondAttribute="centerY" constant="10" id="kfQ-4X-q98"/>
+                        <constraint firstAttribute="bottom" secondItem="pip-LZ-bEi" secondAttribute="bottom" id="qL5-KS-OWU"/>
                         <constraint firstItem="4ee-tx-nen" firstAttribute="leading" secondItem="oTN-5M-0Kf" secondAttribute="leading" constant="20" id="wI7-L5-KT9"/>
                     </constraints>
                 </view>

@@ -44,7 +44,7 @@
                             <state key="normal" image="icon_arrow_leftsssa"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kit-gH-xYV">
-                            <rect key="frame" x="-2.5" y="12" width="60" height="60"/>
+                            <rect key="frame" x="0.0" y="4" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="OM7-XG-K0n"/>
                                 <constraint firstAttribute="height" constant="60" id="TRm-TK-LFd"/>
@@ -66,12 +66,12 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="kit-gH-xYV" firstAttribute="centerY" secondItem="Fhw-Fx-paR" secondAttribute="centerY" id="2yL-Vy-9Lk"/>
+                        <constraint firstItem="kit-gH-xYV" firstAttribute="leading" secondItem="di5-7O-Lwr" secondAttribute="leading" id="0SN-XI-kkE"/>
                         <constraint firstAttribute="bottom" secondItem="e6W-UH-7YD" secondAttribute="bottom" id="HRa-lv-rtj"/>
-                        <constraint firstItem="kit-gH-xYV" firstAttribute="centerX" secondItem="Fhw-Fx-paR" secondAttribute="centerX" id="PpV-L1-ZDJ"/>
+                        <constraint firstItem="e6W-UH-7YD" firstAttribute="top" secondItem="ra5-v2-40K" secondAttribute="bottom" constant="10" id="QqN-9k-4Cv"/>
                         <constraint firstAttribute="height" constant="64" id="SAW-ne-REv"/>
                         <constraint firstItem="e6W-UH-7YD" firstAttribute="leading" secondItem="di5-7O-Lwr" secondAttribute="leading" id="TRa-Zi-8Jv"/>
-                        <constraint firstItem="ra5-v2-40K" firstAttribute="centerY" secondItem="di5-7O-Lwr" secondAttribute="centerY" constant="10" id="Vfk-ob-TIv"/>
+                        <constraint firstAttribute="bottom" secondItem="kit-gH-xYV" secondAttribute="bottom" id="UgO-5O-kTl"/>
                         <constraint firstItem="Fhw-Fx-paR" firstAttribute="leading" secondItem="di5-7O-Lwr" secondAttribute="leading" constant="20" id="YvH-hZ-K9u"/>
                         <constraint firstItem="ra5-v2-40K" firstAttribute="centerX" secondItem="di5-7O-Lwr" secondAttribute="centerX" id="gln-qO-mZE"/>
                         <constraint firstAttribute="trailing" secondItem="e6W-UH-7YD" secondAttribute="trailing" id="ngu-bZ-hUf"/>
