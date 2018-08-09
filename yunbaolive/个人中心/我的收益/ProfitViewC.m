@@ -28,7 +28,7 @@
     if (self.VIewH.constant<80) {
         self.VIewH.constant+=statusbarHeight;
     }
-    _profitL.text = [common name_votes];
+    _profitL.text = YZMsg(@"蚁币");
     _keLabel.text = YZMsg(@"可提现金额(元)");
     _todayKeLabel.text = YZMsg(@"今日可提现金额(元)");
     [_prof setTitle:YZMsg(@"提现") forState:0];

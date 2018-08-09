@@ -34,7 +34,6 @@
 //主播等级
 @property (nonatomic, weak) UIImageView *level_anchorView;
 //编辑按钮
-@property (nonatomic, strong) UIButton *editBtn;
 @property (nonatomic, strong) UIButton *editBtn2;
 //签名
 @property (nonatomic, strong) UILabel *IDL;

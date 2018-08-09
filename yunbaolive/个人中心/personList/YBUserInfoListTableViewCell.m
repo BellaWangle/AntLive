@@ -42,8 +42,8 @@
     _iconImage.contentMode = UIViewContentModeScaleAspectFit;
     _nameL = [[UILabel alloc]init];
     _nameL.textAlignment = NSTextAlignmentCenter;
-    _nameL.textColor = [UIColor blackColor];
-    _nameL.font = fontThin(14);
+    _nameL.textColor = Default_Black;
+    _nameL.font = fontThin(17);
     
     
     [self.contentView addSubview:_nameL];

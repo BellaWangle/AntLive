@@ -111,10 +111,17 @@
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-    [self creatNavi];
+//    [self creatNavi];
     _listArr = [NSArray arrayWithArray:[common getpersonc]];
     [self restListArr];
     [self setUI];
+    
+    
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 //MARK:-设置tableView
 -(void)setUI
@@ -122,7 +129,6 @@
     [self.tableView registerClass:[YBPersonTableViewCell class] forCellReuseIdentifier:@"YBPersonTableViewCell"];
     [self.tableView registerClass:[YBUserInfoListTableViewCell class] forCellReuseIdentifier:@"YBUserInfoListTableViewCell"];
     self.tableView.separatorStyle = UITableViewCellAccessoryNone;
-    [self.view addSubview:self.tableView];
     self.tableView.tableFooterView =[[UIView alloc]init];
     self.tableView.tableHeaderView = [[UIView alloc]init];
     self.tableView.bounces = NO;
@@ -181,17 +187,9 @@
 {
     if (indexPath.section == 0)
     {
-        return 180;
+        return PXRate(254)+iPhoneX_Top;
     }
-        return 60;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return 0;
-    }
-    else
-        return 8;
+        return 50;
 }
 -(void)pushH5Webviewinfo:(NSDictionary *)subdic{
     NSString *url = minstr([subdic valueForKey:@"href"]);
@@ -286,10 +284,16 @@
 }//MARK:-懒加载
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,64+statusbarHeight,_window_width,_window_height-64-statusbarHeight-ShowDiff-49) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,_window_width,_window_height + statusbarHeight-ShowDiff-49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = RGB(246, 246, 246);
+        _tableView.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.leading.trailing.mas_equalTo(0);
+            make.bottom.mas_equalTo(-(ShowDiff+49));
+        }];
+        
     }
     return _tableView;
 }

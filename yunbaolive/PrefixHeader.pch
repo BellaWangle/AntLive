@@ -69,6 +69,7 @@
 
 //适配iphoneX
 #define iPhoneX (_window_width== 375.f && _window_height == 812.f)
+#define iPhoneX_Top (iPhoneX ? 22 : 0)
 #define ShowDiff (iPhoneX ? 34: 0)
 #define statusbarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height-20)
 
@@ -153,3 +154,5 @@ alpha:1.f]
 #define IsEmptyStr(_ref) (((_ref) == nil)||([(_ref) isEqual:[NSNull null]])||(![(_ref) isKindOfClass:[NSString class]])||[NSString stringWithFormat:@"%@",_ref].length == 0)
 
 #define IsEmptyList(_ref) (((_ref) == nil)||([(_ref) isEqual:[NSNull null]])||(![(_ref) isKindOfClass:[NSArray class]])||((_ref).count==0))
+//比例换算
+#define PXRate(ref) (_window_width/375 * ref)

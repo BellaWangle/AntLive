@@ -149,10 +149,10 @@
                         NSComparisonResult r = [app_build compare:build];
                         _Build =[NSString stringWithFormat:@"%@",[subdic valueForKey:@"ipa_url"]];
                         if (r == NSOrderedAscending || r == NSOrderedDescending) {//可改为if(r == -1L)
-                            alertupdate = [[UIAlertView alloc]initWithTitle:YZMsg(@"提示") message:minstr(ipa_des) delegate:self cancelButtonTitle:YZMsg(@"使用旧版") otherButtonTitles:YZMsg(@"前往更新"), nil];
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                 [alertupdate show];
-                            });
+//                            alertupdate = [[UIAlertView alloc]initWithTitle:YZMsg(@"提示") message:minstr(ipa_des) delegate:self cancelButtonTitle:YZMsg(@"使用旧版") otherButtonTitles:YZMsg(@"前往更新"), nil];
+//                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                                 [alertupdate show];
+//                            });
                         }
                     }
                     else{

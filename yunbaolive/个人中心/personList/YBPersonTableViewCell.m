@@ -81,7 +81,7 @@
     }
     [_levelView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"leve%@",_model.level]]];
     [_level_anchorView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"host_%@",_model.level_anchor]]];
-    [_iconView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [_iconView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     [self.bottomView setAgain:@[_model.lives,_model.follows,_model.fans]];
     
 }
@@ -107,65 +107,88 @@
 //MARK:-设置控件
 -(void)setupView
 {
+    
+    UIImageView * bgImageView = [[UIImageView alloc]init];
+    bgImageView.image = [UIImage imageNamed:@"ic_mine_bg"];
+    [self.contentView addSubview:bgImageView];
+    [bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.top.trailing.mas_equalTo(0);
+        make.height.mas_equalTo(bgImageView.mas_width).multipliedBy(0.608);
+    }];
     //头像
     UIImageView *iconView = [[UIImageView alloc]init];
-    iconView.frame = CGRectMake(0,0,80,80);
     [iconView setClipsToBounds:YES];
     iconView.layer.masksToBounds = YES;
-    iconView.layer.cornerRadius =40;
+    iconView.layer.cornerRadius =PXRate(33);
+    iconView.layer.borderColor = [UIColor whiteColor].CGColor;
+    iconView.layer.borderWidth = 2;
     [iconView sizeToFit];
     self.iconView = iconView;
     [self.contentView addSubview:iconView];
     self.contentView.backgroundColor = [UIColor whiteColor];
     //姓名
     UILabel *nameLabel = [[UILabel alloc]init];
-    nameLabel.textColor = [UIColor blackColor];
+    nameLabel.textColor = [UIColor whiteColor];
     nameLabel.textAlignment = NSTextAlignmentCenter;
-    [nameLabel setFont:fontThin(14)];
+    nameLabel.font = [UIFont systemFontOfSize:PXRate(17)];
     self.nameLabel = nameLabel;
     [self.contentView addSubview:nameLabel];
     //性别
     UIImageView *sexView = [[UIImageView alloc]init];
+    sexView.layer.cornerRadius = 8;
+    sexView.layer.borderColor = [UIColor whiteColor].CGColor;
+    sexView.layer.borderWidth = 0.6;
     [sexView setClipsToBounds:YES];
     [sexView setContentMode:UIViewContentModeScaleAspectFit];
     [self.contentView addSubview:sexView];
     self.sexView = sexView;
     //等级
     UIImageView *levelView = [[UIImageView alloc]init];
+    levelView.layer.cornerRadius = 8;
+    levelView.layer.borderColor = [UIColor whiteColor].CGColor;
+    levelView.layer.borderWidth = 0.6;
     [levelView setClipsToBounds:YES];
     [levelView setContentMode:UIViewContentModeScaleAspectFit];
     [self.contentView addSubview:levelView];
     self.levelView = levelView;
     
     UIImageView *levelViewhost = [[UIImageView alloc]init];
+    levelViewhost.layer.cornerRadius = 8;
+    levelViewhost.layer.borderColor = [UIColor whiteColor].CGColor;
+    levelViewhost.layer.borderWidth = 0.6;
     [levelViewhost setClipsToBounds:YES];
     [levelViewhost setContentMode:UIViewContentModeScaleAspectFit];
     [self.contentView addSubview:levelViewhost];
     self.level_anchorView = levelViewhost;
-    //编辑按钮
-    UIButton *editBtn = [[UIButton alloc]init];
-    [editBtn setImage:[UIImage imageNamed:getImagename(@"编辑资料")] forState:UIControlStateNormal];
-    [editBtn addTarget:self action:@selector(doEdit) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:editBtn];
-    self.editBtn = editBtn;
+    
     UIButton *editBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [editBtn2 addTarget:self action:@selector(doEdit) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:editBtn2];
     self.editBtn2 = editBtn2;
+    
 
     //ID
     UILabel *ID = [[UILabel alloc]init];
     ID.backgroundColor = [UIColor clearColor];
     ID.textAlignment = NSTextAlignmentCenter;
-    ID.textColor = [UIColor grayColor];
-    [ID setFont:fontThin(14)];
+    ID.textColor = [UIColor whiteColor];
+    ID.font = [UIFont systemFontOfSize:PXRate(13)];
     [self.contentView addSubview:ID];
     self.IDL = ID;
     
     //底部view
     YBBottomView *bottomView = [[YBBottomView alloc]init];
+    bottomView.backgroundColor = [UIColor whiteColor];
+    bottomView.layer.cornerRadius = 6;
+    bottomView.layer.shadowColor = HexColor(@"F29821").CGColor;
+    bottomView.layer.shadowOffset = CGSizeMake(0, 6);
+    bottomView.layer.shadowOpacity = 0.15;
+    bottomView.layer.shadowRadius = 6;
+    
     bottomView.BottpmViewDelegate = self;
     [self.contentView addSubview:bottomView];
+    
+    
     
     self.bottomView = bottomView;
     LiveUser *user = [Config myProfile];
@@ -183,6 +206,16 @@
     [_levelView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"level%@",user.level]]];
     [_level_anchorView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"host_%@",user.level_anchor]]];
     
+    UIImageView * imageView = [[UIImageView alloc]init];
+    imageView.image = [UIImage imageNamed:@"go_white"];
+    [self.contentView addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.iconView);
+        make.trailing.mas_equalTo(-15);
+        make.width.mas_equalTo(5);
+        make.height.mas_equalTo(10);
+    }];
+    
 }
 -(void)doEdit
 {
@@ -192,56 +225,52 @@
 -(void)layoutUI
 {
     [self.iconView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.width.height.mas_equalTo(80);
-        make.left.mas_equalTo(self.contentView.mas_left).offset(10);
-        make.top.mas_equalTo(self.contentView.mas_top).offset(28);
+        make.width.height.mas_equalTo(PXRate(66));
+        make.leading.mas_equalTo(16);
+        make.top.mas_equalTo(PXRate(72)+iPhoneX_Top);
     }];
-     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.iconView.mas_right).offset(15);
-            make.top.equalTo(self.iconView.mas_top).offset(20);
-            make.height.mas_equalTo(20);
-            
-        }];
+    
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.iconView.mas_right).offset(12);
+        make.top.equalTo(self.iconView.mas_top).offset(PXRate(12));
+        make.height.mas_equalTo(PXRate(24));
+    }];
     
     [self.sexView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLabel.mas_right).offset(3);
-        make.topMargin.equalTo(self.nameLabel.mas_topMargin);
-        make.top.mas_equalTo(self.nameLabel.mas_top).offset(3);
+        make.left.mas_equalTo(self.nameLabel.mas_right).offset(10);
+        make.centerY.equalTo(self.nameLabel);
         make.width.height.mas_equalTo(16);
     }];
     
     [self.level_anchorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.sexView.mas_right).offset(3);
-        make.top.mas_equalTo(self.nameLabel.mas_top).offset(3);
-        make.width.mas_equalTo(16);
-        make.height.mas_equalTo(16);
+        make.left.mas_equalTo(self.sexView.mas_right).offset(6);
+        make.centerY.equalTo(self.nameLabel);
+        make.width.height.mas_equalTo(16);
     }];
+     
     [self.levelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.level_anchorView.mas_right).offset(3);
-        make.top.mas_equalTo(self.nameLabel.mas_top).offset(3);
-        make.width.mas_equalTo(16);
-        make.height.mas_equalTo(16);
+        make.left.mas_equalTo(self.level_anchorView.mas_right).offset(6);
+        make.centerY.equalTo(self.nameLabel);
+        make.width.height.mas_equalTo(16);
     }];
-    [self.editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-5);
-        make.top.equalTo(self.nameLabel.mas_top);
-        make.width.mas_equalTo(60);
-        make.height.mas_equalTo(20);
-    }];
-    [self.editBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.centerY.equalTo(self.editBtn);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(60);
-    }];
+    
     [self.IDL mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(9);
-        make.height.equalTo(self.nameLabel.mas_height);
+        make.top.mas_equalTo(self.nameLabel.mas_bottom).offset(4);
+        make.height.mas_equalTo(18);
         make.left.equalTo(self.nameLabel);
+        make.width.mas_greaterThanOrEqualTo(0);
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
-        make.height.mas_equalTo(60);
+        make.leading.mas_equalTo(15);
+        make.trailing.mas_equalTo(-15);
+        make.top.equalTo(self.iconView.mas_bottom).offset(PXRate(20));
+        make.height.mas_equalTo(PXRate(74));
+    }];
+    
+    [self.editBtn2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(self.nameLabel);
+        make.top.trailing.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.bottomView.mas_top);
     }];
 }
 //MARK:-动态返回label文字宽度
@@ -296,15 +325,7 @@
     }
     return _nameLabel;
 }
-//编辑按钮
-- (UIButton *)editBtn
-{
-    if (!_editBtn) {
-        UIButton *editBtn = [[UIButton alloc]init];
-        _editBtn = editBtn;
-    }
-    return _editBtn;
-}
+
 //签名
 -(UILabel *)IDL
 {

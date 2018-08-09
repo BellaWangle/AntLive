@@ -39,10 +39,10 @@
 
     
     line1 = [[UILabel alloc]init];
-    line1.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    line1.backgroundColor = Default_Line_Color;
     [self addSubview:line1];
     line2 = [[UILabel alloc]init];
-    line2.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    line2.backgroundColor = Default_Line_Color;
     [self addSubview:line2];
 }
 //MARK:-layoutSubviews
@@ -50,8 +50,7 @@
 {
     [super layoutSubviews];
     [self.liveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self);
-        make.height.mas_equalTo(60);
+        make.left.top.bottom.equalTo(self);
         make.width.mas_equalTo(_window_width/self.btnArr.count);
     }];
     [self.forceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,13 +65,13 @@
         make.left.equalTo(self.liveBtn.mas_right);
         make.width.mas_equalTo(1);
         make.height.mas_equalTo(20);
-        make.top.mas_equalTo(20);
+        make.centerY.mas_equalTo(self);
     }];
     [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.forceBtn.mas_right);
         make.width.mas_equalTo(1);
         make.height.mas_equalTo(20);
-        make.top.mas_equalTo(20);
+        make.centerY.mas_equalTo(self);
     }];
 }
 -(void)setAgain:(NSArray *)array{
@@ -89,7 +88,7 @@
     button = [[UIButton alloc]init];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:RGB(252, 155, 3) forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     NSString *btnNameStr1 =   [NSString stringWithFormat:@"%@ %@",title,numValue];
     [button addTarget:self action:@selector(actionClick:) forControlEvents:UIControlEventTouchUpInside];
