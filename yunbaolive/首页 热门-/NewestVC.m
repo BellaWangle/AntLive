@@ -54,7 +54,7 @@
     [self.view addSubview:self.collectionView];
     [self createView];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
 -(void)createView{
@@ -131,23 +131,19 @@
     }];
 }
 #pragma mark - Table view data source
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return CGSizeMake(_window_width/2-1.5,_window_width/2-1.5);
-    
-}
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.allArray.count;
-}
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
+
+
+
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.allArray.count;
+}
+
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     buttomCell *cell = (buttomCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"buttomCEll" forIndexPath:indexPath];
     NSDictionary *subdic = self.allArray[indexPath.row];
@@ -181,11 +177,30 @@
     return cell;
     
 }
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return CGSizeMake(_window_width/2-2.5,_window_width/2-2.5);
+    
+}
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    
+    return UIEdgeInsetsMake(2.5, 2.5, 2.5, 2.5);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 0;
+}
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     selected = (int)indexPath.row;
     selectedDic = self.allArray[indexPath.row];
     [self checklive:[selectedDic valueForKey:@"stream"] andliveuid:[selectedDic valueForKey:@"uid"]];
 }
+
+
 -(void)checklive:(NSString *)stream andliveuid:(NSString *)liveuid{
     NSString *url = [purl stringByAppendingFormat:@"service=Live.checkLive"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];

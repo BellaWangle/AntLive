@@ -82,7 +82,7 @@
     _imagebackImage.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
     //魅力值文字
     labell = [[UILabel alloc]init];//WithFrame:CGRectMake(30,0,45,20)
-    labell.text = [NSString stringWithFormat:@"%@:",[common name_votes]];
+    labell.text = [NSString stringWithFormat:@"%@:",YZMsg(@"蚁币")];
     labell.textAlignment = NSTextAlignmentLeft;
     labell.textColor = [UIColor whiteColor];
     labell.font = fontMT(13);

@@ -71,7 +71,7 @@
 //进入直播间
 "直播Live" = "Live";
 "房间:" = "Room:";
-"映票:" = "Note";//(服务端获取)
+"蚁币:" = "nt Coin";//(服务端获取)
 "周榜" = "Weekly list";
 "总榜" = "Total list";
 "贡献" = "Donate";

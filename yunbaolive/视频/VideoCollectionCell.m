@@ -49,20 +49,46 @@
             return;
         }
         CGSize size = [str boundingRectWithSize:CGSizeMake(_window_width*0.65, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10]} context:nil].size;
-        view = [[UIView alloc] initWithFrame:CGRectMake(self.width - 20 - size.width - 9.5, 10, size.width + 16 + 9.5, 19)];
-        view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2];
-        view.layer.masksToBounds = YES;
-        view.layer.cornerRadius = 9.5;
-        [self.contentView addSubview:view];
-        imageV = [[UIImageView alloc] initWithFrame:CGRectMake(5, 3, 12, 12)];
-        imageV.image = [UIImage imageNamed:@"定位小图标"];
-        imageV.contentMode = UIViewContentModeScaleAspectFit;
-        [view addSubview:imageV];
-        label = [[UILabel alloc] initWithFrame:CGRectMake(16 + 2, 2, size.width, 15)];
-        label.font = [UIFont systemFontOfSize:10];
-        label.textColor = [UIColor whiteColor];
+        if (!view) {
+            view = [[UIView alloc]init];
+            view.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.3];
+            view.layer.borderColor = [UIColor blackColor].CGColor;
+            view.layer.borderWidth = 0.6;
+            view.layer.cornerRadius = 14;
+            [self.contentView addSubview:view];
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(6);
+                make.trailing.mas_equalTo(-6);
+                make.width.mas_greaterThanOrEqualTo(0);
+                make.height.mas_equalTo(28);
+                make.leading.mas_greaterThanOrEqualTo(6);
+            }];
+            
+            imageV = [[UIImageView alloc] init];
+            imageV.image = [UIImage imageNamed:@"定位小图标"];
+            imageV.contentMode = UIViewContentModeScaleAspectFit;
+            [view addSubview:imageV];
+            [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.trailing.mas_equalTo(-10);
+                make.centerY.mas_equalTo(view);
+                make.width.mas_equalTo(8);
+                make.height.mas_equalTo(10);
+            }];
+            
+            label = [[UILabel alloc] init];
+            label.font = [UIFont systemFontOfSize:13];
+            label.textColor = [UIColor whiteColor];
+            [view addSubview:label];
+            [label mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.trailing.mas_equalTo(imageV.mas_leading).offset(-6);
+                make.centerY.mas_equalTo(view);
+                make.width.height.mas_greaterThanOrEqualTo(0);
+                make.leading.mas_equalTo(10);
+            }];
+        }
+        
         label.text = str;
-        [view addSubview:label];
+        
     }
     
 }

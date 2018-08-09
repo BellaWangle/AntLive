@@ -40,7 +40,6 @@ int d =1;
   
     UIAlertController  *Feedeductionalertc;//扣费alert
     zajindan *goldView;
-    UIButton *_zaBtn;
     toutiaoAnimation *toutiaoView;
     int sssss;
 }
@@ -1019,7 +1018,6 @@ int d =1;
     keyBTN = [UIButton buttonWithType:UIButtonTypeCustom];
     [keyBTN setBackgroundImage:[UIImage imageNamed:@"live_聊天"] forState:UIControlStateNormal];
     [keyBTN addTarget:self action:@selector(showkeyboard:) forControlEvents:UIControlEventTouchUpInside];
-    keyBTN.frame = CGRectMake(_window_width + 15,_window_height - 45, www, www);
     
     //发送按钮
     pushBTN = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1114,10 +1112,7 @@ int d =1;
     [_connectVideo setImage:[UIImage imageNamed:@"live_连麦"]forState:UIControlStateNormal];
     [_connectVideo addTarget:self action:@selector(connectVideos) forControlEvents:UIControlEventTouchUpInside];
     _connectVideo.selected = NO;
-    _zaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [_zaBtn setBackgroundImage:[UIImage imageNamed:@"woto_chuizi"] forState:UIControlStateNormal];
-    [_zaBtn addTarget:self action:@selector(doZajinDan) forControlEvents:UIControlEventTouchUpInside];
 
     [self setbtnframe];
     
@@ -1132,28 +1127,26 @@ int d =1;
     [backScrollView insertSubview:_messageBTN atIndex:5];
     [backScrollView insertSubview:_liwuBTN atIndex:5];
  // [backScrollView insertSubview:_connectVideo atIndex:9];
-    [backScrollView insertSubview:_zaBtn atIndex:5];
+    
 
     
 }
 -(void)setbtnframe{
     
-    CGFloat  wwwwww = 30;
-    CGFloat hhh = _window_height - 45;
-    _returnCancle.frame = CGRectMake(_window_width*2-wwwwww-10,hhh,wwwwww,wwwwww);
-    _connectVideo.frame = CGRectMake(_window_width*2 - wwwwww*5-50,hhh,wwwwww,wwwwww);
-    _liwuBTN.frame = CGRectMake(_window_width*2 - wwwwww*2-20,hhh,wwwwww,wwwwww);
-    _fenxiangBTN.frame = CGRectMake(_window_width*2 - wwwwww*3-30,hhh, wwwwww, wwwwww);
-    _messageBTN.frame = CGRectMake(_window_width*2 - wwwwww*4-40,hhh, wwwwww,wwwwww);
-    _zaBtn.frame = CGRectMake(_window_width*2 - wwwwww*5-50,hhh,wwwwww,wwwwww);
+    CGFloat  width = 30;
+    CGFloat y = _window_height - 45;
+    _returnCancle.frame = CGRectMake(_window_width + 15,_window_height - 45, www, www);
+    _connectVideo.frame = CGRectMake(_window_width*2 - width*5-50,y,width,width);
+    _liwuBTN.frame = CGRectMake(_window_width*2 - width*2-20,y,width,width);
+    _fenxiangBTN.frame = CGRectMake(_window_width*2 - width*3-30,y, width, width);
+    _messageBTN.frame = CGRectMake(_window_width*2 - width*4-40,y, width,width);
+    keyBTN.frame = CGRectMake(_window_width*2-width-10,y,width,width);
 
     NSArray *shareplatforms = [common share_type];
     
     if (shareplatforms.count == 0) {
         _fenxiangBTN.hidden = YES;
-        _messageBTN.frame = CGRectMake(_window_width*2 - wwwwww*3 - 30,hhh, wwwwww,wwwwww);
-//        _connectVideo.frame = CGRectMake(_window_width*2 - wwwwww*4 - 40,hhh + 2,27,27);
-        _zaBtn.frame = CGRectMake(_window_width*2 - wwwwww*4 - 40,hhh + 2,27,27);
+        _messageBTN.frame = CGRectMake(_window_width*2 - width*3 - 30,y, width,width);
 
     }
     
@@ -1430,7 +1423,6 @@ int d =1;
     _fenxiangBTN.hidden = YES;
     _messageBTN.hidden = YES;
     keyBTN.hidden = YES;
-    _zaBtn.hidden = YES;
 }
 //按钮出现
 -(void)showBTN{
@@ -1439,7 +1431,6 @@ int d =1;
     _fenxiangBTN.hidden = NO;
     _messageBTN.hidden = NO;
     keyBTN.hidden = NO;
-    _zaBtn.hidden = NO;
 }
 //列表信息退出
 -(void)doCancle{
@@ -2544,59 +2535,7 @@ int d =1;
     rec.view.center = CGPointMake(rec.view.center.x + point.x, rec.view.center.y + point.y);
     [rec setTranslation:CGPointMake(0, 0) inView:videoView];
 }
-- (void)doZajinDan{
-//    goldView = [[zajindan alloc]initWithLiveId:@"10087" andChuiziArray:@[@{@"hammer_price":@"100",@"giftname":@"飞机"},@{@"hammer_price":@"50",@"giftname":@"跑车"},@{@"hammer_price":@"10",@"giftname":@"玫瑰"}]];
-//    [goldView show];
 
-    _zaBtn.userInteractionEnabled = NO;
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    NSString *url = [purl stringByAppendingFormat:@"service=Goldeneggs.getHammerList"];
-
-
-    [session POST:url parameters:nil
-         progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-             NSNumber *number = [responseObject valueForKey:@"ret"] ;
-             if([number isEqualToNumber:[NSNumber numberWithInt:200]])
-             {
-                 NSArray *data = [responseObject valueForKey:@"data"];
-                 NSNumber *code = [data valueForKey:@"code"];
-                 if([code isEqualToNumber:[NSNumber numberWithInt:0]])
-                 {
-                     NSMutableArray *chuiziArr = [data valueForKey:@"info"];
-                     
-                     if (chuiziArr.count >= 3) {
-                         goldView = [[zajindan alloc]initWithLiveId:[_playDoc valueForKey:@"uid"] andChuiziArray:chuiziArr];
-                         goldView.delegate = self;
-                         goldView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-                         [self.view addSubview:goldView];
-                         [UIView animateWithDuration:0.3 animations:^{
-                             goldView.transform = CGAffineTransformMakeScale(1, 1);
-                         } completion:^(BOOL finished) {
-                             goldView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-                         }];
-                         
-                         //                         [zajindanview show];
-                         
-                     }
-                 }
-             }
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 _zaBtn.userInteractionEnabled = YES;
-             });
-             
-             
-         }
-          failure:^(NSURLSessionDataTask *task, NSError *error)
-     {
-         [MBProgressHUD showError:YZMsg(@"无网络")];
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             _zaBtn.userInteractionEnabled = YES;
-         });
-         
-     }];
-
-
-}
 
 - (void)goChongZhi{
     UIAlertController *alertCot = [UIAlertController alertControllerWithTitle:nil message:YZMsg(@"对不起，您的钻石余额不足。\n立即去充值？") preferredStyle:UIAlertControllerStyleAlert];

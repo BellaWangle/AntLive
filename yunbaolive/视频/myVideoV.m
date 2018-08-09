@@ -77,6 +77,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"VideoCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"VideoCollectionCell"];
     self.collectionView.delegate =self;
     self.collectionView.dataSource = self;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.mj_header = ({
         MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(pullInternetforNewDown)];
         header.lastUpdatedTimeLabel.hidden = YES;
@@ -92,7 +93,7 @@
     
     [self.view addSubview:self.collectionView];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
     [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshNear) userInfo:nil repeats:YES];
     if (_ismyvideo == 1) {
         self.collectionView.frame = CGRectMake(0,40, _window_width, _window_height - 40);
@@ -194,17 +195,17 @@
 }
 #pragma mark - Table view data source
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((_window_width - 3)/2,(_window_width - 3)/2 * 1.4);
+    return CGSizeMake((_window_width - 5)/2,(_window_width - 5)/2 * 1.4);
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.modelrray.count;
 }
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(1,1,1,1);
+    return UIEdgeInsetsMake(2.5,2.5,2.5,2.5);
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 1;
+    return 0;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
