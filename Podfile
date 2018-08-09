@@ -1,7 +1,7 @@
 platform :ios, '8.0'
 inhibit_all_warnings!
 source 'https://github.com/CocoaPods/Specs.git'
-target "yunbaolive" do
+target "AntliveShow" do
 #图片
 pod 'SDWebImage', '~>3.8'
 #网络请求

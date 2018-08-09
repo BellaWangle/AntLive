@@ -1,11 +1,10 @@
-CONFIGURATION_BUILD_DIR = $PODS_CONFIGURATION_BUILD_DIR/libksygpulive
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/GPUImage"
+CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/libksygpulive
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/GPUImage"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Bugly" "${PODS_ROOT}/Headers/Public/JCore" "${PODS_ROOT}/Headers/Public/JMessage" "${PODS_ROOT}/Headers/Public/JPush" "${PODS_ROOT}/Headers/Public/MOBFoundation" "${PODS_ROOT}/Headers/Public/OpenSSL-for-iOS" "${PODS_ROOT}/Headers/Public/TXLiteAVSDK_UGC" "${PODS_ROOT}/Headers/Public/mob_sharesdk"
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../prebuilt/libs"
 OTHER_LDFLAGS = -all_load -l"ObjC" -l"bz2" -l"iconv" -l"ksybase" -l"ksygpufilter" -l"ksymediacodec" -l"ksymediacore_enc_base" -l"ksymediacore_enc_lite" -l"ksyplayer" -l"ksystreamerbase" -l"ksystreamerengine" -l"ksyyuv" -l"stdc++.6" -l"z" -framework "AVFoundation" -framework "VideoToolbox"
-PODS_BUILD_DIR = $BUILD_DIR
-PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}
 PODS_TARGET_SRCROOT = ${PODS_ROOT}/..
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
