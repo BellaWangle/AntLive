@@ -20,17 +20,17 @@
 }
 -(void)setCommentFrame{
     //头像
-    self.IconR = CGRectMake(15,10,40,40);
+    self.IconR = CGRectMake(15,10,44,44);
     //大图
-    self.imageR = CGRectMake(0,60, _window_width,_window_width);
+    self.imageR = CGRectMake(0,64, _window_width,_window_width);
     //名字
     self.nameR = CGRectMake(70,10,200, 20);
     //位置
     self.placeR = CGRectMake(82,33,180,14);
     //在线人数
-    self.CountR = CGRectMake(_window_width - 170,10,150,20);
+    self.CountR = CGRectMake(_window_width - 170,0,150,64);
     //直播状态
-    self.statusR = CGRectMake(_window_width - 95,15,80,45);
+    self.statusR = CGRectMake(_window_width - 108,15,78,30);
 }
 +(instancetype)modelWithDic:(NSDictionary *)dic{
     return  [[self alloc]initWithDic:dic];

@@ -138,7 +138,7 @@ alpha:1.f]
 //文字黑色
 #define Default_Black HexColor(@"342715")
 //文字灰色
-#define Default_Gray HexColor(@"888888")
+#define Default_Gray HexColor(@"B2A89A")
 //主色调
 #define Main_Color HexColor(@"F29821")
 //默认背景色

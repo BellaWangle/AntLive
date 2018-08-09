@@ -12,7 +12,6 @@
 
 @property(nonatomic,strong)UIImageView *level_anchormage;//主播等级
 @property(nonatomic,strong)UIImageView *typeimagevc;//直播类型
-@property(nonatomic,strong)UIImageView *gameimagevc;//游戏类型
 @property(nonatomic,strong)hotModel *model;
 +(hotCell *)cellWithTableView:(UITableView *)tableView;
 @end

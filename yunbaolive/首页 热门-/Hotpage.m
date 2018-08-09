@@ -266,7 +266,7 @@ static NSString *CellIdentifier = @"HOTCell";
 }
 //表头间距
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return _window_width + 60;
+    return _window_width + 64;
 }
 //进入房间
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

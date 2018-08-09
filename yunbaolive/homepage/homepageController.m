@@ -80,7 +80,7 @@
     //搜索按钮
     UIButton *searchBTN = [UIButton buttonWithType:UIButtonTypeCustom];
     [searchBTN setImage:[UIImage imageNamed:@"icon_search.png"] forState:UIControlStateNormal];
-    searchBTN.frame = CGRectMake(20,35 +statusbarHeight,15,15);
+    searchBTN.frame = CGRectMake(20,35 +statusbarHeight,20,20);
     searchBTN.contentMode = UIViewContentModeScaleAspectFit;
     [searchBTN addTarget:self action:@selector(search) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:searchBTN];
@@ -91,7 +91,7 @@
     [self.view addSubview:searchBTNs];
     UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    messageBtn.frame = CGRectMake(_window_width-35,35 +statusbarHeight,20,15);
+    messageBtn.frame = CGRectMake(_window_width-35,35 +statusbarHeight,20,20);
     messageBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [messageBtn setImage:[UIImage imageNamed:@"私信new"] forState:UIControlStateNormal];
     [messageBtn addTarget:self action:@selector(messageBtnClick) forControlEvents:UIControlEventTouchUpInside];
