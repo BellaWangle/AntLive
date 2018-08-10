@@ -100,7 +100,7 @@
                 NSComparisonResult r = [local compare:internet];
                 if (r == NSOrderedAscending || r == NSOrderedDescending) {//可改为if(r == -1L)
                     NSMutableAttributedString *attributeall = [[NSMutableAttributedString alloc]init];
-                    NSString *string = [NSString stringWithFormat:@"%@",local];
+                    NSString *string = [NSString stringWithFormat:@"%.1f",local.floatValue];
                     NSMutableAttributedString *version = [[NSMutableAttributedString alloc]initWithString:string];
                     [attributeall appendAttributedString:version];
                     NSMutableAttributedString *now = [[NSMutableAttributedString alloc]initWithString:YZMsg(@"(当前版本可更新)")];
@@ -113,7 +113,7 @@
                     isNewBuid = 0;
                     //(当前已是最新版本)
                     NSMutableAttributedString *attributeall = [[NSMutableAttributedString alloc]init];
-                    NSString *string = [NSString stringWithFormat:@"%@",local];
+                    NSString *string = [NSString stringWithFormat:@"%.1f",local.floatValue];
                     NSMutableAttributedString *version = [[NSMutableAttributedString alloc]initWithString:string];
                     [attributeall appendAttributedString:version];
                     NSMutableAttributedString *now = [[NSMutableAttributedString alloc]initWithString:YZMsg(@"(当前已是最新版本)")];

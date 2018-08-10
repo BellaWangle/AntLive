@@ -2090,9 +2090,9 @@ int d =1;
 /************  杨志刚 礼物弹出及队列显示结束 *************/
 //跳转充值
 -(void)pushCoinV{
-      CoinVeiw *coin = [[CoinVeiw alloc] init];
-      UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:coin];
-      [self presentViewController:navi animated:YES completion:nil];
+//      CoinVeiw *coin = [[CoinVeiw alloc] init];
+//      UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:coin];
+//      [self presentViewController:navi animated:YES completion:nil];
 }
 //聊天自动上滚
 -(void)jumpLast

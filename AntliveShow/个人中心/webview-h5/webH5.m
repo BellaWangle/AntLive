@@ -56,8 +56,8 @@
         return NO;
     }
     if ([url containsString:@"phonelive://pay"]) {
-        CoinVeiw *coins = [[CoinVeiw alloc]init];
-        [self.navigationController pushViewController:coins animated:YES];
+//        CoinVeiw *coins = [[CoinVeiw alloc]init];
+//        [self.navigationController pushViewController:coins animated:YES];
         return NO;
     }
     return YES;

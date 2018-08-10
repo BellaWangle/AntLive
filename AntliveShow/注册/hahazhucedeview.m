@@ -258,6 +258,12 @@
         [cancleBtn setTitleColor:[UIColor grayColor] forState:0];
         [cancleBtn addTarget:self action:@selector(cancleOrSure:) forControlEvents:UIControlEventTouchUpInside];
         [titleView addSubview:cancleBtn];
+        [cancleBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(20);
+            make.top.mas_equalTo(0);
+            make.width.mas_greaterThanOrEqualTo(0);
+            make.height.mas_equalTo(40);
+        }];
         
         UIButton *sureBtn = [UIButton buttonWithType:0];
         sureBtn.frame = CGRectMake(_window_width-60, 0, 40, 40);
@@ -266,6 +272,12 @@
         [sureBtn setTitleColor:[UIColor orangeColor] forState:0];
         [sureBtn addTarget:self action:@selector(cancleOrSure:) forControlEvents:UIControlEventTouchUpInside];
         [titleView addSubview:sureBtn];
+        [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.mas_equalTo(-20);
+            make.top.mas_equalTo(0);
+            make.width.mas_greaterThanOrEqualTo(0);
+            make.height.mas_equalTo(40);
+        }];
         
         UIPickerView *pick = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 40, _window_width, 160)];
         pick.delegate = self;

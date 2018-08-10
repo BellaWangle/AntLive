@@ -91,7 +91,7 @@
     NSMutableArray * list = [[NSMutableArray alloc]init];
     for (NSDictionary * dic in _listArr) {
         int selectedid = [dic[@"id"] intValue];//选项ID
-        if (selectedid == 1 || selectedid == 2 || selectedid == 15 || selectedid == 13) {
+        if (selectedid == 15 || selectedid == 13 || selectedid == 12 || selectedid == 14 || selectedid == 3) {
             [list addObject:dic];
         }
     }

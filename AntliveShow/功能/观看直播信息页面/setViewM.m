@@ -86,8 +86,8 @@
     labell.textAlignment = NSTextAlignmentLeft;
     labell.textColor = [UIColor whiteColor];
     labell.font = fontMT(13);
-    CGSize voteSize = [labell.text boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:fontMT(13)} context:nil].size;
-    labell.frame = CGRectMake(30, 0, voteSize.width, 20);
+//    CGSize voteSize = [labell.text boundingRectWithSize:CGSizeMake(300, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:fontMT(13)} context:nil].size;
+    labell.frame = CGRectMake(30, 0, 0, 20);
     UIImageView *zuanshiImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 2.5, 15, 15)];;
     zuanshiImage.image = [UIImage imageNamed:@"zuanshi"];
     zuanshiImage.backgroundColor = [UIColor clearColor];

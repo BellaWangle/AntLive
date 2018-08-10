@@ -2253,9 +2253,9 @@ static int startKeyboard = 0;
     [self changecontinuegiftframe];
 }
 -(void)pushCoinV{
-    CoinVeiw *coin = [[CoinVeiw alloc] init];
-    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:coin];
-    [self presentViewController:navi animated:YES completion:nil];
+//    CoinVeiw *coin = [[CoinVeiw alloc] init];
+//    UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:coin];
+//    [self presentViewController:navi animated:YES completion:nil];
 }
 //********************************转盘*******************************************************************//
 -(void)reloadUserList{
