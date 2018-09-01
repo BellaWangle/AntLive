@@ -4,8 +4,8 @@
 
 #import "MBProgressHUD.h"
 #import "MBProgressHUD+MJ.h"
-#import "liveCity.h"
-#import "cityDefault.h"
+#import "userLocation.h"
+#import "locationCache.h"
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 #import "UIImage+AFNetworking.h"
@@ -23,11 +23,14 @@
 #import "UIView+WPFExtension.h"
 #import <JMessage/JMessage.h>
 #import <JPUSHService.h>
-#import "YBNavi.h"
+#import "AntNavi.h"
 #import <MJRefresh/MJRefresh.h>
-#import "YBPullData.h"
+#import "AntPullData.h"
 #import "HUDHelper.h"
 #import "RookieTools.h"
+#import "UILabel+Util.h"
+#import "UIColor+Util.h"
+#import "UIViewController+category.h"
 
 //域名
 #define purl [NSString stringWithFormat:@"http://jinbgroup.com/api/public/?language=%@&",[Config canshu]]
@@ -66,11 +69,13 @@
 
 //适配iphoneX
 #define iPhoneX (_window_width== 375.f && _window_height == 812.f)
+#define iPhoneX_Top (iPhoneX ? 22 : 0)
 #define ShowDiff (iPhoneX ? 34: 0)
 #define statusbarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height-20)
 
 //app主色调s
-#define normalColors [UIColor colorWithRed:255/255.0 green:211/255.0 blue:80/255.0 alpha:1]
+//#define normalColors [UIColor colorWithRed:255/255.0 green:211/255.0 blue:80/255.0 alpha:1]
+
 //顶部导航栏背景色
 #define navigationBGColor [UIColor colorWithRed:246/255.0 green:246/255.0 blue:246/255.0 alpha:1]
 //顶部导航栏字体颜色
@@ -102,10 +107,10 @@
 
 #define MAGIN_W ([UIScreen mainScreen].bounds.size.width / 3)
 //pageviewcontroller宽度
-#define _pageBarWidth  _window_width *0.6
+#define _pageBarWidth  _window_width *0.7
 #define  _window_width  [UIScreen mainScreen].bounds.size.width
 #define _window_height [UIScreen mainScreen].bounds.size.height
-#define backColor [UIColor colorWithRed:65/255.0 green:212/255.0 blue:131/255.0 alpha:1]
+#define BackColor [UIColor colorWithRed:65/255.0 green:212/255.0 blue:131/255.0 alpha:1]
 //255 211 80
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
@@ -130,3 +135,30 @@ green:(g)/255.f \
 blue:(b)/255.f \
 alpha:1.f]
 #endif /* PrefixHeader_pch */
+
+
+//主颜色
+#define normalColors HexColor(@"F29821")
+//文字黑色
+#define Default_Black HexColor(@"342715")
+//文字灰色
+#define Default_Gray HexColor(@"B2A89A")
+//主色调
+#define Main_Color HexColor(@"F29821")
+//默认背景色
+#define Default_BG_Color HexColor(@"EEEEEE")
+//默认线条颜色
+#define Default_Line_Color HexColor(@"E5E5E5")
+
+#define HexColor(ref) [UIColor colorWithHexString:ref]
+
+#define IsNilOrNull(_ref) (((_ref) == nil)||([(_ref) isEqual:[NSNull null]]))
+
+#define IsEmptyStr(_ref) (((_ref) == nil)||([(_ref) isEqual:[NSNull null]])||(![(_ref) isKindOfClass:[NSString class]])||[NSString stringWithFormat:@"%@",_ref].length == 0)
+
+#define IsEmptyList(_ref) (((_ref) == nil)||([(_ref) isEqual:[NSNull null]])||(![(_ref) isKindOfClass:[NSArray class]])||((_ref).count==0))
+//比例换算
+#define PXRate(ref) (_window_width/375 * ref)
+
+#define DEFAULT_MARGIN_ENDS 15
+

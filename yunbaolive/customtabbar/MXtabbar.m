@@ -106,7 +106,7 @@
     self.center = self.folZYenter;
     // Configure center button
     //设置中间按钮
-    _pathCenterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.centerImage.size.width/2, self.centerImage.size.height/2)];
+    _pathCenterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 56, 56)];
     [_pathCenterButton setImage:self.centerImage forState:UIControlStateNormal];
     [_pathCenterButton addTarget:self action:@selector(centerButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     

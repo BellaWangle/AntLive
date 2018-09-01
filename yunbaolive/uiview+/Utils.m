@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 oschina. All rights reserved.
 //
 #import "Utils.h"
-#import "AppDelegate.h"
+#import "AntAppDelegate.h"
 #import "UIFont+FontAwesome.h"
 #import "NSString+FontAwesome.h"
 #import "MBProgressHUD.h"

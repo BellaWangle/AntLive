@@ -1,0 +1,36 @@
+//
+//  RankCell.h
+//  yunbaolive
+//
+//  Created by YunBao on 2018/2/2.
+//  Copyright © 2018年 cat. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+#import "AntLiveRankModel.h"
+
+@interface AntLiveRankCell : UITableViewCell
+
+#pragma mark - 第一行
+
+//没有特殊字段
+
+#pragma mark - 其他行
+
+@property (weak, nonatomic) IBOutlet UIImageView *kkIV;  //边框
+@property (weak, nonatomic) IBOutlet UILabel *otherMCL;  //名次
+
+#pragma mark - 公用
+@property (weak, nonatomic) IBOutlet UIImageView *iconIV;
+@property (weak, nonatomic) IBOutlet UILabel *nameL;
+@property (weak, nonatomic) IBOutlet UIImageView *levelIV;
+@property (weak, nonatomic) IBOutlet UILabel *moneyL;
+@property (weak, nonatomic) IBOutlet UIButton *followBtn;
+
+@property (nonatomic,strong) AntLiveRankModel *model;
+
++(AntLiveRankCell*)cellWithTab:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
+
+
+@end

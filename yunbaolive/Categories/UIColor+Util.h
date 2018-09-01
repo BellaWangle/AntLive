@@ -32,5 +32,8 @@
 //+ (UIColor *)borderColor;
 //+ (UIColor *)refreshControlColor;
 
++ (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
++ (UIColor *)colorWithHexString:(NSString *)hexValue;
+
 
 @end
