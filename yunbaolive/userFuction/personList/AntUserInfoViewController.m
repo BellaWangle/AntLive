@@ -99,9 +99,24 @@
 //MARK:-设置tableView
 -(void)setUI
 {
-    _navigationBar = [self createNavigationBarWithTitle:YZMsg(@"个人中心") type:NavigationBarTypeGradual];
-    _navigationBar.backButton.hidden = YES;
-    _navigationBar.alpha = 0;
+    
+    
+    _shadowView = [[UIView alloc]init];
+    _shadowView.backgroundColor = [UIColor whiteColor];
+    _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
+    _shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _shadowView.layer.shadowOpacity = 0.1;
+    _shadowView.layer.shadowRadius = 10;
+    _shadowView.layer.cornerRadius = 8;
+    _shadowView.userInteractionEnabled = NO;
+    [self.view addSubview:_shadowView];
+    [_shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(357);
+        make.height.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH-40);
+        make.leading.mas_equalTo(20);
+        make.trailing.mas_equalTo(-20);
+    }];
     
     _headerView = [[UserinfoHeaderView alloc]init];
     _headerView.delegate = self;
@@ -118,24 +133,9 @@
     self.tableView.estimatedSectionFooterHeight = 0;
     self.view.backgroundColor = RGB(248, 248, 248);
     
-    _shadowView = [[UIView alloc]init];
-    _shadowView.backgroundColor = [UIColor whiteColor];
-    _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
-    _shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-    _shadowView.layer.shadowOpacity = 0.1;
-    _shadowView.layer.shadowRadius = 10;
-    _shadowView.layer.cornerRadius = 8;
-    [self.tableView addSubview:_shadowView];
-    [self.tableView sendSubviewToBack:_shadowView];
-    [_shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(357);
-        make.height.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH-40);
-        make.leading.mas_equalTo(20);
-        make.trailing.mas_equalTo(-20);
-    }];
-    
-    [self.view sendSubviewToBack:_tableView];
+    _navigationBar = [self createNavigationBarWithTitle:YZMsg(@"个人中心") type:NavigationBarTypeGradual];
+    _navigationBar.backButton.hidden = YES;
+    _navigationBar.alpha = 0;
     
     if (@available(iOS 11.0, *)) {
         
@@ -150,10 +150,11 @@
 }
 
 -(void)reloadViews{
-    [_tableView reloadData];
     [_shadowView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(listArr.count * 50);
     }];
+    
+    [_tableView reloadData];
 }
 //MARK:-tableviewDateSource
 
@@ -282,7 +283,7 @@
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,_window_width,_window_height) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView.backgroundColor = [UIColor clearColor];
     }
     return _tableView;
 }
@@ -332,7 +333,7 @@
     }else{
         _navigationBar.alpha = 1;
     }
-    
+    _shadowView.mj_y = -scrollView.contentOffset.y + 357;
 }
 
 @end

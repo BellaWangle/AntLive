@@ -217,15 +217,15 @@
     }
     
     if (button.tag == 2501) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(pushAttentionList)]) {
-             [self.delegate pushAttentionList];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(pushFansList)]) {
+             [self.delegate pushFansList];
         }
         return;
     }
     
     if (button.tag == 2502) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(pushFansList)]) {
-             [self.delegate pushFansList];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(pushAttentionList)]) {
+             [self.delegate pushAttentionList];
         }
         return;
     }
