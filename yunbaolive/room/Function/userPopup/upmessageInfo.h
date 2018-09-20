@@ -1,5 +1,8 @@
 
 #import <UIKit/UIKit.h>
+
+@class UpmessageInfoNumView;
+
 @protocol upmessageKickAndShutUp <NSObject>
 -(void)socketShutUp:(NSString *)name andID:(NSString *)ID;
 -(void)socketkickuser:(NSString *)name andID:(NSString *)ID;
@@ -22,17 +25,13 @@
 @property(nonatomic,copy)NSString *userID;
 @property(nonatomic,copy)NSString *playstate;
 
+@property (nonatomic, strong) UIView * contentBgView;
 //左上角button
 @property (nonatomic, strong) UIButton *systemBtn;
 //右上角关闭Button
 @property (nonatomic, strong) UIButton *closeBtn;
 //头像image
 @property (nonatomic, strong) UIImageView *iconImageView;
-
-/**
- 装饰
- */
-@property (nonatomic, strong) UIImageView *iconBackView;
 //名字label
 @property (nonatomic, strong) UILabel *nameLabel;
 //性别icon
@@ -47,17 +46,14 @@
 @property (nonatomic, strong) UIImageView *mapIcon;
 //城市label
 @property (nonatomic, strong) UILabel *cityLabel;
-@property (nonatomic, strong) UIImageView *lineView1;
 //关注Label
-@property (nonatomic, strong) UILabel *forceLabel;
+@property (nonatomic, strong) UpmessageInfoNumView *forceView;
 //粉丝Label
-@property (nonatomic, strong) UILabel *fansLabel;
-@property (nonatomic, strong) UIImageView *lineView2;
+@property (nonatomic, strong) UpmessageInfoNumView *fansView;
 //送出Label
-@property (nonatomic, strong) UILabel *payLabel;
+@property (nonatomic, strong) UpmessageInfoNumView *payView;
 //收入Label
-@property (nonatomic, strong) UILabel *incomeLabel;
-@property (nonatomic, strong) UIImageView *lineView3;
+@property (nonatomic, strong) UpmessageInfoNumView *incomeView;
 //关注Btn
 @property (nonatomic, strong) UIButton *forceBtn;
 //私信Btn
@@ -74,5 +70,15 @@
 
 @property(nonatomic,strong)NSDictionary *zhuboDic;
 -(void)getUpmessgeinfo:(NSDictionary *)userDic andzhuboDic:(NSDictionary *)zhuboDic;
+
+@end
+
+@interface UpmessageInfoNumView : UIView
+
+-(instancetype)initWithTitle:(NSString *)title;
+//左边title
+@property (nonatomic, strong) UILabel *titleLabel;
+//右边内容
+@property (nonatomic, strong) UILabel *contentLabel;
 
 @end

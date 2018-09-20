@@ -134,7 +134,7 @@
         self.titleLabel.text = [NSString stringWithFormat:@"%@",_model.title];
     }
     NSString *imagePath = [_model.zhuboIcon stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self.IconBTN sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [self.IconBTN sd_setImageWithURL:[NSURL URLWithString:imagePath] placeholderImage:[UIImage imageNamed:@"default_head"]];
     NSString *thumb = [NSString stringWithFormat:@"%@",_model.zhuboImage];
     if (thumb) {
         [self.imageV sd_setImageWithURL:[NSURL URLWithString:thumb] placeholderImage:[UIImage imageNamed:@"无结果"]];

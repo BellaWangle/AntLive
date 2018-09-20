@@ -18,19 +18,24 @@
 #import "NetWork.h"
 #import "UserinfoHeaderView.h"
 
+
 @interface AntUserInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UserinfoHeaderViewDelegate,UIAlertViewDelegate>
 {
     NSArray *listArr;
+    NSMutableArray *_dataSource;
+    NSMutableArray *_shadowViewArr;
     NSDictionary *selectDic;
+    CGFloat _shadowTop;
 }
 @property (nonatomic, assign, getter=isOpenPay) BOOL openPay;
-@property(nonatomic,strong)NSDictionary *infoArray;//个人信息
+@property (nonatomic,strong)NSDictionary *infoArray;//个人信息
 @property (nonatomic, strong) YBPersonTableViewModel *model;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UserinfoHeaderView * headerView;
-@property (nonatomic, strong) UIView * shadowView;
 @property (nonatomic, strong) AntLiveNavigationBar * navigationBar;
-
+@property (nonatomic, strong) UIView * shadowView1;
+@property (nonatomic, strong) UIView * shadowView2;
+@property (nonatomic, strong) UIView * shadowView3;
 
 @end
 @implementation AntUserInfoViewController
@@ -66,11 +71,10 @@
         NSArray *list = [info valueForKey:@"list"];
         listArr = list;
         [common savepersoncontroller:listArr];//保存在本地，防止没网的时候不显示
-        [self reloadViews];
+        [self reloadViewsWithData:list];
     } failure:^BOOL(NSString *code, NSString *msg) {
-        listArr = [NSArray arrayWithArray:[common getpersonc]];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self reloadViews];
+            [self reloadViewsWithData:[NSArray arrayWithArray:[common getpersonc]]];
         });
         return YES;
     }];
@@ -93,30 +97,20 @@
     self.navigationController.navigationBarHidden = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     listArr = [NSArray arrayWithArray:[common getpersonc]];
-    [self.tableView reloadData];
+    _dataSource = [[NSMutableArray alloc]init];
+    _shadowViewArr = [[NSMutableArray alloc]init];
+    
     [self setUI];
+    [self reloadViewsWithData:[NSArray arrayWithArray:[common getpersonc]]];
 }
+
+
 //MARK:-设置tableView
 -(void)setUI
 {
-    
-    
-    _shadowView = [[UIView alloc]init];
-    _shadowView.backgroundColor = [UIColor whiteColor];
-    _shadowView.layer.shadowOffset = CGSizeMake(0, 0);
-    _shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-    _shadowView.layer.shadowOpacity = 0.1;
-    _shadowView.layer.shadowRadius = 10;
-    _shadowView.layer.cornerRadius = 8;
-    _shadowView.userInteractionEnabled = NO;
-    [self.view addSubview:_shadowView];
-    [_shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(357);
-        make.height.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH-40);
-        make.leading.mas_equalTo(20);
-        make.trailing.mas_equalTo(-20);
-    }];
+    _shadowView1 = [self shadowView];
+    _shadowView2 = [self shadowView];
+    _shadowView3 = [self shadowView];
     
     _headerView = [[UserinfoHeaderView alloc]init];
     _headerView.delegate = self;
@@ -125,7 +119,7 @@
     [self.tableView registerClass:[YBUserInfoListTableViewCell class] forCellReuseIdentifier:@"YBUserInfoListTableViewCell"];
     self.tableView.separatorStyle = UITableViewCellAccessoryNone;
     [self.view addSubview:self.tableView];
-    self.tableView.tableFooterView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80+ShowDiff)];
+    self.tableView.tableFooterView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80+iPhoneX_Bottom)];
     self.tableView.tableHeaderView = _headerView;
     self.tableView.bounces = NO;
     self.tableView.estimatedRowHeight = 0;
@@ -149,10 +143,69 @@
     
 }
 
--(void)reloadViews{
-    [_shadowView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(listArr.count * 50);
+-(UIView *)shadowView{
+    UIView * shadowView = [[UIView alloc]init];
+    shadowView.backgroundColor = [UIColor whiteColor];
+    shadowView.layer.shadowOffset = CGSizeMake(0, 0);
+    shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
+    shadowView.layer.shadowOpacity = 0.1;
+    shadowView.layer.shadowRadius = 10;
+    shadowView.layer.cornerRadius = 8;
+    shadowView.userInteractionEnabled = NO;
+    [self.view addSubview:shadowView];
+    [self.view sendSubviewToBack:shadowView];
+    [shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(0);
+        make.leading.mas_equalTo(20);
+        make.trailing.mas_equalTo(-20);
     }];
+    [_shadowViewArr addObject:shadowView];
+    return shadowView;
+}
+
+-(void)reloadViewsWithData:(NSArray *)data{
+    _shadowTop = _headerView.mj_h + 20;
+    [_dataSource removeAllObjects];
+    
+    NSMutableArray * list1 = [[NSMutableArray alloc]initWithCapacity:6];
+    NSMutableArray * list2 = [[NSMutableArray alloc]initWithCapacity:2];
+    NSMutableArray * list3 = [[NSMutableArray alloc]initWithCapacity:2];
+    
+    for (int i = 0; i < listArr.count; i++) {
+        NSDictionary * dic = listArr[i];
+        NSInteger ID = [dic[@"id"] integerValue];
+        if (ID == 1 || ID == 2 || ID == 15 || ID == 3 || ID == 14 || ID == 11) {
+            [list1 addObject:dic];
+            continue;
+        }
+        if (ID == 4 || ID == 8) {
+            [list2 addObject:dic];
+            continue;
+        }
+        if (ID == 12 || ID == 13) {
+            [list3 addObject:dic];
+            continue;
+        }
+    }
+    
+    [_dataSource addObject:list1];
+    [_dataSource addObject:list2];
+    [_dataSource addObject:list3];
+    
+   
+    
+    for (int i = 0; i < _dataSource.count; i++) {
+        UIView * shadow = _shadowViewArr[i];
+        NSArray * list = _dataSource[i];
+        
+        shadow.hidden = IsEmptyList(list);
+        shadow.mj_h = list.count * 50;
+    }
+    
+    _shadowView1.mj_y = -self.tableView.contentOffset.y + _headerView.mj_h + 20;
+    _shadowView2.mj_y = _shadowView1.mj_y + _shadowView1.mj_h+20;
+    _shadowView3.mj_y = _shadowView2.mj_y + _shadowView2.mj_h+20;
     
     [_tableView reloadData];
 }
@@ -160,19 +213,58 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return _dataSource.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return listArr.count;
+    NSArray * list = _dataSource[section];
+    return list.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YBUserInfoListTableViewCell *cell = [YBUserInfoListTableViewCell cellWithTabelView:tableView];
-    NSDictionary *subdic = listArr[indexPath.row];
+    NSArray * list = _dataSource[indexPath.section];
+    NSDictionary *subdic = list[indexPath.row];
     cell.nameL.text = minstr([subdic valueForKey:@"name"]);
-    [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:minstr([subdic valueForKey:@"thumb"])]];
+    int selectedid = [subdic[@"id"] intValue];//选项ID
+    
+    switch (selectedid) {
+            //原生页面无法动态添加
+        case 1:
+            cell.iconImage.image = [UIImage imageNamed:@"Collection"];
+            break;
+        case 2:
+            cell.iconImage.image = [UIImage imageNamed:@"Diamonds"];
+            break;
+        case 3:
+            cell.iconImage.image = [UIImage imageNamed:@"Grade"];
+            break;
+        case 4:
+            cell.iconImage.image = [UIImage imageNamed:@"ShoppingMall"];
+            break;
+        case 8:
+            cell.iconImage.image = [UIImage imageNamed:@"distribution"];
+            break;
+        case 11:
+            cell.iconImage.image = [UIImage imageNamed:@"Authentication"];
+            break;
+        case 12:
+            cell.iconImage.image = [UIImage imageNamed:@"us"];
+            break;
+        case 13:
+            cell.iconImage.image = [UIImage imageNamed:@"setting"];
+            break;
+        case 14:
+            cell.iconImage.image = [UIImage imageNamed:@"Detailed"];
+            break;
+        case 15:
+            cell.iconImage.image = [UIImage imageNamed:@"video"];
+            break;
+        default:
+            break;
+    }
+    
     return cell;
 }
 
@@ -189,6 +281,47 @@
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     view.backgroundColor = [UIColor clearColor];
     return view;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+#warning 根据ID判断 进入 哪个页面（ID 不可随意更改（服务端，客户端））
+    NSArray * list = _dataSource[indexPath.section];
+    selectDic = list[indexPath.row];
+    int selectedid = [selectDic[@"id"] intValue];//选项ID
+    NSString *url = [NSString stringWithFormat:@"%@",[selectDic valueForKey:@"href"]];
+    if (url.length >9) {
+        [self pushH5Webviewinfo:selectDic];
+    }
+    else{
+        /*
+         1我的收益  2 我的钻石  4 在线商城 5 装备中心 13 个性设置
+         其他页面 都是H5
+         */
+        switch (selectedid) {
+                //原生页面无法动态添加
+            case 1:
+                [self Myearnings];//我的收益
+                break;
+            case 2:
+                [self MyDiamonds];//我的钻石
+                break;
+            case 4:
+                [self ShoppingMall];//在线商城
+                break;
+            case 5:
+                [self Myequipment];//装备中心
+                break;
+            case 13:
+                [self SetUp];//设置
+                break;
+            case 15:
+                [self myVideo];//我的视频
+                break;
+            default:
+                break;
+        }
+    }
+    
 }
 
 -(void)pushH5Webviewinfo:(NSDictionary *)subdic{
@@ -239,45 +372,8 @@
     VC.url = url;
     [[MXBADelegate sharedAppDelegate] pushViewController:VC animated:YES];
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    #warning 根据ID判断 进入 哪个页面（ID 不可随意更改（服务端，客户端））
-    selectDic = listArr[indexPath.row];
-    int selectedid = [selectDic[@"id"] intValue];//选项ID
-    NSString *url = [NSString stringWithFormat:@"%@",[selectDic valueForKey:@"href"]];
-    if (url.length >9) {
-        [self pushH5Webviewinfo:selectDic];
-    }
-    else{
-        /*
-         1我的收益  2 我的钻石  4 在线商城 5 装备中心 13 个性设置
-         其他页面 都是H5
-         */
-        switch (selectedid) {
-                //原生页面无法动态添加
-            case 1:
-                [self Myearnings];//我的收益
-                break;
-            case 2:
-                [self MyDiamonds];//我的钻石
-                break;
-            case 4:
-                [self ShoppingMall];//在线商城
-                break;
-            case 5:
-                [self Myequipment];//装备中心
-                break;
-            case 13:
-                [self SetUp];//设置
-                break;
-            case 15:
-                [self myVideo];//我的视频
-                break;
-            default:
-                break;
-        }
-    }
 
-}//MARK:-懒加载
+//MARK:-懒加载
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,_window_width,_window_height) style:UITableViewStylePlain];
@@ -333,7 +429,10 @@
     }else{
         _navigationBar.alpha = 1;
     }
-    _shadowView.mj_y = -scrollView.contentOffset.y + 357;
+    
+    _shadowView1.mj_y = -scrollView.contentOffset.y + _headerView.mj_h + 20;
+    _shadowView2.mj_y = _shadowView1.mj_y + _shadowView1.mj_h+20;
+    _shadowView3.mj_y = _shadowView2.mj_y + _shadowView2.mj_h+20;
 }
 
 @end

@@ -108,7 +108,7 @@
         cell.btnPrice.layer.cornerRadius = 15;
         cell.btnPrice.layer.borderColor = RGB(253, 198, 16).CGColor;
         cell.labCoin.text = [subdic valueForKey:@"coin"];
-        [cell.btnPrice setTitle:money forState:UIControlStateNormal];
+        [cell.btnPrice setTitle:[NSString stringWithFormat:@"$%@",money] forState:UIControlStateNormal];
         return cell;
     }
 }

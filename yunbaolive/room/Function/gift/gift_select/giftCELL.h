@@ -26,6 +26,8 @@
 
 @property(nonatomic,strong)UILabel *countL;
 
+@property(nonatomic,strong)UIImageView * diamondsImageView;
+
 @property(nonatomic,strong)GIFTModell *model;
 @property (nonatomic,strong)UILabel *numLabel;//个数
 

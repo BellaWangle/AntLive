@@ -52,7 +52,7 @@
 {
     _timeL.text = _model.time;
     [_textBTN setTitle:_model.text forState:UIControlStateNormal];
-    [_iconBTN sd_setImageWithURL:[NSURL URLWithString:_model.icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [_iconBTN sd_setImageWithURL:[NSURL URLWithString:_model.icon] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_head"]];
     if ([_model.type isEqual:@"0"]) {
         [_textBTN setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_textBTN setBackgroundImage:[UIImage resizableImage:@"chat_send_nor"] forState:UIControlStateNormal];

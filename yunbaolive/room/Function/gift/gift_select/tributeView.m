@@ -106,7 +106,7 @@
         self.models = [NSArray array];
         self.allArray = [NSArray array];
         self.pldic = playdic;
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
         [self reloadColl];
         [self requestUserGiftList];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestUserGiftList) name:@"zajindanle" object:nil];
@@ -117,9 +117,9 @@
         [self addSubview:headerView];
 
         NSArray *titleArray = @[YZMsg(@"礼物"),YZMsg(@"背包")];
-        for (int i = 0; i<2; i++) {
+        for (int i = 0; i<titleArray.count; i++) {
             UIButton *button = [UIButton buttonWithType:0];
-            button.frame = CGRectMake((_window_width/2-80)+i*80, 0, 80, 39);
+            button.frame = CGRectMake(i*80, 0, 80, 39);
             [button setTitle:titleArray[i] forState:0];
             button.tag = 1000+i;
             [button setTitleColor:normalColors forState:0];
@@ -157,31 +157,69 @@
         //底部条
         _buttomView = [[UIView alloc]initWithFrame:CGRectMake(0, _collectionView.bottom, _window_width,_window_height/18)];
         _buttomView.backgroundColor = [UIColor clearColor];
-        _push = [UIButton buttonWithType:UIButtonTypeSystem];
-        _push.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:_buttomView];
+        
+        
+        
+        UIImageView * diamondsImageView = [[UIImageView alloc]init];
+        diamondsImageView.image = [UIImage imageNamed:@"Diamonds_big"];
+        [_buttomView addSubview:diamondsImageView];
+        [diamondsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.leading.mas_equalTo(DEFAULT_MARGIN_ENDS);
+            make.width.height.mas_equalTo(24);
+        }];
+        
         //充值lable
+         LiveUser *user = [Config myProfile];
         _chongzhi = [[UILabel alloc] init];
-        LiveUser *user = [Config myProfile];
         _chongzhi.textColor = [UIColor whiteColor];
-        _chongzhi.font = [UIFont systemFontOfSize:14];
-        int chongzhi_y = _buttomView.frame.size.height/2-7;
+        _chongzhi.font = [UIFont systemFontOfSize:15];
         [_buttomView addSubview:_chongzhi];
+        [_chongzhi mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.mas_equalTo(diamondsImageView);
+            make.width.mas_greaterThanOrEqualTo(0);
+            make.leading.mas_equalTo(diamondsImageView.mas_trailing).offset(6);
+        }];
+        
+        UIImageView * jiantou = [[UIImageView alloc]init];
+        jiantou.image = [UIImage imageNamed:@"箭头gift"];
+        [_buttomView addSubview:jiantou];
+        [jiantou mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(_chongzhi.mas_trailing).offset(7);
+            make.centerY.mas_equalTo(_chongzhi);
+            make.width.height.mas_equalTo(10);
+        }];
+        
         //充值上透明按钮
-        _jumpRecharge = [[UIButton alloc] initWithFrame:CGRectMake(5,chongzhi_y,250,40)];
+        _jumpRecharge = [[UIButton alloc] initWithFrame:CGRectMake(5,0,250,40)];
         _jumpRecharge.titleLabel.text = @"";
         [_jumpRecharge setBackgroundColor:[UIColor clearColor]];
         [_jumpRecharge addTarget:self action:@selector(jumpRechargess) forControlEvents:UIControlEventTouchUpInside];
         [_buttomView addSubview:_jumpRecharge];
+        [_jumpRecharge mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.mas_equalTo(diamondsImageView);
+            make.trailing.mas_equalTo(jiantou);
+            make.centerY.mas_equalTo(diamondsImageView);
+            make.height.mas_equalTo(30);
+        }];
+        
+        _push = [UIButton buttonWithType:UIButtonTypeSystem];
+        _push.backgroundColor = [UIColor lightGrayColor];
         [_push setTitle:YZMsg(@"赠送") forState:UIControlStateNormal];
         [_push setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_push addTarget:self action:@selector(doLiWu:) forControlEvents:UIControlEventTouchUpInside];
         _push.enabled = NO;
         _push.tag = 6789;
-        _push.frame = CGRectMake(_window_width - 75,5,70,_buttomView.frame.size.height - 10);
         _push.layer.masksToBounds = YES;
-        _push.layer.cornerRadius = (_buttomView.frame.size.height - 10)/2;
+        _push.layer.cornerRadius = 15;
         [_buttomView addSubview:_push];
-        [self addSubview:_buttomView];
+        [_push mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.mas_equalTo(-DEFAULT_MARGIN_ENDS);
+            make.centerY.mas_equalTo(diamondsImageView);
+            make.height.mas_equalTo(30);
+            make.width.mas_equalTo(70);
+        }];
+        
         UILabel *xianssss = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _window_width, 0.3)];
         xianssss.backgroundColor = RGB(241, 241, 241);
         [_buttomView addSubview:xianssss];
@@ -341,19 +379,8 @@
 }
 -(void)chongzhiV:(NSString *)coins{
     if (_chongzhi) {
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ : %@%@",YZMsg(@"充值"),coins,[common name_coin]]];
-    NSRange redRange = NSMakeRange(0, [[noteStr string] rangeOfString:@":"].location);
-    [noteStr addAttribute:NSForegroundColorAttributeName value:RGB(255, 204, 52) range:redRange];
-    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-    attch.image = [UIImage imageNamed:@"箭头gift"];
-    attch.bounds = CGRectMake(0,0,10,10);
-    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-    [noteStr appendAttributedString:string];
-    [_chongzhi setAttributedText:noteStr];
-    _chongzhi.font = [UIFont systemFontOfSize:14];
-    int chongzhi_y = _buttomView.frame.size.height/2-7;
-    _chongzhi.frame = CGRectMake(10,chongzhi_y,_window_width/2,20);
-}
+        _chongzhi.text = [NSString stringWithFormat:@"%@  %@",coins,YZMsg(@"充值")];
+    }
 }
 //展示cell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -417,16 +444,14 @@
                 cell.kuangimage.hidden = NO;
                 cell.priceL.textColor = RGB(255, 204, 52);
                 cell.countL.textColor = RGB(255, 204, 52);
-            }
-            else{
+            }else{
                 cell.kuangimage.hidden = YES;
                 cell.priceL.textColor = [UIColor grayColor];
                 cell.countL.textColor = [UIColor lightGrayColor];
             }
             if ([model.type isEqual:@"1"]) {
                 cell.imageVs.hidden = NO;
-            }
-            else{
+            }else{
                 cell.imageVs.hidden = YES;
             }
             cell.numLabel.hidden = YES;

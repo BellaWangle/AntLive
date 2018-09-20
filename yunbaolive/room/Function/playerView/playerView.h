@@ -2,6 +2,9 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 #import "GrounderSuperView.h"
+
+
+
 @protocol frontviewDelegate <NSObject>
 -(void)zhezhaoBTNdelegate;
 -(void)gongxianbang;//跳贡献榜
@@ -9,9 +12,9 @@
 -(void)guanzhuZhuBo;//关注zhubo
 @end
 @interface playerView : UIView
-{
-    UILabel *labell;
-}
+
+#define isAttention_leftView_wtidth 108
+#define noAttention_leftView_wtidth 140
 
 @property(nonatomic,assign)CGSize yingpiaoSize;
 @property(nonatomic,assign)id<frontviewDelegate>frontviewDelegate;

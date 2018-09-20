@@ -44,7 +44,7 @@
 
 -(void)setModel:(AntLiveRankModel *)model {
     _model = model;
-    [_iconIV sd_setImageWithURL:[NSURL URLWithString:_model.iconStr] placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [_iconIV sd_setImageWithURL:[NSURL URLWithString:_model.iconStr] placeholderImage:[UIImage imageNamed:@"default_head"]];
     _nameL.text = _model.unameStr;
     //收益榜-0 消费榜-1
     if ([_model.type isEqual:@"0"]) {

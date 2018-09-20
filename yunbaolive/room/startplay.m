@@ -482,7 +482,7 @@
     
     
     UIImageView *iconIMage = [[UIImageView alloc]initWithFrame:CGRectMake(_window_width*0.35, _window_height*0.1, _window_width*0.3, _window_width*0.3)];
-    [iconIMage sd_setImageWithURL:[NSURL URLWithString:[Config getavatar]] placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [iconIMage sd_setImageWithURL:[NSURL URLWithString:[Config getavatar]] placeholderImage:[UIImage imageNamed:@"default_head"]];
     iconIMage.layer.masksToBounds = YES;
     iconIMage.layer.cornerRadius = _window_width*0.15;
     [lastView addSubview:iconIMage];

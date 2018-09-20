@@ -80,8 +80,8 @@
         make.height.mas_equalTo(50);
     }];
     
-    UILabel * label = [[UILabel alloc]initWithTextColor:Default_Gray font:13 textAliahment:NSTextAlignmentCenter text:@"还没有账号？立即注册"];
-    [label setupTextAttributesTextFont:13 textColor:Main_Color atRange:[label.text rangeOfString:@"立即注册"]];
+    UILabel * label = [[UILabel alloc]initWithTextColor:Default_Gray font:13 textAliahment:NSTextAlignmentCenter text:[NSString stringWithFormat:@"%@?%@",YZMsg(@"还没有账号"),YZMsg(@"立即注册")]];
+    [label setupTextAttributesTextFont:13 textColor:Main_Color atRange:[label.text rangeOfString:YZMsg(@"立即注册")]];
     [self.view addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);

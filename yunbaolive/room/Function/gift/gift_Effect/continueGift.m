@@ -113,7 +113,7 @@
     [GiftPopView addSubview:giftBGView];
     [self addSubview:GiftPopView];
     //用户显示头像
-    UIImage *headerImg = [UIImage imageNamed:@"bg1"];
+    UIImage *headerImg = [UIImage imageNamed:@"default_head"];
     UIImageView *headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, height, height)];
     [headerView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:headerImg];
     headerView.layer.masksToBounds = YES;

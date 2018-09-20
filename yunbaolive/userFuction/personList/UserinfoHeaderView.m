@@ -63,7 +63,7 @@
     _avatarImageView = [[UIImageView alloc]init];
     _avatarImageView.layer.cornerRadius = 47;
     _avatarImageView.clipsToBounds = YES;
-    _avatarImageView.image = [UIImage imageNamed:@"default_avatar"];
+    _avatarImageView.image = [UIImage imageNamed:@"default_head"];
     [self addSubview:_avatarImageView];
     [_avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(61);
@@ -187,7 +187,7 @@
     }];
     
     LiveUser *user = [Config myProfile];
-    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:user.avatar] placeholderImage:[UIImage imageNamed:@"default_head"]];
     _nickNameLabel.text = user.user_nicename;
     _IDNumLabel.text = [NSString stringWithFormat:@"ID:%@",user.ID];
      NSString *sexS = [NSString stringWithFormat:@"%@",user.sex];
@@ -256,7 +256,7 @@
         }
         [_levelImageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"leve%@",_model.level]]];
         [_levelAnchorView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"host_%@",_model.level_anchor]]];
-        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        [_avatarImageView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"default_head"]];
     });
     
     

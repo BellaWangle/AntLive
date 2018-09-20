@@ -23,6 +23,9 @@ game 5
 #import <ReplayKit/ReplayKit.h>
 #import "goldEggs.h"
 #import "toutiaoAnimation.h"
+#import "AntButton.h"
+#import "IQKeyboardManager.h"
+#import "UIView+Util.h"
 //新礼物结束
 #define iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO)
 
@@ -30,7 +33,7 @@ game 5
 
 @interface SpectatorRoomVC ()
 <
-UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,dianjishijian,UIScrollViewDelegate,UIActionSheetDelegate,UIGestureRecognizerDelegate,UITextFieldDelegate ,catSwitchDelegate,UIAlertViewDelegate,socketDelegate,frontviewDelegate,sendGiftDelegate,upmessageKickAndShutUp,haohuadelegate,listDelegate,gameDelegate,WPFRotateViewDelegate,shangzhuangdelegate,zajindanDelegate,toutiaoDelegate
+UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,dianjishijian,UIScrollViewDelegate,UIActionSheetDelegate,UIGestureRecognizerDelegate,UITextFieldDelegate ,catSwitchDelegate,UIAlertViewDelegate,socketDelegate,frontviewDelegate,sendGiftDelegate,upmessageKickAndShutUp,haohuadelegate,listDelegate,zajindanDelegate,toutiaoDelegate
 >
 @end
 int d =1;
@@ -39,248 +42,12 @@ int d =1;
     NSMutableArray *msgList;
   
     UIAlertController  *Feedeductionalertc;//扣费alert
-    goldEggs *goldView;
-    UIButton *_zaBtn;
-    toutiaoAnimation *toutiaoView;
+    goldEggs *goldView;    toutiaoAnimation *toutiaoView;
     int sssss;
-}
-#pragma socketDelegate
-//准备炸金花游戏
-//*********************************************************************** 炸金花********************************//
--(void)stopGamendMethod:(NSString *)method andMsgtype:(NSString *)msgtype{
-    
-    
-    
-}
--(void)prepGameandMethod:(NSString *)method andMsgtype:(NSString *)msgtype{
-    if (gameVC) {
-        [gameVC releaseAll];
-        [gameVC removeFromSuperview];
-        gameVC = nil;
-    }
-    gameVC = [[gameBottomVC alloc]initWIthDic:_playDoc andIsHost:NO andMethod:method andMsgtype:msgtype];
-    gameVC.delagate = self;
-    gameVC.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-    [self changeBtnFrame:_window_height - 260];
-    [backScrollView insertSubview:gameVC atIndex:4];
-    [backScrollView insertSubview:_liwuBTN atIndex:5];
-    [self tableviewheight:_window_height - _window_height*0.2 -260];
-    [self changecontinuegiftframe];
-    //上庄
-    if ([method isEqual:@"startCattleGame"]) {
-        if (!zhuangVC) {
-            zhuangVC = [[shangzhuang alloc]initWithFrame:CGRectMake(_window_width + 10,90, _window_width/4, _window_width/4 + 20 + _window_width/8) ishost:NO withstreame:[self.playDoc valueForKey:@"stream"]];
-            zhuangVC.deleagte = self;
-            [backScrollView insertSubview:zhuangVC atIndex:10];
-            [backScrollView bringSubviewToFront:zhuangVC];
-            [zhuangVC addtableview];
-            [zhuangVC getbanksCoin:zhuangstartdic];
-        }
-    }
-}
-//**************************************************上庄操作***********************
-
--(void)changeBank:(NSDictionary *)bankdic{
-       [gameVC changebankid:[bankdic valueForKey:@"id"]];
-       [zhuangVC getNewZhuang:bankdic];
-}
--(void)getzhuangjianewmessagedelegatem:(NSDictionary *)subdic{
-    
-    [zhuangVC getNewZhuang:subdic];
-    
-}
--(void)takePoker:(NSString *)gameid Method:(NSString *)method andMsgtype:(NSString *)msgtype{
-    if (!gameVC) {
-        gameVC = [[gameBottomVC alloc]initWIthDic:_playDoc andIsHost:NO andMethod:method andMsgtype:msgtype];
-        gameVC.delagate = self;
-        gameVC.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-        [self changeBtnFrame:_window_height - 260];
-        [backScrollView insertSubview:gameVC atIndex:4];
-        [backScrollView insertSubview:_liwuBTN atIndex:5];
-    }
-    //上庄
-    if ([method isEqual:@"startCattleGame"]) {
-        if (!zhuangVC) {
-            zhuangVC = [[shangzhuang alloc]initWithFrame:CGRectMake(_window_width + 10,90, _window_width/4, _window_width/4 + 20 + _window_width/8) ishost:NO withstreame:[self.playDoc valueForKey:@"stream"]];
-            zhuangVC.deleagte = self;
-            [backScrollView insertSubview:zhuangVC atIndex:10];
-            [zhuangVC getbanksCoin:zhuangstartdic];
-            [zhuangVC addtableview];
-        }
-        [zhuangVC addPoker];
-    }
-    [self tableviewheight:_window_height - _window_height*0.2 -260 - www ];
-    //wangminxinliwu
-    [self changecontinuegiftframe];
-    [gameVC createUI];
-}
--(void)startGame:(NSString *)time andGameID:(NSString *)gameid{
-    [gameVC movieplayStartCut:time andGameid:gameid];
-}
-//得到游戏结果
--(void)getResult:(NSArray *)array{
-    [gameVC getResult:array];
-    if (zhuangVC) {
-        [zhuangVC getresult:array];
-    }
-    
-}
--(void)reloadcoinsdelegate{
-    if (gameVC) {
-        [gameVC reloadcoins];
-    }
-}
--(void)stopGame{
-    if (zhuangVC) {
-        [zhuangVC remopokers];
-        [zhuangVC removeFromSuperview];
-        zhuangVC = nil;
-    }
-    [gameVC removeFromSuperview];
-    gameVC = nil;
-    [self changeBtnFrame:_window_height - 45];
-    [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 50];
-    //wangminxinliwu
-    [self changecontinuegiftframe];
-}
-//用户投注
--(void)skate:(NSString *)type andMoney:(NSString *)money andMethod:(NSString *)method andMsgtype:(NSString *)msgtype{
-    [socketDelegate stakePoke:type andMoney:money andMethod:method andMsgtype:msgtype];
-}
--(void)getCoin:(NSString *)type andMoney:(NSString *)money{
-    [gameVC getCoinType:type andMoney:money];
+    CGFloat _keyboardHeight;
+    CGFloat _tableViewDefaultTop;
 }
 
-//*********************************************************************** 炸金花********************************//
-//*********************************************************************** 二八贝********************************//
--(void)shellprepGameandMethod:(NSString *)method andMsgtype:(NSString *)msgtype{
-    if (shell) {
-        [shell gameOver];
-        [shell removeFromSuperview];
-        shell = nil;
-    }
-    shell = [[shellGame alloc]initWIthDic:_playDoc andIsHost:NO andMethod:@"startShellGame" andMsgtype:@"19" andandBanklist:nil];
-    shell.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-    shell.delagate = self;
-    [backScrollView insertSubview:shell atIndex:4];
-    [backScrollView insertSubview:_liwuBTN atIndex:5];
-    [self changeBtnFrame:_window_height - 45 - 215];
-     [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2- 265];
-    //wangminxinliwu
-    [self changecontinuegiftframe];
-}
--(void)shelltakePoker:(NSString *)gameid Method:(NSString *)method andMsgtype:(NSString *)msgtype{
-    if (!shell) {
-        shell = [[shellGame alloc]initWIthDic:_playDoc andIsHost:NO andMethod:@"startShellGame" andMsgtype:@"19" andandBanklist:nil];
-        shell.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-        shell.delagate = self;
-        [backScrollView insertSubview:shell atIndex:4];
-        [backScrollView insertSubview:_liwuBTN atIndex:5];
-    }
-    [self changeBtnFrame:_window_height - 45 - 215];
-    [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2- 265];
-    //wangminxinliwu
-    [self changecontinuegiftframe];
-    [shell createUI];
-}
--(void)shellstopGame{
-    [shell gameOver];
-    [shell removeFromSuperview];
-    [self changeBtnFrame:_window_height - 45];
-    shell = nil;
-    [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 50];
-    //wangminxinliwu
-    [self changecontinuegiftframe];
-}
--(void)shellgetResult:(NSArray *)array{
-    [shell getShellResult:array];
-}
-//开始倒数计时
--(void)shellstartGame:(NSString *)time andGameID:(NSString *)gameid{
-    [shell movieplayStartCut:time andGameid:gameid];
-}
--(void)shellgetCoin:(NSString *)type andMoney:(NSString *)money{
-    [shell getShellCoin:type andMoney:money];
-}
--(void)shellstakePoke:(NSString *)type andMoney:(NSString *)money andMethod:(NSString *)method andMsgtype:(NSString *)msgtype{
-    [socketDelegate stakePoke:type andMoney:money andMethod:method andMsgtype:msgtype];
-}
-//**********************************************************************转盘游戏
-//关闭游戏
--(void)stopRotationGame{
-    [self setbtnframe];
-     [rotationV stopRotatipnGameInt];
-     [rotationV stoplasttimer];
-    [rotationV removeFromSuperview];
-    [rotationV removeall];
-    rotationV = nil;
-    [self changeBtnFrame:_window_height - 45];
-    [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 50];
-    //wangminxinliwu
-    [self changecontinuegiftframe];
-}
-//出现游戏界面
--(void)prepRotationGame{
-    [self getRotation];
-}
--(void)getRotation{
-    if (zhuangVC) {
-        [zhuangVC remopokers];
-        [zhuangVC removeFromSuperview];
-        zhuangVC = nil;
-    }
-    if (!rotationV) {
-        isRotationGame = YES;
-        rotationV = [WPFRotateView rotateView];
-        [rotationV setlayoutview];
-        rotationV.delegate = self;
-        [rotationV isHost:NO andHostDic:[_playDoc valueForKey:@"stream"]];
-        rotationV.frame = CGRectMake(_window_width, _window_height - _window_width/1.5, _window_width, _window_width);
-        [backScrollView insertSubview:rotationV atIndex:6];
-        [backScrollView insertSubview:_liwuBTN atIndex:7];
-        [rotationV addtableview];
-    }
-    rotationV.frame = CGRectMake(_window_width, _window_height - _window_width/1.5, _window_width, _window_width);
-    [self changeBtnFrame:_window_height - 45 - _window_width/1.5];
-    
-}
--(void)changeBtnFrame:(CGFloat)hhh{
-    
-    if (rotationV) {
-        [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - _window_width+_window_width/5];
-        [self changecontinuegiftframe];
-    }
-    CGFloat  wwwssss = 30;
-    keyBTN.frame = CGRectMake(_window_width + 15,hhh, www, www);
-    _returnCancle.frame = CGRectMake(_window_width*2-wwwssss-10,hhh,wwwssss,wwwssss);
-    _liwuBTN.frame = CGRectMake(_window_width*2 - wwwssss*2-20,hhh,wwwssss,wwwssss);
-    _fenxiangBTN.frame = CGRectMake(_window_width*2 - wwwssss*3-30,hhh, wwwssss, wwwssss);
-    _messageBTN.frame = CGRectMake(_window_width*2 - wwwssss*4-40,hhh, wwwssss,wwwssss);
-    _connectVideo.frame = CGRectMake(_window_width*2 - wwwssss*5-50,hhh + 2,27,27);
-    NSArray *shareplatforms = [common share_type];
-    if (shareplatforms.count == 0) {
-        _fenxiangBTN.hidden = YES;
-        _messageBTN.frame = CGRectMake(_window_width*2 - wwwssss*3 - 30,hhh, wwwssss,wwwssss);
-        _connectVideo.frame = CGRectMake(_window_width*2 - wwwssss*4 - 40,hhh + 2,27,27);
-    }
-}
-//开始倒计时
--(void)startRotationGame:(NSString *)time andGameID:(NSString *)gameid{
-    [self getRotation];
-    [rotationV movieplayStartCut:time andGameid:gameid];
-}
-//获取游戏结果
--(void)getRotationResult:(NSArray *)array{
-    [rotationV getRotationResult:array];
-}
-//用户押注
--(void)skateRotaton:(NSString *)type andMoney:(NSString *)money{
-    [socketDelegate stakeRotationPoke:type andMoney:money];
-}
-//更新押注数量
--(void)getRotationCoin:(NSString *)type andMoney:(NSString *)money{
-    [rotationV getRotationCoinType:type andMoney:money];
-}
 //*****************************************************************************
 -(void)superAdmin:(NSString *)state{
     [socketDelegate superStopRoom];
@@ -491,11 +258,10 @@ int d =1;
         userviewW = _window_width *0.9 + sssss;
     }
     if (!userView) {
-         userView = [[upmessageInfo alloc]initWithFrame:CGRectMake(_window_width/2 - 150,_window_height + 20,upViewW,userviewW) andPlayer:@"movieplay"];
+         userView = [[upmessageInfo alloc]initWithFrame:CGRectMake(0,0,_window_width,_window_height) andPlayer:@"movieplay"];
         //添加用户列表弹窗
         userView.upmessageDelegate = self;
-        userView.backgroundColor = [UIColor whiteColor];
-        userView.layer.cornerRadius = 10;
+        userView.alpha = 0;
         UIWindow *mainwindows = [UIApplication sharedApplication].keyWindow;
         [mainwindows addSubview:userView];
         
@@ -504,58 +270,30 @@ int d =1;
     NSDictionary *subdic = @{@"id":[self.playDoc valueForKey:@"uid"]};
     [self GetInformessage:subdic];
     [UIView animateWithDuration:0.2 animations:^{
-        userView.frame = CGRectMake(_window_width*0.1,_window_height*0.2,upViewW,userviewW);
+        userView.alpha = 1;
+        userView.contentBgView.centerY = _window_height/2;
     }];
 }
 //改变tableview高度
 -(void)tableviewheight:(CGFloat)h{
-    self.tableView.frame = CGRectMake(_window_width + 10,h,tableWidth,_window_height*0.2);
+    self.tableView.top = h;
     useraimation.frame = CGRectMake(_window_width + 10,self.tableView.top - 40,_window_width,20);
 }
 //点击礼物ye消失
 -(void)zhezhaoBTNdelegate{
     giftViewShow = NO;
-    if (gameVC || shell || rotationV) {
-        [self.liwuBTN setBackgroundImage:[UIImage imageNamed:@"live_礼物"] forState:UIControlStateNormal];//@"花猫直播－游戏图标"
-        giftview.push.enabled = NO;
-        giftview.push.backgroundColor = [UIColor lightGrayColor];
-            if (gameVC) {
-                gameVC.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-                 [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 265];
-            }
-            if (shell) {
-                shell.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 265];
-            }
-            if (rotationV) {
-                rotationV.frame = CGRectMake(_window_width, _window_height - _window_width/1.5, _window_width, _window_width);
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - _window_width+_window_width/5];
-            }
-        setFrontV.ZheZhaoBTN.hidden = YES;
-        giftview.continuBTN.hidden = YES;
-        fenxiangV.hidden = YES;
-        [UIView animateWithDuration:0.5 animations:^{
-            [self changeGiftViewFrameY:_window_height *3];
-            self.tableView.hidden = NO;
-        }];
-        //wangminxinliwu
-        [self changecontinuegiftframe];
-    }
-    else{
-        giftViewShow = NO;
-        giftview.push.enabled = NO;
-        giftview.push.backgroundColor = [UIColor lightGrayColor];
-        setFrontV.ZheZhaoBTN.hidden = YES;
-        giftview.continuBTN.hidden = YES;
-        fenxiangV.hidden = YES;
-        [UIView animateWithDuration:0.5 animations:^{
-           [self changeGiftViewFrameY:_window_height *3];
-            [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 50];
-        }];
-        keyBTN.hidden = NO;
-        //wangminxinliwu
-        [self changecontinuegiftframe];
-    }
+    giftview.push.enabled = NO;
+    giftview.push.backgroundColor = [UIColor lightGrayColor];
+    setFrontV.ZheZhaoBTN.hidden = YES;
+    giftview.continuBTN.hidden = YES;
+    fenxiangV.hidden = YES;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self changeGiftViewFrameY:_window_height *3];
+        [self tableviewheight:_tableViewDefaultTop];
+    }];
+    keyBTN.hidden = NO;
+    //wangminxinliwu
+    [self changecontinuegiftframe];
     [self showBTN];
 }
 //页面退出
@@ -589,72 +327,26 @@ int d =1;
 }
 //礼物按钮
 -(void)doLiwu{
-    if (gameVC || rotationV || shell) {
-        if (giftViewShow == NO) {
-            giftViewShow = YES;
-            if (gameVC) {
-                [self changeBtnFrame:_window_height - 260];
-                [UIView animateWithDuration:0.5 animations:^{
-                    gameVC.frame = CGRectMake(_window_width, _window_height+60, _window_width,260);
-                }];
-            }
-            if (rotationV) {
-                [self changeBtnFrame:_window_height - 45 - _window_width/1.5];
-                [UIView animateWithDuration:0.5 animations:^{
-                    rotationV.frame = CGRectMake(_window_width, _window_height+60, _window_width, _window_width);
-                }];
-            }
-            if (shell) {
-                  [self changeBtnFrame:_window_height - 45 - 215];
-                [UIView animateWithDuration:0.5 animations:^{
-                    shell.frame = CGRectMake(_window_width, _window_height +60, _window_width,260);
-                }];
-            }
-            if (!giftview) {
-                //礼物弹窗
-                giftview = [[tributeView alloc]initWithDic:self.playDoc andMyDic:nil];
-                giftview.giftDelegate = self;
-                [self changeGiftViewFrameY:_window_height*3];
-                [self.view addSubview:giftview];
-            }
-            backScrollView.userInteractionEnabled = YES;
-            setFrontV.ZheZhaoBTN.hidden = NO;
-            setFrontV.backgroundColor = [UIColor clearColor];
-            LiveUser *user = [Config myProfile];
-            [giftview chongzhiV:user.coin];
-            [UIView animateWithDuration:0.5 animations:^{
-                [self changeGiftViewFrameY:_window_height/3*2 - 10-40];
-            }];
-            [self.liwuBTN setBackgroundImage:[UIImage imageNamed:@"live_礼物"] forState:UIControlStateNormal];//@"花猫直播－游戏图标"
-            [self changecontinuegiftframe];
-            [self hideBTN];
+    if (giftViewShow == NO) {
+        giftViewShow = YES;
+        if (!giftview) {
+            //礼物弹窗
+            giftview = [[tributeView alloc]initWithDic:self.playDoc andMyDic:nil];
+            giftview.giftDelegate = self;
+            [self changeGiftViewFrameY:_window_height*3];
+            [self.view addSubview:giftview];
         }
-        else{
-            [self zhezhaoBTNdelegate];
-        }
-    }
-    else{
-        if (giftViewShow == NO) {
-            giftViewShow = YES;
-            if (!giftview) {
-                //礼物弹窗
-                giftview = [[tributeView alloc]initWithDic:self.playDoc andMyDic:nil];
-                giftview.giftDelegate = self;
-                 [self changeGiftViewFrameY:_window_height*3];
-                [self.view addSubview:giftview];
-            }
-            
-            backScrollView.userInteractionEnabled = YES;
-            setFrontV.ZheZhaoBTN.hidden = NO;
-            setFrontV.backgroundColor = [UIColor clearColor];
-            LiveUser *user = [Config myProfile];
-            [giftview chongzhiV:user.coin];
-            [UIView animateWithDuration:0.1 animations:^{
-                [self changeGiftViewFrameY:_window_height/3*2 - 10-40];
-            }];
-            [self changecontinuegiftframe];
-            [self showBTN];
-        }
+        
+        backScrollView.userInteractionEnabled = YES;
+        setFrontV.ZheZhaoBTN.hidden = NO;
+        setFrontV.backgroundColor = [UIColor clearColor];
+        LiveUser *user = [Config myProfile];
+        [giftview chongzhiV:user.coin];
+        [UIView animateWithDuration:0.1 animations:^{
+            [self changeGiftViewFrameY:_window_height/3*2 - 10-40];
+        }];
+        [self changecontinuegiftframe];
+        [self showBTN];
     }
     [giftview reloadPushState];
 }
@@ -685,6 +377,12 @@ int d =1;
     [backScrollView setContentOffset:CGPointMake(_window_width,0) animated:YES];
     self.unRead = 0;
     [self labeiHid];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 }
 
 //手指拖拽弹窗移动
@@ -788,22 +486,7 @@ int d =1;
     }
     return YES;
 }
-//加载底部滑动scrollview
--(void)backscroll{
 
-    backScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,_window_height, _window_width, _window_height)];
-    backScrollView.delegate = self;
-    backScrollView.contentSize = CGSizeMake(_window_width*2,0);
-    [backScrollView setContentOffset:CGPointMake(_window_width,0) animated:YES];
-    backScrollView.pagingEnabled = YES;
-    backScrollView.backgroundColor = [UIColor clearColor];
-    backScrollView.showsHorizontalScrollIndicator = NO;
-    backScrollView.bounces = NO;
-    backScrollView.userInteractionEnabled = YES;
-    [self.view addSubview:backScrollView];
-    
-      fangKeng = !fangKeng;//全部加载完毕了再释放滑动
-}
 -(void)socketShutUp:(NSString *)name andID:(NSString *)ID{
     [socketDelegate shutUp:name andID:ID];
 }
@@ -824,10 +507,8 @@ int d =1;
     }
     if (!userView) {
         //添加用户列表弹窗
-        userView = [[upmessageInfo alloc]initWithFrame:CGRectMake(_window_width/2 - 150,_window_height + 20,upViewW,userviewW) andPlayer:@"movieplay"];
+        userView = [[upmessageInfo alloc]initWithFrame:CGRectMake(0,_window_height + 20,_window_width,_window_height) andPlayer:@"movieplay"];
         userView.upmessageDelegate = self;
-        userView.backgroundColor = [UIColor whiteColor];
-        userView.layer.cornerRadius = 10;
         UIWindow *mainwindows = [UIApplication sharedApplication].keyWindow;
         [mainwindows addSubview:userView];
     }
@@ -835,7 +516,8 @@ int d =1;
     self.tanChuangID = [NSString stringWithFormat:@"%@",[subdic valueForKey:@"id"]];
     [userView getUpmessgeinfo:subdic andzhuboDic:self.playDoc];
     [UIView animateWithDuration:0.2 animations:^{
-        userView.frame = CGRectMake( _window_width*0.1,_window_height*0.2,upViewW,userviewW);
+        userView.alpha = 1;
+        userView.contentBgView.centerY = _window_height/2;
     }];
     
     
@@ -858,13 +540,7 @@ int d =1;
 }
 //点亮星星
 -(void)starok{
-    if (gameVC) {
-    }
-    else if (rotationV){
-    }
-    else if (shell) {
-        [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2- 265];
-    }
+    
 
     //wangminxinliwu
     [self changecontinuegiftframe];
@@ -956,7 +632,7 @@ int d =1;
     backScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,0, _window_width, _window_height)];
     backScrollView.delegate = self;
     backScrollView.contentSize = CGSizeMake(_window_width*2,0);
-    [backScrollView setContentOffset:CGPointMake(_window_width,0) animated:YES];
+    [backScrollView setContentOffset:CGPointMake(_window_width,0) animated:NO];
     backScrollView.pagingEnabled = YES;
     backScrollView.backgroundColor = [UIColor clearColor];
     backScrollView.showsHorizontalScrollIndicator = NO;
@@ -964,6 +640,15 @@ int d =1;
     backScrollView.userInteractionEnabled = YES;
     [self.view addSubview:backScrollView];
     
+    if (@available(iOS 11.0, *)) {
+        backScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    //添加底部按钮
+    _returnCancle = [self bottomButtonWithImageName:@"close_white" action:@selector(returnCancless) x:10];
+    [self.view addSubview:_returnCancle];
     
     //加载背景模糊图
     buttomimageviews = [[UIImageView alloc]init];
@@ -983,9 +668,8 @@ int d =1;
     setFrontV.clipsToBounds = YES;
     [backScrollView addSubview:setFrontV];
     
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(_window_width + 10,setFrontV.frame.size.height - _window_height*0.25 - 50,tableWidth,_window_height*0.2) style:UITableViewStylePlain];
-    [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 50];
+    _tableViewDefaultTop = _window_height - (_window_height*0.2 + iPhoneX_Bottom + 10 + 42);
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(_window_width + 10,_tableViewDefaultTop,tableWidth,_window_height*0.2) style:UITableViewStylePlain];
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -1016,10 +700,7 @@ int d =1;
     #pragma mark -- 绑定键盘
     www = 30;
     //点击弹出键盘
-    keyBTN = [UIButton buttonWithType:UIButtonTypeCustom];
-    [keyBTN setBackgroundImage:[UIImage imageNamed:@"live_聊天"] forState:UIControlStateNormal];
-    [keyBTN addTarget:self action:@selector(showkeyboard:) forControlEvents:UIControlEventTouchUpInside];
-    keyBTN.frame = CGRectMake(_window_width + 15,_window_height - 45, www, www);
+    
     
     //发送按钮
     pushBTN = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1077,75 +758,70 @@ int d =1;
     UITapGestureRecognizer *gifttaps = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(starok)];
     [liansongliwubottomview addGestureRecognizer:gifttaps];
     
-    //添加底部按钮
-    _returnCancle = [UIButton buttonWithType:UIButtonTypeCustom];
-    _returnCancle.tintColor = [UIColor whiteColor];
-    [_returnCancle setImage:[UIImage imageNamed:@"live_关闭"] forState:UIControlStateNormal];//直播间观众—关闭
-    _returnCancle.backgroundColor = [UIColor clearColor];
-    [_returnCancle addTarget:self action:@selector(returnCancless) forControlEvents:UIControlEventTouchUpInside];
-    //消息按钮
-    _messageBTN =[UIButton buttonWithType:UIButtonTypeCustom];
-     self.unReadLabel = [[UILabel alloc]initWithFrame:CGRectMake(13, -5, 16, 16)];
-     self.unReadLabel.hidden = YES;
-     self.unReadLabel.textAlignment = NSTextAlignmentCenter;
-     self.unReadLabel.textColor = [UIColor whiteColor];
-     self.unReadLabel.layer.masksToBounds = YES;
-     self.unReadLabel.layer.cornerRadius = 8;
-     self.unReadLabel.font = [UIFont systemFontOfSize:9];
-     self.unReadLabel.backgroundColor = [UIColor redColor];
-    [_messageBTN addSubview: self.unReadLabel];
-    [_messageBTN setImage:[UIImage imageNamed:@"live_私信"] forState:UIControlStateNormal];//直播间观众—私信
-    _messageBTN.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [_messageBTN addTarget:self action:@selector(doMessage) forControlEvents:UIControlEventTouchUpInside];
-    //分享按钮
-    _fenxiangBTN = [UIButton buttonWithType:UIButtonTypeCustom];
-    _fenxiangBTN.enabled = YES;
-    _fenxiangBTN.tintColor = [UIColor whiteColor];
-    [_fenxiangBTN setBackgroundImage:[UIImage imageNamed:@"live_分享"] forState:UIControlStateNormal];
-    [_fenxiangBTN addTarget:self action:@selector(doFenxiang:) forControlEvents:UIControlEventTouchUpInside];
     //礼物
-    _liwuBTN = [UIButton buttonWithType:UIButtonTypeCustom];
-    _liwuBTN.tintColor = [UIColor whiteColor];
-    [_liwuBTN setBackgroundImage:[UIImage imageNamed:@"live_礼物"] forState:UIControlStateNormal];
-    [_liwuBTN addTarget:self action:@selector(doLiwu) forControlEvents:UIControlEventTouchUpInside];
+    _liwuBTN = [self bottomButtonWithImageName:nil action:@selector(doLiwu) x:_window_width * 2 - 52];
+    _liwuBTN.clipsToBounds = YES;
+    [_liwuBTN gradientWithColors:@[HexColor(@"FF00EE"), HexColor(@"9415FF")] starPoint:CGPointMake(1, 0) endPoint:CGPointMake(1, 1)];
+    [backScrollView insertSubview:_liwuBTN atIndex:5];
+    
+    UIImageView * imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"gift"]];
+    imageView.frame = CGRectMake(_liwuBTN.width/2-10, _liwuBTN.height/2-10, 20, 20);
+    [_liwuBTN addSubview:imageView];
+    
+    keyBTN = [self bottomButtonWithImageName:@"ic_message" action:@selector(showkeyboard:) x:_liwuBTN.left - 57];
+    [backScrollView insertSubview:keyBTN atIndex:5];
+    
+    NSArray *shareplatforms = [common share_type];
+    if (shareplatforms.count != 0) {
+        //分享按钮
+        _fenxiangBTN = [self bottomButtonWithImageName:@"share" action:@selector(doFenxiang:) x:keyBTN.left - 57];
+        [backScrollView insertSubview:_fenxiangBTN atIndex:5];
+    }
+    
+    
+    CGFloat messageX = shareplatforms.count != 0 ?_fenxiangBTN.left - 57 :keyBTN.left - 57;
+    _messageBTN = [self bottomButtonWithImageName:@"email" action:@selector(doMessage) x:messageX];
+    [backScrollView insertSubview:_messageBTN atIndex:5];
+    
+    self.unReadLabel = [[UILabel alloc]initWithFrame:CGRectMake(13, -5, 16, 16)];
+    self.unReadLabel.hidden = YES;
+    self.unReadLabel.textAlignment = NSTextAlignmentCenter;
+    self.unReadLabel.textColor = [UIColor whiteColor];
+    self.unReadLabel.layer.masksToBounds = YES;
+    self.unReadLabel.layer.cornerRadius = 8;
+    self.unReadLabel.font = [UIFont systemFontOfSize:9];
+    self.unReadLabel.backgroundColor = [UIColor redColor];
+    [_messageBTN addSubview: self.unReadLabel];
+    
     /*==================  连麦  ================*/
     //连麦按钮
     _connectVideo = [UIButton buttonWithType:UIButtonTypeCustom];
     [_connectVideo setImage:[UIImage imageNamed:@"live_连麦"]forState:UIControlStateNormal];
     [_connectVideo addTarget:self action:@selector(connectVideos) forControlEvents:UIControlEventTouchUpInside];
     _connectVideo.selected = NO;
-    _zaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [_zaBtn setBackgroundImage:[UIImage imageNamed:@"woto_chuizi"] forState:UIControlStateNormal];
-    [_zaBtn addTarget:self action:@selector(doZajinDan) forControlEvents:UIControlEventTouchUpInside];
-
-    [self setbtnframe];
-    
-    [backScrollView insertSubview:keyBTN atIndex:5];
-    [backScrollView insertSubview:_returnCancle atIndex:5];
-    
-    NSArray *shareplatforms = [common share_type];
-    if (shareplatforms.count != 0) {
-        [backScrollView insertSubview:_fenxiangBTN atIndex:5];
-     }
-  
-    [backScrollView insertSubview:_messageBTN atIndex:5];
-    [backScrollView insertSubview:_liwuBTN atIndex:5];
- // [backScrollView insertSubview:_connectVideo atIndex:9];
-    [backScrollView insertSubview:_zaBtn atIndex:5];
-
-    
+    // [backScrollView insertSubview:_connectVideo atIndex:9];
 }
+
+-(AntButton *)bottomButtonWithImageName:(NSString *)imageName action:(SEL)action x:(CGFloat)x{
+    AntButton * button = [[AntButton alloc]init];
+    button.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.3];
+    button.image = [UIImage imageNamed:imageName];
+    button.buttonImageWidth = 20;
+    button.layer.cornerRadius = 21;
+    button.frame = CGRectMake(x, _window_height -(iPhoneX_Bottom + 10 + 42), 42, 42);
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
 -(void)setbtnframe{
     
-    CGFloat  wwwwww = 30;
-    CGFloat hhh = _window_height - 45;
-    _returnCancle.frame = CGRectMake(_window_width*2-wwwwww-10,hhh,wwwwww,wwwwww);
+    CGFloat  wwwwww = 42;
+    CGFloat hhh = _window_height - wwwwww - iPhoneX_Bottom;
+    _returnCancle.frame = CGRectMake(10 ,hhh,wwwwww,wwwwww);
     _connectVideo.frame = CGRectMake(_window_width*2 - wwwwww*5-50,hhh,wwwwww,wwwwww);
     _liwuBTN.frame = CGRectMake(_window_width*2 - wwwwww*2-20,hhh,wwwwww,wwwwww);
     _fenxiangBTN.frame = CGRectMake(_window_width*2 - wwwwww*3-30,hhh, wwwwww, wwwwww);
     _messageBTN.frame = CGRectMake(_window_width*2 - wwwwww*4-40,hhh, wwwwww,wwwwww);
-    _zaBtn.frame = CGRectMake(_window_width*2 - wwwwww*5-50,hhh,wwwwww,wwwwww);
 
     NSArray *shareplatforms = [common share_type];
     
@@ -1153,7 +829,6 @@ int d =1;
         _fenxiangBTN.hidden = YES;
         _messageBTN.frame = CGRectMake(_window_width*2 - wwwwww*3 - 30,hhh, wwwwww,wwwwww);
 //        _connectVideo.frame = CGRectMake(_window_width*2 - wwwwww*4 - 40,hhh + 2,27,27);
-        _zaBtn.frame = CGRectMake(_window_width*2 - wwwwww*4 - 40,hhh + 2,27,27);
 
     }
     
@@ -1179,7 +854,7 @@ int d =1;
 }
 -(void)guanzhuZhuBo{
     [UIView animateWithDuration:0.5 animations:^{
-        setFrontV.leftView.frame = CGRectMake(10, 20+sssss, 90, leftW);
+        setFrontV.leftView.frame = CGRectMake(10, 20+sssss, isAttention_leftView_wtidth, leftW);
         listcollectionviewx = _window_width+110;
         listView.frame = CGRectMake(listcollectionviewx, 20+sssss, _window_width-130,40);
         listView.listCollectionview.frame = CGRectMake(0, 0, _window_width-130, 40);
@@ -1310,7 +985,7 @@ int d =1;
     if ([userView.forceBtn.titleLabel.text isEqual:YZMsg(@"已关注")]) {
         [userView.forceBtn setTitle:YZMsg(@"关注") forState:UIControlStateNormal];
         [userView.forceBtn setTitleColor:UIColorFromRGB(0xff9216) forState:UIControlStateNormal];
-        setFrontV.leftView.frame = CGRectMake(10,20+sssss,140,leftW);
+        setFrontV.leftView.frame = CGRectMake(10,20+sssss,noAttention_leftView_wtidth,leftW);
         listcollectionviewx = _window_width+160;
         setFrontV.newattention.hidden = NO;
        listView.frame = CGRectMake(listcollectionviewx, 20+sssss, _window_width-170,40);
@@ -1318,7 +993,7 @@ int d =1;
         [userView.forceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     }
     else{
-        setFrontV.leftView.frame = CGRectMake(10,20+sssss,90,leftW);
+        setFrontV.leftView.frame = CGRectMake(10,20+sssss,isAttention_leftView_wtidth,leftW);
         listcollectionviewx = _window_width+110;
         setFrontV.newattention.hidden = YES;
         listView.frame = CGRectMake(listcollectionviewx, 20+sssss, _window_width-130,40);
@@ -1347,15 +1022,7 @@ int d =1;
 #pragma mark -- 获取键盘高度
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
-    if (gameVC) {
-        gameVC.hidden = YES;
-    }
-    if (shell) {
-        shell.hidden = YES;
-    }
-    if (rotationV) {
-        rotationV.hidden = YES;
-    }
+    
     [self doCancle];
     [self hideBTN];
     keyBTN.hidden = YES;
@@ -1364,63 +1031,42 @@ int d =1;
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
     CGFloat height = keyboardRect.origin.y;
-    CGFloat heightw = keyboardRect.size.height;
-    int newHeight = _window_height - height -44;
+    _keyboardHeight = keyboardRect.size.height;
+    int newHeight = _window_height - _keyboardHeight -44;
+    backScrollView.scrollEnabled = NO;
     [UIView animateWithDuration:0.3 animations:^{
-        [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 40 - heightw];
-        toolBar.frame = CGRectMake(0,height-44,_window_width,44);
+        [self tableviewheight:_window_height - _keyboardHeight - _tableView.height - 44];
+        toolBar.top = newHeight;
         listView.frame = CGRectMake(listcollectionviewx,-height,_window_width-130,40);
         listView.listCollectionview.frame = CGRectMake(0, 0, _window_width-130, 40);
         setFrontV.frame = CGRectMake(_window_width,-newHeight,_window_width,_window_height);
         [self changeGiftViewFrameY:_window_height*10];
         //wangminxinliwu
         [self changecontinuegiftframe];
-        if (zhuangVC) {
-            zhuangVC.frame =  CGRectMake(_window_width + 10,20, _window_width/4, _window_width/4 + 20 + _window_width/8);
-        }
+        
     }];
+    
+    
 }
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
-    if (gameVC) {
-        gameVC.hidden = NO;
-    }
-    if (shell) {
-        shell.hidden = NO;
-    }
-    if (rotationV) {
-        rotationV.hidden = NO;
-    }
     
+    backScrollView.scrollEnabled = YES;
     [UIView animateWithDuration:0.1 animations:^{
         setFrontV.frame = CGRectMake(_window_width,0,_window_width,_window_height);
         listView.frame = CGRectMake(listcollectionviewx, 20+sssss, _window_width-130,40);
         listView.listCollectionview.frame = CGRectMake(0, 0, _window_width-130, 40);
-            if (giftViewShow) {
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2- 265];
+            if (!giftViewShow) {
+                [self tableviewheight:_tableViewDefaultTop];
             }
-            if (gameVC) {
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2- 265];
-                
-            }
-            else if (rotationV){
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - _window_width + _window_width/5];
-            }
-            else if (shell) {
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2- 265];
-            }
-            else{
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2 - 50];
-            }
-            
+        
+        
             //wangminxinliwu
             [self changecontinuegiftframe];
         toolBar.frame = CGRectMake(0,_window_height + 10,_window_width,44);
         [self changeGiftViewFrameY:_window_height*3];
     }];
-    if (zhuangVC) {
-        zhuangVC.frame =  CGRectMake(_window_width + 10,90, _window_width/4, _window_width/4 + 20 + _window_width/8);
-    }
+    
     [self showBTN];
     keyBTN.hidden = NO;
 }
@@ -1430,7 +1076,6 @@ int d =1;
     _fenxiangBTN.hidden = YES;
     _messageBTN.hidden = YES;
     keyBTN.hidden = YES;
-    _zaBtn.hidden = YES;
 }
 //按钮出现
 -(void)showBTN{
@@ -1439,13 +1084,13 @@ int d =1;
     _fenxiangBTN.hidden = NO;
     _messageBTN.hidden = NO;
     keyBTN.hidden = NO;
-    _zaBtn.hidden = NO;
 }
 //列表信息退出
 -(void)doCancle{
     userView.forceBtn.enabled = YES;
     [UIView animateWithDuration:0.2 animations:^{
-        userView.frame = CGRectMake( _window_width*0.1,_window_height*2, upViewW,upViewW);
+        userView.alpha = 0;
+        userView.contentBgView.centerY = _window_height * 1.5;
     }];
     self.tableView.userInteractionEnabled = YES;
 }
@@ -1465,17 +1110,6 @@ int d =1;
             liveUser.coin = [NSString stringWithFormat:@"%@",[[[data valueForKey:@"info"] firstObject] valueForKey:@"coin"]];
             liveUser.level = level;
             [Config updateProfile:liveUser];
-            
-            
-            if (gameVC) {
-                [gameVC reloadcoins];
-            }
-            if (shell) {
-                [shell reloadcoins];
-            }
-            if (rotationV) {
-                [rotationV reloadcoins];
-            }
             
             if (giftview) {
                 [giftview chongzhiV:[NSString stringWithFormat:@"%@",liveUser.coin]];
@@ -1636,13 +1270,7 @@ int d =1;
         [gifhour removeFromSuperview];
         gifhour = nil;
     }
-    if (zhuangVC) {
-        [zhuangVC dismissroom];
-        [zhuangVC removeall];
-        [zhuangVC remopokers];
-        [zhuangVC removeFromSuperview];
-        zhuangVC = nil;
-    }
+    
     if (haslianmai == YES) {
         [self xiamai];
         [socketDelegate xiamaisocket];
@@ -1653,24 +1281,7 @@ int d =1;
         [continueGifts stopTimerAndArray];
         continueGifts = nil;
     }
-    if (shell) {
-        [shell stopGame];
-        [shell releaseAll];
-        [shell removeFromSuperview];
-        shell = nil;
-    }
-    if (gameVC) {
-        [gameVC releaseAll];
-        [gameVC removeFromSuperview];
-        gameVC = nil;
-    }
-    if (rotationV) {
-        [rotationV stopRotatipnGameInt];
-         [rotationV stoplasttimer];
-        [rotationV removeFromSuperview];
-        [rotationV removeall];
-        rotationV = nil;
-    }
+    
     [self onStopVideo];
     [self releaseObservers];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -1748,81 +1359,10 @@ int d =1;
                                     @"id":uid
                                     };
         [gameState savezhuanglimit:game_banker_limit];//缓存上庄钱数限制
-        zhuangstartdic = zhuangdic;
+        
         NSString *gametime = [NSString stringWithFormat:@"%@",[info valueForKey:@"gametime"]];
         NSString *gameaction = [NSString stringWithFormat:@"%@",[info valueForKey:@"gameaction"]];
-        if (!gametime || [gametime isEqual:[NSNull null]] || [gametime isEqual:@"<null>"] || [gametime isEqual:@"null"] || [gametime isEqual:@"0"]) {
-            //没有游戏
-            
-        }
-        else{
-            //有游戏 1炸金花  2海盗  3转盘  4牛牛  5二八贝
-            if ([gameaction isEqual:@"1"] || [gameaction isEqual:@"4"] || [gameaction isEqual:@"2"]) {
-
-                if ([gameaction isEqual:@"2"]) {
-                    gameVC = [[gameBottomVC alloc]initWIthDic:_playDoc andIsHost:NO andMethod:@"startLodumaniGame" andMsgtype:@"18"];
-                }
-                if ([gameaction isEqual:@"1"]) {
-                    gameVC = [[gameBottomVC alloc]initWIthDic:_playDoc andIsHost:NO andMethod:@"startGame" andMsgtype:@"15"];
-                }
-                else if ([gameaction isEqual:@"4"]){
-                    gameVC = [[gameBottomVC alloc]initWIthDic:_playDoc andIsHost:NO andMethod:@"startCattleGame" andMsgtype:@"17"];
-                }
-                gameVC.delagate = self;
-                gameVC.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-                [self changeBtnFrame:_window_height - 260];
-                [backScrollView insertSubview:gameVC atIndex:4];
-                [backScrollView insertSubview:_liwuBTN atIndex:5];
-                [self tableviewheight:_window_height - _window_height*0.2 - 260];
-                [gameVC continueUI];
-                [gameVC movieplayStartCut:gametime andGameid:[info valueForKey:@"gameid"]];
-                NSArray *arrays = [info valueForKey:@"game"];
-                if (arrays) {
-                    [gameVC getNewCOins:[info valueForKey:@"game"]];
-                }
-                NSArray *arraysbet = [info valueForKey:@"gamebet"];
-                if (arraysbet) {
-                    [gameVC getmyCOIns:[info valueForKey:@"gamebet"]];
-                }
-                //上庄
-                if ([gameaction isEqual:@"4"]) {
-                    if (!zhuangVC) {
-                        zhuangVC = [[shangzhuang alloc]initWithFrame:CGRectMake(_window_width + 10,90, _window_width/4, _window_width/4 + 20 + _window_width/8) ishost:NO withstreame:[self.playDoc valueForKey:@"stream"]];
-                        zhuangVC.deleagte = self;
-                        [backScrollView insertSubview:zhuangVC atIndex:10];
-                        [backScrollView bringSubviewToFront:zhuangVC];
-                        [zhuangVC getbanksCoin:zhuangstartdic];
-                        [zhuangVC setpoker];
-                        [zhuangVC addtableview];
-                    }
-                }
-            }
-            //转盘
-            else if ([gameaction isEqual:@"3"]){
-                [self getRotation];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [rotationV continueGame:gametime andgameId:[info valueForKey:@"gameid"] andMoney:[info valueForKey:@"game"] andmycoin:[info valueForKey:@"gamebet"]];
-                });
-            }
-            else if ([gameaction isEqual:@"5"]){
-                shell = [[shellGame alloc]initWIthDic:_playDoc andIsHost:NO andMethod:@"startShellGame" andMsgtype:@"19" andandBanklist:nil];
-                shell.frame = CGRectMake(_window_width, _window_height - 260, _window_width,260);
-                shell.delagate = self;
-                [backScrollView insertSubview:shell atIndex:4];
-                [backScrollView insertSubview:_liwuBTN atIndex:5];
-                [shell movieplayStartCut:gametime andGameid:[info valueForKey:@"gameid"]];
-                NSArray *arrays = [info valueForKey:@"game"];
-                if (arrays) {
-                    [shell getNewCOins:[info valueForKey:@"game"]];
-                }
-                NSArray *arraysbet = [info valueForKey:@"gamebet"];
-                if (arraysbet) {
-                    [shell getmyCOIns:[info valueForKey:@"gamebet"]];
-                }
-                [self changeBtnFrame:_window_height - 45 - 215];
-                [self tableviewheight:setFrontV.frame.size.height - _window_height*0.2- 265];
-            }
-        }
+        
         [self changecontinuegiftframe];
     
         //进入房间的时候checklive返回的收费金额
@@ -1879,9 +1419,7 @@ int d =1;
 -(void)changecontinuegiftframe{
     
     liansongliwubottomview.frame = CGRectMake(_window_width, self.tableView.top - 150,_window_width/2,100);
-    if (zhuangVC) {
-        liansongliwubottomview.frame = CGRectMake(_window_width, self.tableView.top,_window_width/2,100);
-    }
+    
 }
 -(void)reloadUserList{
     [listView listReloadNoew];
@@ -1890,7 +1428,7 @@ int d =1;
     if ([isattention isEqual:@"0"]) {
         //未关注
         setFrontV.newattention.hidden = NO;
-        setFrontV.leftView.frame = CGRectMake(10,20+sssss,140,leftW);
+        setFrontV.leftView.frame = CGRectMake(10,20+sssss,noAttention_leftView_wtidth,leftW);
         listcollectionviewx = _window_width+160;
         listView.frame = CGRectMake(listcollectionviewx, 20+sssss, _window_width-170,40);
         listView.listCollectionview.frame = CGRectMake(0, 0, _window_width-170, 40);
@@ -1898,7 +1436,7 @@ int d =1;
     else{
         //关注
         setFrontV.newattention.hidden = YES;
-        setFrontV.leftView.frame = CGRectMake(10,20+sssss,90,leftW);
+        setFrontV.leftView.frame = CGRectMake(10,20+sssss,isAttention_leftView_wtidth,leftW);
         listcollectionviewx = _window_width+110;
         listView.frame = CGRectMake(listcollectionviewx, 20+sssss, _window_width-130,40);
         listView.listCollectionview.frame = CGRectMake(0, 0, _window_width-130, 40);
@@ -2543,59 +2081,6 @@ int d =1;
     NSLog(@"%f,%f",point.x,point.y);
     rec.view.center = CGPointMake(rec.view.center.x + point.x, rec.view.center.y + point.y);
     [rec setTranslation:CGPointMake(0, 0) inView:videoView];
-}
-- (void)doZajinDan{
-//    goldView = [[zajindan alloc]initWithLiveId:@"10087" andChuiziArray:@[@{@"hammer_price":@"100",@"giftname":@"飞机"},@{@"hammer_price":@"50",@"giftname":@"跑车"},@{@"hammer_price":@"10",@"giftname":@"玫瑰"}]];
-//    [goldView show];
-
-    _zaBtn.userInteractionEnabled = NO;
-    AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    NSString *url = [purl stringByAppendingFormat:@"service=Goldeneggs.getHammerList"];
-
-
-    [session POST:url parameters:nil
-         progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-             NSNumber *number = [responseObject valueForKey:@"ret"] ;
-             if([number isEqualToNumber:[NSNumber numberWithInt:200]])
-             {
-                 NSArray *data = [responseObject valueForKey:@"data"];
-                 NSNumber *code = [data valueForKey:@"code"];
-                 if([code isEqualToNumber:[NSNumber numberWithInt:0]])
-                 {
-                     NSMutableArray *chuiziArr = [data valueForKey:@"info"];
-                     
-                     if (chuiziArr.count >= 3) {
-                         goldView = [[goldEggs alloc]initWithLiveId:[_playDoc valueForKey:@"uid"] andChuiziArray:chuiziArr];
-                         goldView.delegate = self;
-                         goldView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-                         [self.view addSubview:goldView];
-                         [UIView animateWithDuration:0.3 animations:^{
-                             goldView.transform = CGAffineTransformMakeScale(1, 1);
-                         } completion:^(BOOL finished) {
-                             goldView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
-                         }];
-                         
-                         //                         [zajindanview show];
-                         
-                     }
-                 }
-             }
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 _zaBtn.userInteractionEnabled = YES;
-             });
-             
-             
-         }
-          failure:^(NSURLSessionDataTask *task, NSError *error)
-     {
-         [MBProgressHUD showError:YZMsg(@"无网络")];
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             _zaBtn.userInteractionEnabled = YES;
-         });
-         
-     }];
-
-
 }
 
 - (void)goChongZhi{

@@ -82,31 +82,31 @@
     switch (_liveType) {
         case 0:
             [_imageView setImage:[UIImage imageNamed:@"icon_live_state_normal"]];
-            _titleLabel.text = @"普通直播";
+            _titleLabel.text = YZMsg(@"普通直播");
             color1 = HexColor(@"8ACA00");
             color2 = HexColor(@"BEE700");
             break;
         case 1:
             [_imageView setImage:[UIImage imageNamed:@"icon_live_state_pwd"]];
-            _titleLabel.text = @"私密直播";
+            _titleLabel.text = YZMsg(@"私密直播");
             color1 = HexColor(@"1A74FF");
             color2 = HexColor(@"00B4FF");
             break;
         case 2:
             [_imageView setImage:[UIImage imageNamed:@"icon_live_state_charge"]];
-            _titleLabel.text = @"收费直播";
+            _titleLabel.text = YZMsg(@"收费直播");
             color1 = HexColor(@"FF62A5");
             color2 = HexColor(@"FF8960");
             break;
         case 3:
             [_imageView setImage:[UIImage imageNamed:@"icon_live_state_time"]];
-            _titleLabel.text = @"计时直播";
+            _titleLabel.text = YZMsg(@"计时直播");
             color1 = HexColor(@"6950FB");
             color2 = HexColor(@"B83AF3");
             break;
         default:
             [_imageView setImage:[UIImage imageNamed:@"icon_live_state_star"]];
-            _titleLabel.text = @"明星直播";
+            _titleLabel.text = YZMsg(@"明星直播");
             color1 = HexColor(@"6950FB");
             color2 = HexColor(@"B83AF3");
             break;

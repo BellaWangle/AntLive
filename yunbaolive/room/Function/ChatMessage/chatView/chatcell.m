@@ -21,17 +21,18 @@
         self.bgV.layer.masksToBounds = YES;
         self.bgV.layer.cornerRadius = 5;
         self.bgV.backgroundColor = [UIColor blackColor];
-        self.bgV.alpha = 0.3;
+        self.bgV.alpha = 0.2;
         
         
         self.imageV = [[UIImageView alloc]init];
-        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
+        self.imageV.layer.borderWidth = 1;
+        self.imageV.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.imageV.clipsToBounds = YES;
         
         self.vip_imagev = [[UIImageView alloc]init];
-        self.vip_imagev.contentMode = UIViewContentModeScaleAspectFit;
         
         self.liangimage = [[UIImageView alloc]init];
-        self.liangimage.contentMode = UIViewContentModeScaleAspectFit;
+        
         
         self.nameL = [[mylabels alloc]init];
         self.nameL.backgroundColor = [UIColor clearColor];
@@ -59,6 +60,7 @@
         [self.contentView addSubview:self.vip_imagev];
         [self.contentView addSubview:self.liangimage];
         
+        
         [self.contentView addSubview:self.imageV];
         [self.contentView addSubview:self.nameL];
         [self.contentView addSubview:self.button];
@@ -73,7 +75,7 @@
     if ([_model.titleColor isEqual:@"firstlogin"]) {
         eWai = 0;
         [self setfirstFrame];
-        self.nameL.textColor = RGB(82,229,212);
+        self.nameL.textColor = HexColor(@"FFC700");
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.nameL.text attributes:@{NSShadowAttributeName:_shadow}];
         NSRange redRange = NSMakeRange(0, [[noteStr string] rangeOfString:@":"].location +1);
         [noteStr addAttribute:NSForegroundColorAttributeName value:RGB(255, 255, 255) range:redRange];
@@ -83,7 +85,7 @@
       //用户进入
         eWai = 0;
         [self setfirstFrame];
-        self.nameL.textColor = RGB(82,229,212);
+        self.nameL.textColor = HexColor(@"FFC700");
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.nameL.text attributes:@{NSShadowAttributeName:_shadow}];
         NSRange redRange = NSMakeRange(0, _model.userName.length);
         [noteStr addAttribute:NSForegroundColorAttributeName value:RGB(255, 255, 255) range:redRange];
@@ -102,22 +104,22 @@
         self.nameL.textColor = [UIColor whiteColor];
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.nameL.text attributes:@{NSShadowAttributeName:_shadow}];
         NSRange redRange = NSMakeRange(0, [[noteStr string] rangeOfString:@":"].location +1);
-        [noteStr addAttribute:NSForegroundColorAttributeName value:RGB(157, 201, 255) range:redRange];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:redRange];
         //礼物
         if ([_model.titleColor isEqual:@"2"])
         {
-            self.nameL.textColor = RGB(240,237,60);//黄色
+            self.nameL.textColor =  HexColor(@"FFC700");//黄色
             NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.nameL.text];
             NSRange redRange = NSMakeRange(0, [[noteStr string] rangeOfString:@":"].location);
-            [noteStr addAttribute:NSForegroundColorAttributeName value:RGB(237,166,43) range:redRange];
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:redRange];
             
         }
         //点亮
         if ([_model.titleColor containsString:@"light"]) {
-            self.nameL.textColor = RGB(176,176,176);//灰色
+            self.nameL.textColor =  HexColor(@"FFC700");//灰色
             NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.nameL.text];
             NSRange redRange = NSMakeRange(0, [[noteStr string] rangeOfString:@":"].location);
-            [noteStr addAttribute:NSForegroundColorAttributeName value:RGB(237,166,43) range:redRange];
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:redRange];
         }
          if ([_model.titleColor isEqual:@"light0"])//青蛙
         {
@@ -221,14 +223,16 @@
     _vip_imagev.frame = CGRectMake(0, 0, 0, 0);
     _liangimage.frame = CGRectMake(0, 0, 0, 0);
     _nameL.frame = _model.NAMER;
-    _bgV.frame = CGRectMake(0, 0, CGRectGetMaxX(_model.NAMER)+eWai, _model.NAMER.size.height+7);;
+    _bgV.frame = CGRectMake(0, 0, CGRectGetMaxX(_model.NAMER)+eWai+18, _model.NAMER.size.height+18);;
 }
 -(void)setFrame{
     _liangimage.frame = _model.liangR;
     _vip_imagev.frame =  _model.vipR;
     _imageV.frame = _model.levelR;
+    _imageV.layer.cornerRadius = _imageV.width/2;
     _nameL.frame = CGRectMake(_model.nameR.origin.x, _model.nameR.origin.y, _model.nameR.size.width+eWai, _model.nameR.size.height+7);//_model.nameR;
-    _bgV.frame = CGRectMake(0, 0, CGRectGetMaxX(_model.nameR)+eWai, _model.nameR.size.height+7);
+    _bgV.frame = CGRectMake(0, 0, CGRectGetMaxX(_model.nameR)+eWai+18, _model.nameR.size.height+18);
+    _nameL.centerY = _bgV.centerY;
     self.button.frame =  _nameL.frame;
 }
 +(chatcell *)cellWithtableView:(UITableView *)tableView{

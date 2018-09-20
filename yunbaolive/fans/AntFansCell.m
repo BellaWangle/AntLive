@@ -41,7 +41,7 @@
     self.levelL.image = [UIImage imageNamed:[NSString stringWithFormat:@"host_%@",_model.level_anchor]];
     self.hostlevel.image = [UIImage imageNamed:[NSString stringWithFormat:@"leve%@",_model.level]];
     //头像
-    [self.iconV sd_setBackgroundImageWithURL:[NSURL URLWithString:_model.icon]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [self.iconV sd_setBackgroundImageWithURL:[NSURL URLWithString:_model.icon]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_head"]];
     self.iconV.layer.cornerRadius = 20;
     self.iconV.layer.masksToBounds = YES;
     //关注

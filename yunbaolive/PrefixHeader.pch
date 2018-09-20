@@ -70,7 +70,7 @@
 //适配iphoneX
 #define iPhoneX (_window_width== 375.f && _window_height == 812.f)
 #define iPhoneX_Top (iPhoneX ? 22 : 0)
-#define ShowDiff (iPhoneX ? 34: 0)
+#define iPhoneX_Bottom (iPhoneX ? 34: 0)
 #define statusbarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height-20)
 
 //app主色调s
@@ -95,9 +95,9 @@
 #define WPFRandomColor [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1.0]
 
 #ifndef __OPTIMIZE__
-# define NSLog(...) NSLog(__VA_ARGS__)
+//# define NSLog(...) NSLog(__VA_ARGS__)
 #else
-# define NSLog(...)
+//# define NSLog(...)
 #endif
 //RGB(246, 246, 246)
 
@@ -117,7 +117,7 @@ green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 \
 alpha:1.0]
 #define FNOT [UIFont systemFontOfSize:16];
-#define leftW 39  //直播间左上角头像
+#define leftW 40  //直播间左上角头像
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)

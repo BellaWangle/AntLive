@@ -76,7 +76,7 @@
     flow.minimumLineSpacing = 3;
     flow.minimumInteritemSpacing = 0;
     
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,64+statusbarHeight, _window_width, _window_height - 114 -statusbarHeight-ShowDiff) collectionViewLayout:flow];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,64+statusbarHeight, _window_width, _window_height - 114 -statusbarHeight-iPhoneX_Bottom) collectionViewLayout:flow];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"AntNearbyCell" bundle:nil] forCellWithReuseIdentifier:@"fujincell"];
     self.collectionView.delegate =self;
@@ -198,10 +198,10 @@
     cell.liveImgView.image = [UIImage imageNamed:getImagename(@"直播live")];
     NSString *path = [NSString stringWithFormat:@"%@",[subdic valueForKey:@"thumb"]];
     if (path) {
-        [cell.thumbimagev sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"bg1"] options:SDWebImageRefreshCached];
+        [cell.thumbimagev sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"default_head"] options:SDWebImageRefreshCached];
     }
     else{
-        [cell.thumbimagev sd_setImageWithURL:[NSURL URLWithString:[subdic valueForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@"bg1"] options:SDWebImageRefreshCached];
+        [cell.thumbimagev sd_setImageWithURL:[NSURL URLWithString:[subdic valueForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@"default_head"] options:SDWebImageRefreshCached];
     }
     cell.cityl.text = minstr([subdic valueForKey:@"city"]);
     cell.distanceL.text = minstr([subdic valueForKey:@"distance"]);

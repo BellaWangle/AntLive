@@ -80,7 +80,7 @@
     }
     [_levelView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"leve%@",_model.level]]];
     [_level_anchorView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"host_%@",_model.level_anchor]]];
-    [_iconView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [_iconView sd_setImageWithURL:[NSURL URLWithString:_model.avatar] placeholderImage:[UIImage imageNamed:@"default_head"]];
     [self.bottomView setAgain:@[_model.lives,_model.follows,_model.fans]];
     
 }

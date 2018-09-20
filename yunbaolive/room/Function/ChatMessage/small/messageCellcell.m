@@ -28,7 +28,7 @@
 }
 -(void)setModel:(messageModel *)model{
     _model = model;
-    [self.iconB sd_setImageWithURL:[NSURL URLWithString:_model.imageIcon]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"bg1"]];
+    [self.iconB sd_setImageWithURL:[NSURL URLWithString:_model.imageIcon]  forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_head"]];
     _nameL.text = _model.userName;
     _messageL.text = _model.content;
     _timeL.text = _model.time;

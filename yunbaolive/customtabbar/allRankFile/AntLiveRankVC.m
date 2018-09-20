@@ -230,7 +230,7 @@
 #pragma mark - tableView
 -(UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, statusbarHeight+110, _window_width, _window_height-49-statusbarHeight-ShowDiff-110) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, statusbarHeight+110, _window_width, _window_height-49-statusbarHeight-iPhoneX_Bottom-110) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

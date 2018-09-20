@@ -45,7 +45,7 @@
     flow.minimumLineSpacing = 3;
     flow.minimumInteritemSpacing = 0;
     
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, _window_width, _window_height - 114 -statusbarHeight-ShowDiff) collectionViewLayout:flow];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, _window_width, _window_height - 114 -statusbarHeight-iPhoneX_Bottom) collectionViewLayout:flow];
     
 //    [self.collectionView registerNib:[UINib nibWithNibName:@"antNewCell" bundle:nil] forCellWithReuseIdentifier:@"antNewCell"];
     [self.collectionView registerClass:[antNewCell class] forCellWithReuseIdentifier:@"antNewCell"];
@@ -282,10 +282,10 @@
     cell.titleLabel.text = [subdic valueForKey:@"user_nicename"];
     NSString *path = [NSString stringWithFormat:@"%@",[subdic valueForKey:@"thumb"]];
     if (path) {
-        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"bg1"] options:SDWebImageRefreshCached];
+        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"default_head"] options:SDWebImageRefreshCached];
     }
     else{
-        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:[subdic valueForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@"bg1"] options:SDWebImageRefreshCached];
+        [cell.imageV sd_setImageWithURL:[NSURL URLWithString:[subdic valueForKey:@"avatar"]] placeholderImage:[UIImage imageNamed:@"default_head"] options:SDWebImageRefreshCached];
     }
     NSInteger type = [[subdic valueForKey:@"type"] integerValue];
     cell.typeView.liveType = type;

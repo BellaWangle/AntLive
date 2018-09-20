@@ -428,3 +428,10 @@
 "禁言成功" = "Gag success";
 "背包" = "Backpack";
 "礼物" = "Gift";
+//
+"还没有账号" = "No account";
+"普通直播" = "General";
+"密码直播" = "Private";
+"收费直播" = "Charge Fee";
+"计时直播" = "Timing";
+"明星直播" = "Star";

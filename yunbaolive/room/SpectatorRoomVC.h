@@ -116,11 +116,7 @@
     liveEndView *lastv;
     
     int coasttime;//扣费计时
-    gameBottomVC *gameVC;//炸金花
-    WPFRotateView *rotationV;//转盘
-    shellGame *shell;//二八贝
-    shangzhuang *zhuangVC;//上装VC
-    NSDictionary *zhuangstartdic;//庄家初始化信息
+
     BOOL giftViewShow;//是否显示礼物view
     UIPanGestureRecognizer *videopan;//视频拖拽手势
     UITapGestureRecognizer *videotap;

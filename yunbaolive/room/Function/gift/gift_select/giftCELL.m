@@ -12,11 +12,37 @@
         
         self.cellimageV = [[UIImageView alloc]init];
         self.cellimageV.contentMode = UIViewContentModeScaleAspectFit;
+        [self.contentView addSubview:self.cellimageV];
+        [_cellimageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.leading.mas_equalTo(10);
+            make.trailing.mas_equalTo(-10);
+            make.bottom.mas_equalTo(-30);
+        }];
+        
         self.priceL = [[UILabel alloc]init];
         self.priceL.backgroundColor = [UIColor clearColor];
         self.priceL.textAlignment = NSTextAlignmentCenter;
         self.priceL.font = [UIFont systemFontOfSize:10];
         self.priceL.textColor = [UIColor grayColor];
+        [self.contentView addSubview:self.priceL];
+        [self.priceL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(12);
+            make.trailing.mas_lessThanOrEqualTo(-5);
+            make.width.mas_greaterThanOrEqualTo(0);
+            make.top.mas_equalTo(_cellimageV.mas_bottom);
+            make.height.mas_equalTo(20);
+        }];
+        
+        _diamondsImageView = [[UIImageView alloc]init];
+        _diamondsImageView.image = [UIImage imageNamed:@"Diamonds_small"];
+        [self.contentView addSubview:_diamondsImageView];
+        [_diamondsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.mas_equalTo(_priceL.mas_leading).offset(-5);
+            make.centerY.mas_equalTo(_priceL);
+            make.width.mas_equalTo(14);
+            make.height.mas_equalTo(16);
+        }];
+        
         self.countL = [[UILabel alloc]init];
         self.countL.textColor = [UIColor lightGrayColor];
         self.countL.backgroundColor = [UIColor clearColor];
@@ -30,7 +56,11 @@
         self.numLabel.numberOfLines = 0;
         self.numLabel.textAlignment = NSTextAlignmentRight;
         self.numLabel.font = [UIFont systemFontOfSize:10];
-
+        
+        self.diamondsImageView = [[UIImageView alloc]init];
+        self.diamondsImageView.image = [UIImage imageNamed:@"Diamonds_small"];
+        [self.contentView addSubview:self.diamondsImageView];
+//        self
         
         imageView = [[UIImageView alloc]init];
         imageView.image = [UIImage imageNamed:@"个人中心(钻石)"];
@@ -58,7 +88,7 @@
         [self.contentView addSubview:_duihao];//对号
        // [self.contentView addSubview:imageView];//魅力值
         [self.contentView addSubview:self.cellimageV];//礼物图
-        [self.contentView addSubview:self.priceL];//价格
+        //价格
         [self.contentView addSubview:self.countL];//经验值
         [self.contentView addSubview:_kuangimage];
         [self.contentView addSubview:self.numLabel];
@@ -84,12 +114,12 @@
 }
 -(void)setData{
     [self.cellimageV sd_setImageWithURL:[NSURL URLWithString:_model.imagePath] placeholderImage:[UIImage imageNamed:@"mr.png"]];
-    _countL.text = _model.giftname;
-    _priceL.text = [NSString stringWithFormat:@"%@%@",_model.price,[common name_coin]];;
+//    _countL.text = _model.giftname;
+    _priceL.text = [NSString stringWithFormat:@"%@",_model.price];;
 
-    self.cellimageV.frame = CGRectMake(10,0,self.frame.size.width-20, self.frame.size.width - 50);
-    _priceL.frame = CGRectMake(0,self.frame.size.width - 35,_window_width/4,20);
-    _countL.frame = CGRectMake(0,self.frame.size.width - 50,_window_width/4,20);
+//    self.cellimageV.frame = CGRectMake(10,0,self.frame.size.width-20, self.frame.size.width - 50);
+//    _priceL.frame = CGRectMake(0,self.frame.size.width - 50,_window_width/4,20);
+//    _countL.frame = CGRectMake(0,self.frame.size.width - 50,_window_width/4,20);
     imageView.frame = CGRectMake(_model.priceR.size.width+_model.priceR.origin.x, _model.priceR.origin.y, 15, 15);
     self.numLabel.frame = CGRectMake(self.width-30, _priceL.top+5, 25, 15);
 
