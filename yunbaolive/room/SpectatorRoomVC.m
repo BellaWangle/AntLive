@@ -24,7 +24,6 @@ game 5
 #import "goldEggs.h"
 #import "toutiaoAnimation.h"
 #import "AntButton.h"
-#import "IQKeyboardManager.h"
 #import "UIView+Util.h"
 //新礼物结束
 #define iPhone6Plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242,2208), [[UIScreen mainScreen] currentMode].size) : NO)
@@ -377,12 +376,10 @@ int d =1;
     [backScrollView setContentOffset:CGPointMake(_window_width,0) animated:YES];
     self.unRead = 0;
     [self labeiHid];
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 }
 
 //手指拖拽弹窗移动

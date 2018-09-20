@@ -2,6 +2,8 @@
 #import "AntButton.h"
 #import "TextFieldView.h"
 #import "NetWork.h"
+#import "IQKeyboardManager.h"
+
 @interface registerVC ()<TextFieldViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     NSTimer *messsageTimer;
@@ -23,6 +25,16 @@
 
 @end
 @implementation registerVC
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

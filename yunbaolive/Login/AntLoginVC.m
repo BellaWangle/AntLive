@@ -7,6 +7,7 @@
 #import "antWebH5.h"
 #import "TextFieldView.h"
 #import "NetWork.h"
+#import "IQKeyboardManager.h"
 
 @interface AntLoginVC ()<TextFieldViewDelegate>
 
@@ -21,10 +22,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
 
 - (void)viewDidLoad {

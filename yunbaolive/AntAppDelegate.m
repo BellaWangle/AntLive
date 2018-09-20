@@ -114,6 +114,7 @@
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
     keyboardManager.shouldShowToolbarPlaceholder = NO; // 不显示占位文字
     keyboardManager.shouldResignOnTouchOutside = YES;
+    keyboardManager.enable = NO;
     
     if ([Config getOwnID]) {
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[AntTabBarController alloc] init]];
